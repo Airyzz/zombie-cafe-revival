@@ -4733,36 +4733,6 @@
 
     sput-object v0, Lcom/capcom/zombiecafeandroid/ZombieCafeAndroid;->mDisplay:Landroid/view/Display;
 
-    new-instance v0, Landroid/content/Intent;
-
-    const-string v1, "android.intent.action.MEDIA_MOUNTED"
-
-    new-instance v2, Ljava/lang/StringBuilder;
-
-    const-string v3, "file://"
-
-    invoke-direct {v2, v3}, Ljava/lang/StringBuilder;-><init>(Ljava/lang/String;)V
-
-    invoke-static {}, Landroid/os/Environment;->getExternalStorageDirectory()Ljava/io/File;
-
-    move-result-object v3
-
-    invoke-virtual {v2, v3}, Ljava/lang/StringBuilder;->append(Ljava/lang/Object;)Ljava/lang/StringBuilder;
-
-    move-result-object v2
-
-    invoke-virtual {v2}, Ljava/lang/StringBuilder;->toString()Ljava/lang/String;
-
-    move-result-object v2
-
-    invoke-static {v2}, Landroid/net/Uri;->parse(Ljava/lang/String;)Landroid/net/Uri;
-
-    move-result-object v2
-
-    invoke-direct {v0, v1, v2}, Landroid/content/Intent;-><init>(Ljava/lang/String;Landroid/net/Uri;)V
-
-    invoke-virtual {p0, v0}, Lcom/capcom/zombiecafeandroid/ZombieCafeAndroid;->sendBroadcast(Landroid/content/Intent;)V
-
     const-string v0, "CHARTBOOST"
 
     const-string v1, "INITED"
