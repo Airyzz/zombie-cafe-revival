@@ -32,9 +32,9 @@
 .method static constructor <clinit>()V
     .locals 3
 
-    const/4 v2, 0x1
+    const/4 v2, 0x0
 
-    const/4 v1, 0x0
+    const/4 v1, 0x1
 
     sput-boolean v1, Lcom/capcom/zombiecafeandroid/CC_Android;->NO_MUSIC:Z
 
