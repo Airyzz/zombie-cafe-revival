@@ -1,0 +1,28 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <string name="common_google_play_services_notification_ticker">Google Play Services-ის შეცდომა</string>
+    <string name="common_google_play_services_notification_needs_installation_title">აპლიკაცია საჭიროება Google Play Services-ის ინსტალაციას.</string>
+    <string name="common_google_play_services_notification_needs_update_title">აპლიკაცია საჭიროებს Google Play Services-ის განახლებას.</string>
+    <string name="common_google_play_services_needs_enabling_title">აპლიკაცია საჭიროებს გააქტიურებულ Google Play Services.</string>
+    <string name="common_google_play_services_error_notification_requested_by_msg">მომთხოვნი: %1$s</string>
+    <string name="common_google_play_services_install_title">Google Play სერვისების მიღება</string>
+    <string name="common_google_play_services_install_text_phone">ეს აპი ვერ გაეშვება Google Play სერვისების გარეშე, რაც თქვენს ტელეფონზე ვერ იძებნება.</string>
+    <string name="common_google_play_services_install_text_tablet">ეს აპი ვერ გაეშვება Google Play სერვისების გარეშე, რაც თქვენს ტელეფონზე ვერ იძებნება.</string>
+    <string name="common_google_play_services_install_button">Google Play სერვისების მიღება</string>
+    <string name="common_google_play_services_enable_title">Google Play სერვისების გააქტიურება</string>
+    <string name="common_google_play_services_enable_text">ეს აპი არ იმუშავებს, თუ არ გაააქტიურებთ Google Play სერვისებს.</string>
+    <string name="common_google_play_services_enable_button">Google Play სერვისების გააქტიურება</string>
+    <string name="common_google_play_services_update_title">Google Play სერვისების განახლება</string>
+    <string name="common_google_play_services_update_text">ეს აპი ვერ გაეშვება, თუ Google Play სერვისებს არ განაახლებთ.</string>
+    <string name="common_google_play_services_network_error_title">ქსელის შეცდომა</string>
+    <string name="common_google_play_services_network_error_text">Google Play Services-თან დასაკავშირებლად მონაცემთა გადაცემა აუცილებელია.</string>
+    <string name="common_google_play_services_invalid_account_title">ანგარიში არასწორია</string>
+    <string name="common_google_play_services_invalid_account_text">მითითებული ანგარიში ამ მოწყობილობაზე არ არსებობს. გთხოვთ, აირჩიოთ სხვა ანგარიში.</string>
+    <string name="common_google_play_services_unknown_issue">Google Play სერვისებთან დაკავშირებით უცნობი შეფერხება წარმოიშვა.</string>
+    <string name="common_google_play_services_unsupported_title">Google Play სერვისები</string>
+    <string name="common_google_play_services_unsupported_text">Google Play სერვისები, რაც თქვენს ზოგიერთ აპს ჭირდება, თქვენს მოწყობილობაზე მხარდაჭერილი არ არის. გთხოვთ, დაუკავშირდეთ მწარმოებელს დახმარებისათვის.</string>
+    <string name="common_google_play_services_unsupported_date_text">როგორც ჩანს, მოწყობილობის თარიღი არასწორია. გთხოვთ, შეამოწმოთ მოწყობილობის თარიღი.</string>
+    <string name="common_google_play_services_update_button">განახლება</string>
+    <string name="common_signin_button_text">შესვლა</string>
+    <string name="common_signin_button_text_long">Google-ით შესვლა</string>
+</resources>

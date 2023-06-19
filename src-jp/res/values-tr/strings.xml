@@ -1,0 +1,28 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <string name="common_google_play_services_notification_ticker">Google Play Hizmetleri hatası</string>
+    <string name="common_google_play_services_notification_needs_installation_title">Bir uygulama, Google Play hizmetlerinin yüklenmesini gerektiriyor.</string>
+    <string name="common_google_play_services_notification_needs_update_title">Bir uygulama, Google Play Hizmetleri için bir güncelleme gerektiriyor.</string>
+    <string name="common_google_play_services_needs_enabling_title">"Bir uygulama, Google Play Hizmetleri'nin etkin olmasını gerektiriyor."</string>
+    <string name="common_google_play_services_error_notification_requested_by_msg">İstekte bulunan: %1$s</string>
+    <string name="common_google_play_services_install_title">Google Play hizmetlerini edinin</string>
+    <string name="common_google_play_services_install_text_phone">Google Play Hizmetleri telefonunuzda yok ve bu uygulama Google Play Hizmetleri olmadan çalışmaz.</string>
+    <string name="common_google_play_services_install_text_tablet">Google Play Hizmetleri tabletinizde yok ve bu uygulama Google Play Hizmetleri olmadan çalışmaz.</string>
+    <string name="common_google_play_services_install_button">Google Play hizmetlerini edin</string>
+    <string name="common_google_play_services_enable_title">Google Play hizmetlerini etkinleştir</string>
+    <string name="common_google_play_services_enable_text">Bu uygulama, Google Play Hizmetleri etkinleştirilmeden çalışmaz</string>
+    <string name="common_google_play_services_enable_button">Google Play hizmetlerini etkinleştir</string>
+    <string name="common_google_play_services_update_title">Google Play hizmetlerini güncelle</string>
+    <string name="common_google_play_services_update_text">Bu uygulama Google Play Hizmetleri güncellenmeden çalışmaz.</string>
+    <string name="common_google_play_services_network_error_title">Ağ Hatası</string>
+    <string name="common_google_play_services_network_error_text">Google Play hizmetlerine bağlanmak için bir veri bağlantısı gerekiyor.</string>
+    <string name="common_google_play_services_invalid_account_title">Geçersiz Hesap</string>
+    <string name="common_google_play_services_invalid_account_text">Belirtilen hesap bu cihazda mevcut değil. Lütfen farklı bir hesap seçin.</string>
+    <string name="common_google_play_services_unknown_issue">Google Play hizmetleriyle ilgili bilinmeyen sorun.</string>
+    <string name="common_google_play_services_unsupported_title">Google Play hizmetleri</string>
+    <string name="common_google_play_services_unsupported_text">Cihazınız, uygulamalarınızdan bazıları için gerekli olan Google Play hizmetlerini desteklemiyor. Lütfen yardım için üreticiyle iletişim kurun.</string>
+    <string name="common_google_play_services_unsupported_date_text">Cihazdaki tarih doğru görünmüyor. Lütfen cihazda ayarlı tarihi kontrol edin.</string>
+    <string name="common_google_play_services_update_button">Güncelle</string>
+    <string name="common_signin_button_text">Oturum aç</string>
+    <string name="common_signin_button_text_long">"Google'da oturum aç"</string>
+</resources>

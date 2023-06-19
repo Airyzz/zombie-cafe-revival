@@ -1,0 +1,28 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <string name="common_google_play_services_notification_ticker">Помилка сервісів Google Play</string>
+    <string name="common_google_play_services_notification_needs_installation_title">Щоб додаток працював, потрібно встановити сервіси Google Play.</string>
+    <string name="common_google_play_services_notification_needs_update_title">Щоб додаток працював, потрібно оновити сервіси Google Play.</string>
+    <string name="common_google_play_services_needs_enabling_title">Щоб додаток працював, потрібно ввімкнути сервіси Google Play.</string>
+    <string name="common_google_play_services_error_notification_requested_by_msg">Запит від додатка %1$s</string>
+    <string name="common_google_play_services_install_title">Установити Google Play Послуги</string>
+    <string name="common_google_play_services_install_text_phone">Ця програма не запуститься без Google Play Послуг, яких немає у вашому телефоні.</string>
+    <string name="common_google_play_services_install_text_tablet">Ця програма не запуститься без Google Play Послуг, яких немає на вашому планшетному ПК.</string>
+    <string name="common_google_play_services_install_button">Установити Google Play Послуги</string>
+    <string name="common_google_play_services_enable_title">Увімкнути Google Play Послуги</string>
+    <string name="common_google_play_services_enable_text">Ця програма не працюватиме, поки ви не ввімкнете Google Play Послуги.</string>
+    <string name="common_google_play_services_enable_button">Увімкнути Google Play Послуги</string>
+    <string name="common_google_play_services_update_title">Оновити Google Play Послуги</string>
+    <string name="common_google_play_services_update_text">Ця програма не запуститься, поки ви не оновите Google Play Послуги.</string>
+    <string name="common_google_play_services_network_error_title">Помилка мережі</string>
+    <string name="common_google_play_services_network_error_text">Для під’єднання до сервісів Google Play потрібне з’єднання з мережею.</string>
+    <string name="common_google_play_services_invalid_account_title">Недійсний обліковий запис</string>
+    <string name="common_google_play_services_invalid_account_text">Указаний обліковий запис не існує на цьому пристрої. Виберіть інший обліковий запис.</string>
+    <string name="common_google_play_services_unknown_issue">Google Play Послуги – невідома проблема.</string>
+    <string name="common_google_play_services_unsupported_title">Сервіси Google Play</string>
+    <string name="common_google_play_services_unsupported_text">Ваш пристрій не підтримує Сервіси Google Play, від яких залежить робота деяких програм. Зверніться по допомогу до виробника.</string>
+    <string name="common_google_play_services_unsupported_date_text">Схоже, на пристрої вказано неправильну дату. Перевірте її.</string>
+    <string name="common_google_play_services_update_button">Оновити</string>
+    <string name="common_signin_button_text">Увійти</string>
+    <string name="common_signin_button_text_long">Увійти в обл.запис Google</string>
+</resources>

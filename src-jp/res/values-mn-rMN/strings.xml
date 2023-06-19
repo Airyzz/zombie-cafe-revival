@@ -1,0 +1,28 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <string name="common_google_play_services_notification_ticker">Google Наадаан үйлчилгээний алдаа</string>
+    <string name="common_google_play_services_notification_needs_installation_title">Аппликешн Google Наадаан Үйлчилгээг суулгахыг шаардана.</string>
+    <string name="common_google_play_services_notification_needs_update_title">Аппликешн Google Наадаан Үйлчилгээг шинэчлэхийг шаардана.</string>
+    <string name="common_google_play_services_needs_enabling_title">Аппликешн Google Наадаан Үйлчилгээг идэвхжүүлсэн байхыг шаардана.</string>
+    <string name="common_google_play_services_error_notification_requested_by_msg">%1$s хүсэлт гаргасан</string>
+    <string name="common_google_play_services_install_title">Google Play үйлчилгээ авах</string>
+    <string name="common_google_play_services_install_text_phone">Таны утсанд байхгүй байгаа Google Play үйлчилгээг идэвхжүүлж байж энэ апп-г ажиллуулах боломжтой.</string>
+    <string name="common_google_play_services_install_text_tablet">Таны таблетэд байхгүй Google Play үйлчилгээг идэвхжүүлж байж энэ апп-г ажиллуулах боломжтой.</string>
+    <string name="common_google_play_services_install_button">Google Play үйлчилгээ авах</string>
+    <string name="common_google_play_services_enable_title">Google Play үйлчилгээг идэвхжүүлэх</string>
+    <string name="common_google_play_services_enable_text">Та Google Play үйлчилгээг идэвхжүүлж байж энэ апп-г ажиллуулах боломжтой.</string>
+    <string name="common_google_play_services_enable_button">Google Play үйлчилгээг идэвхжүүлэх</string>
+    <string name="common_google_play_services_update_title">Google Play үйлчилгээг шинэчлэх</string>
+    <string name="common_google_play_services_update_text">Та Google Play үйлчилгээг шинэчлэхгүй бол энэ апп ажиллах боломжгүй.</string>
+    <string name="common_google_play_services_network_error_title">Сүлжээний алдаа</string>
+    <string name="common_google_play_services_network_error_text">Google Play үйлчилгээнд холбогдохын тулд дата холболт шаардлагатай.</string>
+    <string name="common_google_play_services_invalid_account_title">Буруу акаунт</string>
+    <string name="common_google_play_services_invalid_account_text">Заасан акаунт энэ төхөөрөмж дээр байхгүй байна. Өөр акаунт сонгоно уу.</string>
+    <string name="common_google_play_services_unknown_issue">Google Play үйлчилгээтэй холбоотой тодорхойгүй алдаа.</string>
+    <string name="common_google_play_services_unsupported_title">Google Play үйлчилгээ</string>
+    <string name="common_google_play_services_unsupported_text">Таны зарим аппликешнүүдийн хамаардаг Google Play үйлчилгээ таны төхөөрөмжид дэмжигдэхгүй байна. Тусламж авахын тулд үйлдвэрлэгчтэй холбоо барина уу.</string>
+    <string name="common_google_play_services_unsupported_date_text">Төхөөрөмжийн огноо буруу байгаа бололтой. Төхөөрөмжийн огноог шалгана уу.</string>
+    <string name="common_google_play_services_update_button">Шинэчлэх</string>
+    <string name="common_signin_button_text">Нэвтрэх</string>
+    <string name="common_signin_button_text_long">Google-р нэвтрэх:</string>
+</resources>

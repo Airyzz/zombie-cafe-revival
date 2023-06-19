@@ -1,0 +1,28 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <string name="common_google_play_services_notification_ticker">Erro dos Serviços do Google Play</string>
+    <string name="common_google_play_services_notification_needs_installation_title">Uma aplicação necessita da instalação dos Serviços do Google Play.</string>
+    <string name="common_google_play_services_notification_needs_update_title">Uma aplicação necessita da atualização dos Serviços do Google Play.</string>
+    <string name="common_google_play_services_needs_enabling_title">Uma aplicação necessita da ativação dos Serviços do Google Play.</string>
+    <string name="common_google_play_services_error_notification_requested_by_msg">Pedida por %1$s</string>
+    <string name="common_google_play_services_install_title">Obter serviços do Google Play</string>
+    <string name="common_google_play_services_install_text_phone">Esta aplicação não será executada sem os serviços do Google Play, que estão em falta no seu telemóvel.</string>
+    <string name="common_google_play_services_install_text_tablet">Esta aplicação não será executada sem os serviços do Google Play, que estão em falta no seu tablet.</string>
+    <string name="common_google_play_services_install_button">Obter serviços do Google Play</string>
+    <string name="common_google_play_services_enable_title">Ativar serviços do Google Play</string>
+    <string name="common_google_play_services_enable_text">Esta aplicação não funcionará enquanto não ativar os serviços do Google Play.</string>
+    <string name="common_google_play_services_enable_button">Ativar serviços do Google Play</string>
+    <string name="common_google_play_services_update_title">Atualizar serviços do Google Play</string>
+    <string name="common_google_play_services_update_text">Esta aplicação não será executada enquanto não atualizar os serviços do Google Play.</string>
+    <string name="common_google_play_services_network_error_title">Erro de Rede</string>
+    <string name="common_google_play_services_network_error_text">É necessária uma ligação de dados para se ligar aos Serviços do Google Play.</string>
+    <string name="common_google_play_services_invalid_account_title">Conta Inválida</string>
+    <string name="common_google_play_services_invalid_account_text">A conta especificada não existe neste dispositivo. Escolha uma conta diferente.</string>
+    <string name="common_google_play_services_unknown_issue">Problema desconhecido nos serviços do Google Play.</string>
+    <string name="common_google_play_services_unsupported_title">Serviços do Google Play</string>
+    <string name="common_google_play_services_unsupported_text">Os serviços do Google Play, dos quais dependem algumas das suas aplicações, não são suportados pelo seu dispositivo. Contacte o fabricante para obter assistência.</string>
+    <string name="common_google_play_services_unsupported_date_text">A data no dispositivo parece estar incorreta. Verifique a data no dispositivo.</string>
+    <string name="common_google_play_services_update_button">Atualizar</string>
+    <string name="common_signin_button_text">Inic. ses.</string>
+    <string name="common_signin_button_text_long">Inic. sessão com o Google</string>
+</resources>

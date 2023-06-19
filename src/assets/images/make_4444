@@ -1,0 +1,11 @@
+DEBUG_FLAGS="-scale $3%"
+cp $1 uncompressed.png 
+../../spfw/bin/convert $DEBUG_FLAGS -depth 4 -dither FloydSteinberg uncompressed.png raw.rgba
+WIDTH=`../../spfw/bin/identify uncompressed.png | cut -d' ' -f3 | cut -d'x' -f1`
+HEIGHT=`../../spfw/bin/identify uncompressed.png | cut -d' ' -f3 | cut -d'x' -f2`
+
+WIDTH=`echo "($WIDTH * $3+50) / 100" | bc`
+HEIGHT=`echo "($HEIGHT * $3+50) / 100" | bc`
+
+echo "$WIDTH x $HEIGHT"
+../../spfw/bin/make_pvrt $WIDTH $HEIGHT 4444 raw.rgba $2

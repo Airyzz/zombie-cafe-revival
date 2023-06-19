@@ -1,0 +1,28 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <string name="common_google_play_services_notification_ticker">‏خطأ في خدمات Google Play</string>
+    <string name="common_google_play_services_notification_needs_installation_title">‏يتطلب أحد التطبيقات تثبيت خدمات Google Play.</string>
+    <string name="common_google_play_services_notification_needs_update_title">‏يتطلب أحد التطبيقات تحديث خدمات Google Play.</string>
+    <string name="common_google_play_services_needs_enabling_title">‏يتطلب أحد التطبيقات تمكين خدمات Google Play.</string>
+    <string name="common_google_play_services_error_notification_requested_by_msg">تم الطلب عن طريق %1$s</string>
+    <string name="common_google_play_services_install_title">‏الحصول على خدمات Google Play</string>
+    <string name="common_google_play_services_install_text_phone">‏لن يتم تشغيل هذا التطبيق بدون خدمات Google Play، والتي لا تتوفر في هاتفك.</string>
+    <string name="common_google_play_services_install_text_tablet">‏لن يتم تشغيل هذا التطبيق بدون خدمات Google Play، والتي لا تتوفر في جهازك اللوحي.</string>
+    <string name="common_google_play_services_install_button">‏الحصول على خدمات Google Play</string>
+    <string name="common_google_play_services_enable_title">‏تمكين خدمات Google Play</string>
+    <string name="common_google_play_services_enable_text">‏لن يعمل هذا التطبيق ما لم يتم تمكين خدمات Google Play.</string>
+    <string name="common_google_play_services_enable_button">‏تمكين خدمات Google Play</string>
+    <string name="common_google_play_services_update_title">‏تحديث خدمات Google Play</string>
+    <string name="common_google_play_services_update_text">‏لن يتم تشغيل هذا التطبيق ما لم تحدِّث خدمات Google Play.</string>
+    <string name="common_google_play_services_network_error_title">خطأ في الشبكة</string>
+    <string name="common_google_play_services_network_error_text">‏يتطلب الاتصال بخدمات Google Play وجود اتصال بيانات.</string>
+    <string name="common_google_play_services_invalid_account_title">حساب غير صالح</string>
+    <string name="common_google_play_services_invalid_account_text">الحساب الذي تمّ تحديده غير موجود على الجهاز. يُرجى اختيار حساب آخر.</string>
+    <string name="common_google_play_services_unknown_issue">‏حدثت مشكلة غير معروفة في خدمات Google Play.</string>
+    <string name="common_google_play_services_unsupported_title">‏خدمات Google Play</string>
+    <string name="common_google_play_services_unsupported_text">‏خدمات Google Play التي تستجيب لها بعض تطبيقاتك لا تعمل على جهازك. يُرجى الاتصال بجهة التصنيع للحصول على المساعدة.</string>
+    <string name="common_google_play_services_unsupported_date_text">يبدو أن التاريخ على الجهاز غير صحيح. الرجاء التحقق من التاريخ على الجهاز.</string>
+    <string name="common_google_play_services_update_button">تحديث</string>
+    <string name="common_signin_button_text">تسجيل الدخول</string>
+    <string name="common_signin_button_text_long">‏تسجيل الدخول باستخدام Google</string>
+</resources>

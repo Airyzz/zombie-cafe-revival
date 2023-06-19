@@ -1,0 +1,28 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <string name="common_google_play_services_notification_ticker">Google Play Services-fout</string>
+    <string name="common_google_play_services_notification_needs_installation_title">"'n Program vereis dat Google Play Services geïnstalleer word."</string>
+    <string name="common_google_play_services_notification_needs_update_title">"'n Program vereis dat Google Play Services opgedateer word."</string>
+    <string name="common_google_play_services_needs_enabling_title">"'n Program vereis dat Google Play Services geaktiveer word."</string>
+    <string name="common_google_play_services_error_notification_requested_by_msg">Versoek deur %1$s</string>
+    <string name="common_google_play_services_install_title">Kry Google Play-dienste</string>
+    <string name="common_google_play_services_install_text_phone">Hierdie program sal nie loop sonder Google Play-dienste nie, wat nie op jou foon is nie.</string>
+    <string name="common_google_play_services_install_text_tablet">Hierdie program sal nie loop sonder Google Play-dienste nie, wat nie op jou tablet is nie.</string>
+    <string name="common_google_play_services_install_button">Kry Google Play-dienste</string>
+    <string name="common_google_play_services_enable_title">Aktiveer Google Play-dienste</string>
+    <string name="common_google_play_services_enable_text">Hierdie program sal nie werk tensy jy Google Play-dienste aktiveer nie.</string>
+    <string name="common_google_play_services_enable_button">Aktiveer Google Play-dienste</string>
+    <string name="common_google_play_services_update_title">Dateer Google Play-dienste op</string>
+    <string name="common_google_play_services_update_text">Hierdie program sal nie loop nie, tensy jy Google Play-dienste opdateer.</string>
+    <string name="common_google_play_services_network_error_title">Netwerkfout</string>
+    <string name="common_google_play_services_network_error_text">"'n Dataverbinding is nodig om aan Google Play-dienste te koppel."</string>
+    <string name="common_google_play_services_invalid_account_title">Ongeldige rekening</string>
+    <string name="common_google_play_services_invalid_account_text">"Die gespesifiseerde rekening bestaan nie op hierdie toestel nie. Kies asseblief 'n ander rekening."</string>
+    <string name="common_google_play_services_unknown_issue">Onbekende probleem met Google Play-dienste.</string>
+    <string name="common_google_play_services_unsupported_title">Google Play-dienste</string>
+    <string name="common_google_play_services_unsupported_text">Google Play-dienste, waarop sommige van jou programme staatmaak, werk nie met jou toestel nie. Kontak asseblief die vervaardiger vir bystand.</string>
+    <string name="common_google_play_services_unsupported_date_text">Dit lyk of die datum op die toestel verkeerd is. Gaan asseblief die datum op die toestel na.</string>
+    <string name="common_google_play_services_update_button">Dateer op</string>
+    <string name="common_signin_button_text">Meld aan</string>
+    <string name="common_signin_button_text_long">Meld aan met Google</string>
+</resources>

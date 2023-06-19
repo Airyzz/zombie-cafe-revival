@@ -1,0 +1,28 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <string name="common_google_play_services_notification_ticker">Google Play ծառայությունների սխալ կա</string>
+    <string name="common_google_play_services_notification_needs_installation_title">Ինչ-որ հավելված պահանջում է տեղադրել Google Play ծառայությունները:</string>
+    <string name="common_google_play_services_notification_needs_update_title">Ինչ-որ հավելված պահանջում է թարմացնել Google Play ծառայությունները:</string>
+    <string name="common_google_play_services_needs_enabling_title">Ինչ-որ հավելված պահանջում է միացնել Google Play ծառայությունները:</string>
+    <string name="common_google_play_services_error_notification_requested_by_msg">%1$s-ի հարցմամբ</string>
+    <string name="common_google_play_services_install_title">Տեղադրեք Google Play ծառայությունները</string>
+    <string name="common_google_play_services_install_text_phone">Այս հավելվածը չի գործարկվի առանց Google Play ծառայությունների, որոնք բացակայում են ձեր հեռախոսում:</string>
+    <string name="common_google_play_services_install_text_tablet">Այս հավելվածը չի գործարկվի առանց Google Play ծառայությունների, որոնք բացակայում են ձեր գրասալիկում:</string>
+    <string name="common_google_play_services_install_button">Տեղադրել Google Play ծառայությունները</string>
+    <string name="common_google_play_services_enable_title">Միացնել Google Play ծառայությունները</string>
+    <string name="common_google_play_services_enable_text">Այս ծրագիրը չի աշխատի, եթե դուք չմիացնեք Google Play ծառայությունները:</string>
+    <string name="common_google_play_services_enable_button">Միացնել Google Play ծառայությունները</string>
+    <string name="common_google_play_services_update_title">Նորացրեք Google Play ծառայությունները</string>
+    <string name="common_google_play_services_update_text">Այս ծրագիրը չի գործարկվի, եթե դուք չնորացնեք Google Play ծառայությունները:</string>
+    <string name="common_google_play_services_network_error_title">Ցանցի սխալ կա</string>
+    <string name="common_google_play_services_network_error_text">Պահանջվում է տվյալների կապ` Google Play ծառայություններին միանալու համար:</string>
+    <string name="common_google_play_services_invalid_account_title">Հաշիվն անվավեր է</string>
+    <string name="common_google_play_services_invalid_account_text">Նշված հաշիվը գոյություն չունի այս սարքում: Ընտրեք այլ հաշիվ:</string>
+    <string name="common_google_play_services_unknown_issue">Անհայտ խնդիր՝ Google Play ծառայություններում:</string>
+    <string name="common_google_play_services_unsupported_title">Google Play ծառայություններ</string>
+    <string name="common_google_play_services_unsupported_text">Google Play ծառայությունները, որոնց ապավինում են ձեր ծրագրերից որոշները, չեն աջակցվում ձեր սարքի կողմից: Խնդրում ենք կապվել արտադրողի հետ օգնության համար:</string>
+    <string name="common_google_play_services_unsupported_date_text">Սարքի ամսաթիվը կարծես սխալ է: Ստուգեք սարքի ամսաթիվը:</string>
+    <string name="common_google_play_services_update_button">Նորացնել</string>
+    <string name="common_signin_button_text">Մուտք գործել</string>
+    <string name="common_signin_button_text_long">Մուտք գործեք Google-ով</string>
+</resources>

@@ -1,0 +1,29 @@
+!!brut.androlib.meta.MetaInfo
+apkFileName: Zombie Café_ZombieCafeAndroid 1.1.2.0a_Apkpure.apk
+compressionType: false
+doNotCompress:
+- resources.arsc
+- png
+- ogg
+- mid
+isFrameworkApk: false
+packageInfo:
+  forcedPackageId: '127'
+  renameManifestPackage: null
+sdkInfo:
+  minSdkVersion: '8'
+  targetSdkVersion: '14'
+sharedLibrary: false
+sparseResources: true
+unknownFiles:
+  com/paypal/android/utils/data/data.bin: '8'
+  com/paypal/android/utils/data/locale.bin: '8'
+  org/apache/http/entity/mime/version.properties: '8'
+usesFramework:
+  ids:
+  - 1
+  tag: null
+version: 2.5.0-dirty
+versionInfo:
+  versionCode: '19'
+  versionName: ZombieCafeAndroid 1.1.2.0a

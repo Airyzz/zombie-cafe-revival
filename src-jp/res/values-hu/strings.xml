@@ -1,0 +1,28 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <string name="common_google_play_services_notification_ticker">Google Play szolgáltatások – hiba</string>
+    <string name="common_google_play_services_notification_needs_installation_title">Egy alkalmazás Google Play-szolgáltatások telepítését kéri.</string>
+    <string name="common_google_play_services_notification_needs_update_title">Egy alkalmazás Google Play-szolgáltatások frissítését kéri.</string>
+    <string name="common_google_play_services_needs_enabling_title">Egy alkalmazás Google Play-szolgáltatások engedélyezését kéri.</string>
+    <string name="common_google_play_services_error_notification_requested_by_msg">A(z) %1$s kérésére</string>
+    <string name="common_google_play_services_install_title">Play Szolgáltatások telepítése</string>
+    <string name="common_google_play_services_install_text_phone">Az alkalmazás működéséhez a Google Play Szolgáltatások szükségesek, ezek nincsenek telepítve a telefonon.</string>
+    <string name="common_google_play_services_install_text_tablet">Az alkalmazás működéséhez a Google Play Szolgáltatások szükségesek, ezek nincsenek telepítve a táblagépen.</string>
+    <string name="common_google_play_services_install_button">Play Szolgáltatások telepítése</string>
+    <string name="common_google_play_services_enable_title">Google Play Szolgáltatások aktiválása</string>
+    <string name="common_google_play_services_enable_text">Az alkalmazás csak akkor fog működni, ha engedélyezi a Google Play Szolgáltatásokat.</string>
+    <string name="common_google_play_services_enable_button">Play Szolgáltatások aktiválása</string>
+    <string name="common_google_play_services_update_title">Play Szolgáltatások frissítése</string>
+    <string name="common_google_play_services_update_text">Az alkalmazás csak akkor fog működni, ha frissíti a Google Play Szolgáltatásokat.</string>
+    <string name="common_google_play_services_network_error_title">Hálózati hiba</string>
+    <string name="common_google_play_services_network_error_text">A Google Play Szolgáltatásokhoz történő kapcsolódáshoz adatkapcsolat szükséges.</string>
+    <string name="common_google_play_services_invalid_account_title">Érvénytelen fiók</string>
+    <string name="common_google_play_services_invalid_account_text">A megadott fiók nem létezik ezen az eszközön. Kérjük, válasszon másik fiókot.</string>
+    <string name="common_google_play_services_unknown_issue">Ismeretlen hiba a Google Play Szolgáltatásokban.</string>
+    <string name="common_google_play_services_unsupported_title">Google Play Szolgáltatások</string>
+    <string name="common_google_play_services_unsupported_text">A Google Play Szolgáltatásokat, amelyre egyes alkalmazások támaszkodnak, nem támogatja az eszköz. Segítségért forduljon az eszköz gyártójához.</string>
+    <string name="common_google_play_services_unsupported_date_text">Az eszközön beállított dátum helytelen. Kérjük, ellenőrizze azt.</string>
+    <string name="common_google_play_services_update_button">Frissítés</string>
+    <string name="common_signin_button_text">Belépés</string>
+    <string name="common_signin_button_text_long">Google-bejelentkezés</string>
+</resources>

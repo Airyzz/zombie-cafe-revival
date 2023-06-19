@@ -1,0 +1,28 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <string name="common_google_play_services_notification_ticker">Σφάλμα Υπηρεσιών Google Play</string>
+    <string name="common_google_play_services_notification_needs_installation_title">Μια εφαρμογή απαιτεί την εγκατάσταση των Υπηρεσιών Google Play.</string>
+    <string name="common_google_play_services_notification_needs_update_title">Μια εφαρμογή απαιτεί την ενημέρωση των Υπηρεσιών Google Play.</string>
+    <string name="common_google_play_services_needs_enabling_title">Μια εφαρμογή απαιτεί την ενεργοποίηση των Υπηρεσιών Google Play.</string>
+    <string name="common_google_play_services_error_notification_requested_by_msg">Υποβλήθηκε αίτημα από την εφαρμογή %1$s</string>
+    <string name="common_google_play_services_install_title">Λήψη υπηρεσιών Google Play</string>
+    <string name="common_google_play_services_install_text_phone">Αυτή η εφαρμογή δεν θα εκτελεστεί χωρίς τις υπηρεσίες Google Play, οι οποίες λείπουν από το τηλέφωνό σας.</string>
+    <string name="common_google_play_services_install_text_tablet">Αυτή η εφαρμογή δεν θα εκτελεστεί χωρίς τις υπηρεσίες Google Play, οι οποίες λείπουν από το tablet σας.</string>
+    <string name="common_google_play_services_install_button">Λήψη υπηρεσιών Google Play</string>
+    <string name="common_google_play_services_enable_title">Ενεργοποίηση υπηρεσιών Google Play</string>
+    <string name="common_google_play_services_enable_text">Αυτή η εφαρμογή δεν θα λειτουργήσει εάν δεν έχετε ενεργοποιήσει τις υπηρεσίες Google Play.</string>
+    <string name="common_google_play_services_enable_button">Ενεργοπ. υπηρεσιών Google Play</string>
+    <string name="common_google_play_services_update_title">Ενημέρωση υπηρεσιών Google Play</string>
+    <string name="common_google_play_services_update_text">Αυτή η εφαρμογή θα εκτελεστεί αφού ενημερώσετε τις υπηρεσίες Google Play.</string>
+    <string name="common_google_play_services_network_error_title">Σφάλμα δικτύου</string>
+    <string name="common_google_play_services_network_error_text">Απαιτείται σύνδεση δεδομένων για να συνδεθείτε με τις Υπηρεσίες Google Play.</string>
+    <string name="common_google_play_services_invalid_account_title">Μη έγκυρος λογαριασμός</string>
+    <string name="common_google_play_services_invalid_account_text">Ο συγκεκριμένος λογαριασμός δεν υπάρχει σε αυτήν τη συσκευή. Επιλέξτε έναν διαφορετικό λογαριασμό.</string>
+    <string name="common_google_play_services_unknown_issue">Άγνωστο πρόβλημα με τις υπηρεσίες Google Play.</string>
+    <string name="common_google_play_services_unsupported_title">Υπηρεσίες Google Play</string>
+    <string name="common_google_play_services_unsupported_text">Οι υπηρεσίες Google Play, στις οποίες βασίζονται ορισμένες από τις εφαρμογές σας, δεν υποστηρίζονται στη συσκευή σας. Επικοινωνήστε με τον κατασκευαστή για υποστήριξη.</string>
+    <string name="common_google_play_services_unsupported_date_text">Η ημερομηνία στη συσκευή φαίνεται λανθασμένη. Ελέγξτε την ημερομηνία στη συσκευή.</string>
+    <string name="common_google_play_services_update_button">Ενημέρωση</string>
+    <string name="common_signin_button_text">Σύνδεση</string>
+    <string name="common_signin_button_text_long">Συνδεθείτε στο Google</string>
+</resources>

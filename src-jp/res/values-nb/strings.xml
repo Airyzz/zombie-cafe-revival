@@ -1,0 +1,28 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <string name="common_google_play_services_notification_ticker">Google Play Tjenester-feil</string>
+    <string name="common_google_play_services_notification_needs_installation_title">En app krever installasjon av Google Play Tjenester.</string>
+    <string name="common_google_play_services_notification_needs_update_title">En app krever at Google Play Tjenester oppdateres.</string>
+    <string name="common_google_play_services_needs_enabling_title">En app krever Google Play Tjenester for å aktiveres.</string>
+    <string name="common_google_play_services_error_notification_requested_by_msg">Forespurt av %1$s</string>
+    <string name="common_google_play_services_install_title">Installer Google Play Tjenester</string>
+    <string name="common_google_play_services_install_text_phone">Denne appen kan ikke kjøres uten Google Play Tjenester, som ikke er installert på telefonen din.</string>
+    <string name="common_google_play_services_install_text_tablet">Denne appen kan ikke kjøres uten Google Play Tjenester, som ikke er installert på nettbrettet ditt.</string>
+    <string name="common_google_play_services_install_button">Installer Google Play Tjenester</string>
+    <string name="common_google_play_services_enable_title">Aktiver Google Play Tjenester</string>
+    <string name="common_google_play_services_enable_text">Denne appen fungerer ikke med mindre du aktiverer Google Play Tjenester.</string>
+    <string name="common_google_play_services_enable_button">Aktiver Google Play Tjenester</string>
+    <string name="common_google_play_services_update_title">Oppdater Google Play Tjenester</string>
+    <string name="common_google_play_services_update_text">Denne appen kan ikke kjøres før du oppdaterer Google Play Tjenester.</string>
+    <string name="common_google_play_services_network_error_title">Nettverksfeil</string>
+    <string name="common_google_play_services_network_error_text">Du må ha datatilkobling for å koble deg til Google Play-tjenester.</string>
+    <string name="common_google_play_services_invalid_account_title">Ugyldig konto</string>
+    <string name="common_google_play_services_invalid_account_text">Den angitte kontoen finnes ikke på enheten. Velg en annen konto.</string>
+    <string name="common_google_play_services_unknown_issue">Det oppsto et ukjent problem med Google Play Tjenester.</string>
+    <string name="common_google_play_services_unsupported_title">Google Play-tjenester</string>
+    <string name="common_google_play_services_unsupported_text">Google Play Tjenester, som noen av appene er avhengige av, støttes ikke av enheten. Ta kontakt med produsenten for å få hjelp.</string>
+    <string name="common_google_play_services_unsupported_date_text">Datoen på enheten ser ut til å være feil. Sjekk datoen på enheten.</string>
+    <string name="common_google_play_services_update_button">Oppdater</string>
+    <string name="common_signin_button_text">Logg på</string>
+    <string name="common_signin_button_text_long">Logg inn med Google</string>
+</resources>

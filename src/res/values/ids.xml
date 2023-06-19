@@ -1,0 +1,19 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <item type="id" name="billing_supported" />
+    <item type="id" name="owned_items" />
+    <item type="id" name="log" />
+    <item type="id" name="message" />
+    <item type="id" name="layout" />
+    <item type="id" name="mPreview" />
+    <item type="id" name="button0" />
+    <item type="id" name="description" />
+    <item type="id" name="payload_text" />
+    <item type="id" name="item_name" />
+    <item type="id" name="item_quantity" />
+    <item type="id" name="glsurfaceview" />
+    <item type="id" name="CRAMImage" />
+    <item type="id" name="widget" />
+    <item type="id" name="Widget_Text1" />
+    <item type="id" name="button_one" />
+</resources>

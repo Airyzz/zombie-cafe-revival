@@ -1,0 +1,28 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <string name="common_google_play_services_notification_ticker">Eroare a serviciilor Google Play</string>
+    <string name="common_google_play_services_notification_needs_installation_title">O aplicație necesită instalarea serviciilor Google Play.</string>
+    <string name="common_google_play_services_notification_needs_update_title">O aplicație necesită o actualizare pentru serviciile Google Play.</string>
+    <string name="common_google_play_services_needs_enabling_title">O aplicație necesită activarea serviciilor Google Play.</string>
+    <string name="common_google_play_services_error_notification_requested_by_msg">Solicitată de %1$s</string>
+    <string name="common_google_play_services_install_title">Descărcaţi Servicii Google Play</string>
+    <string name="common_google_play_services_install_text_phone">Această aplicaţie nu poate rula fără Servicii Google Play, care lipsesc de pe telefon.</string>
+    <string name="common_google_play_services_install_text_tablet">Această aplicaţie nu poate rula fără Servicii Google Play, care lipsesc de pe tabletă.</string>
+    <string name="common_google_play_services_install_button">Obţineţi Servicii Google Play</string>
+    <string name="common_google_play_services_enable_title">Activaţi Servicii Google Play</string>
+    <string name="common_google_play_services_enable_text">Această aplicaţie nu va funcţiona decât dacă activaţi Servicii Google Play.</string>
+    <string name="common_google_play_services_enable_button">Activaţi Servicii Google Play</string>
+    <string name="common_google_play_services_update_title">Actualizaţi Servicii Google Play</string>
+    <string name="common_google_play_services_update_text">Această aplicaţie nu poate rula decât dacă actualizaţi Servicii Google Play.</string>
+    <string name="common_google_play_services_network_error_title">Eroare de reţea</string>
+    <string name="common_google_play_services_network_error_text">Este necesară o conexiune de date pentru a vă conecta la serviciile Google Play.</string>
+    <string name="common_google_play_services_invalid_account_title">Cont nevalid</string>
+    <string name="common_google_play_services_invalid_account_text">Contul menționat nu există pe acest dispozitiv. Alegeți alt cont.</string>
+    <string name="common_google_play_services_unknown_issue">Problemă necunoscută privind Servicii Google Play.</string>
+    <string name="common_google_play_services_unsupported_title">Servicii Google Play</string>
+    <string name="common_google_play_services_unsupported_text">Gadgetul nu acceptă serviciile Google Play, pe care se bazează unele dintre aplicații. Pentru asistență, contactați producătorul gadgetului.</string>
+    <string name="common_google_play_services_unsupported_date_text">Data de pe dispozitiv pare să fie incorectă. Verificați data de pe dispozitiv.</string>
+    <string name="common_google_play_services_update_button">Actualizaţi</string>
+    <string name="common_signin_button_text">Conectați</string>
+    <string name="common_signin_button_text_long">Conectați-vă cu Google</string>
+</resources>

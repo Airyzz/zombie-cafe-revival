@@ -1,0 +1,28 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <string name="common_google_play_services_notification_ticker">Chyba služieb Google Play</string>
+    <string name="common_google_play_services_notification_needs_installation_title">Aplikácia vyžaduje inštaláciu služieb Google Play.</string>
+    <string name="common_google_play_services_notification_needs_update_title">Aplikácia vyžaduje aktualizáciu služieb Google Play.</string>
+    <string name="common_google_play_services_needs_enabling_title">Aplikácia vyžaduje povolenie služieb Google Play.</string>
+    <string name="common_google_play_services_error_notification_requested_by_msg">Vyžiadané aplikáciou %1$s</string>
+    <string name="common_google_play_services_install_title">Inštalovať služby Google Play</string>
+    <string name="common_google_play_services_install_text_phone">Na spustenie tejto aplikácie sa vyžadujú služby Google Play, ktoré v telefóne nemáte.</string>
+    <string name="common_google_play_services_install_text_tablet">Na spustenie tejto aplikácie sa vyžadujú služby Google Play, ktoré v tablete nemáte.</string>
+    <string name="common_google_play_services_install_button">Inštalovať služby Google Play</string>
+    <string name="common_google_play_services_enable_title">Povoliť služby Google Play</string>
+    <string name="common_google_play_services_enable_text">Táto aplikácia bude fungovať až po povolení služieb Google Play.</string>
+    <string name="common_google_play_services_enable_button">Povoliť služby Google Play</string>
+    <string name="common_google_play_services_update_title">Aktualizovať služby Google Play</string>
+    <string name="common_google_play_services_update_text">Túto aplikáciu bude možné spustiť až po aktualizácii služieb Google Play.</string>
+    <string name="common_google_play_services_network_error_title">Chyba siete</string>
+    <string name="common_google_play_services_network_error_text">Pripojenie k službám Google Play si vyžaduje dátové pripojenie.</string>
+    <string name="common_google_play_services_invalid_account_title">Neplatný účet</string>
+    <string name="common_google_play_services_invalid_account_text">Zadaný účet v tomto zariadení neexistuje. Vyberte iný účet.</string>
+    <string name="common_google_play_services_unknown_issue">Neznámy problém so službami Google Play.</string>
+    <string name="common_google_play_services_unsupported_title">Služby Google Play</string>
+    <string name="common_google_play_services_unsupported_text">Niektoré vaše aplikácie vyžadujú služby Google Play, ktoré vo vašom zariadení nie sú podporované. Ak potrebujete pomoc, kontaktujte výrobcu.</string>
+    <string name="common_google_play_services_unsupported_date_text">Dátum nastavený v zariadení sa zdá byť nesprávny. Skontrolujte ho.</string>
+    <string name="common_google_play_services_update_button">Aktualizovať</string>
+    <string name="common_signin_button_text">Prihlásiť sa</string>
+    <string name="common_signin_button_text_long">Prihlásiť sa do účtu Google</string>
+</resources>

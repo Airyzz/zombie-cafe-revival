@@ -1,0 +1,28 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <string name="common_google_play_services_notification_ticker">Errore Google Play Services</string>
+    <string name="common_google_play_services_notification_needs_installation_title">"Un'applicazione richiede l'installazione di Google Play Services."</string>
+    <string name="common_google_play_services_notification_needs_update_title">"Un'applicazione richiede un aggiornamento di Google Play Services."</string>
+    <string name="common_google_play_services_needs_enabling_title">"Un'applicazione richiede l'attivazione di Google Play Services."</string>
+    <string name="common_google_play_services_error_notification_requested_by_msg">Richiesta da %1$s</string>
+    <string name="common_google_play_services_install_title">Installa Google Play Services</string>
+    <string name="common_google_play_services_install_text_phone">"L'app non funzionerà senza Google Play Services, non presente sul tuo telefono."</string>
+    <string name="common_google_play_services_install_text_tablet">"L'app non funzionerà senza Google Play Services, non presente sul tuo tablet."</string>
+    <string name="common_google_play_services_install_button">Installa Google Play Services</string>
+    <string name="common_google_play_services_enable_title">Attiva Google Play Services</string>
+    <string name="common_google_play_services_enable_text">"L'app non funzionerà se non attivi Google Play Services."</string>
+    <string name="common_google_play_services_enable_button">Attiva Google Play Services</string>
+    <string name="common_google_play_services_update_title">Aggiorna Google Play Services</string>
+    <string name="common_google_play_services_update_text">"L'app non funzionerà se non aggiorni Google Play Services."</string>
+    <string name="common_google_play_services_network_error_title">Errore di rete</string>
+    <string name="common_google_play_services_network_error_text">È necessaria una connessione dati per connettersi a Google Play Services.</string>
+    <string name="common_google_play_services_invalid_account_title">Account non valido</string>
+    <string name="common_google_play_services_invalid_account_text">"L'account specificato non esiste su questo dispositivo. Scegli un altro account."</string>
+    <string name="common_google_play_services_unknown_issue">Problema sconosciuto con Google Play Services.</string>
+    <string name="common_google_play_services_unsupported_title">Google Play Services</string>
+    <string name="common_google_play_services_unsupported_text">La piattaforma Google Play Services, su cui sono basate alcune delle tue applicazioni, non è supportata dal dispositivo in uso. Per assistenza, contatta il produttore.</string>
+    <string name="common_google_play_services_unsupported_date_text">La data sul dispositivo sembra sbagliata. Controllala.</string>
+    <string name="common_google_play_services_update_button">Aggiorna</string>
+    <string name="common_signin_button_text">Accedi</string>
+    <string name="common_signin_button_text_long">Accedi con Google</string>
+</resources>

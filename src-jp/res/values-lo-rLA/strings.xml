@@ -1,0 +1,28 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <string name="common_google_play_services_notification_ticker">Google Play Services ​ເກີດ​ຄວາມ​ຜິດ​ພາດ</string>
+    <string name="common_google_play_services_notification_needs_installation_title">​ແອັບ​ພ​ລິ​ເຄ​ຊັນ​ຕ້ອງ​ການ​ໃຫ້​ຕິດ​ຕັ້ງ​ບໍ​ລິ​ການ Google Play ກ່ອນ.</string>
+    <string name="common_google_play_services_notification_needs_update_title">​ແອັບ​ພ​ລິ​ເຄ​ຊັນ​ຕ້ອງ​ການ​ໃຫ້​ອັບ​ເດດບໍ​ລິ​ການ Google Play ກ່ອນ.</string>
+    <string name="common_google_play_services_needs_enabling_title">ແອັບພລິເຄຊັນຕ້ອງ​ການນຳໃຊ້ Google Play Services.</string>
+    <string name="common_google_play_services_error_notification_requested_by_msg">ຮ້ອງຂໍໂດຍ %1$s</string>
+    <string name="common_google_play_services_install_title">ຕິດຕັ້ງບໍລິການ Google Play</string>
+    <string name="common_google_play_services_install_text_phone">ແອັບຯນີ້ຈະບໍ່ສາມາດເຮັດວຽກໄດ້ໂດຍທີ່ບໍ່ມີບໍລິການ Google Play ເຊິ່ງຂາດຫາຍໄປໃນໂທລະສັບຂອງທ່ານ.</string>
+    <string name="common_google_play_services_install_text_tablet">ແອັບຯນີ້ຈະບໍ່ສາມາດເຮັດວຽກໄດ້ໂດຍທີ່ບໍ່ມີບໍລິການ Google Play ເຊິ່ງຂາດຫາຍໄປໃນແທັບເລັດຂອງທ່ານ.</string>
+    <string name="common_google_play_services_install_button">ຕິດຕັ້ງບໍລິການ Google Play</string>
+    <string name="common_google_play_services_enable_title">ເປີດໃຊ້ບໍລິການ Google Play</string>
+    <string name="common_google_play_services_enable_text">ແອັບຯນີ້ຈະບໍ່ສາມາດເຮັດວຽກໄດ້ຈົນກວ່າທ່ານຈະເປີດໃຊ້ບໍລິການ Google Play</string>
+    <string name="common_google_play_services_enable_button">ເປີດໃຊ້ບໍລິການ Google Play</string>
+    <string name="common_google_play_services_update_title">ອັບເດດບໍລິການ Google Play</string>
+    <string name="common_google_play_services_update_text">ແອັບຯນີ້ຈະບໍ່ສາມາດເຮັດວຽກໄດ້ຈົນກວ່າທ່ານຈະອັບເດດບໍລິການ Google Play.</string>
+    <string name="common_google_play_services_network_error_title">ເຄືອຂ່າຍຜິດພາດ</string>
+    <string name="common_google_play_services_network_error_text">ຕ້ອງໃຊ້ການເຊື່ອມຕໍ່ອິນເຕີເນັດເພື່ອໃຊ້ Google Play Services.</string>
+    <string name="common_google_play_services_invalid_account_title">ບັນຊີບໍ່ຖືກຕ້ອງ</string>
+    <string name="common_google_play_services_invalid_account_text">ບັນຊີທີ່ເລືອກບໍ່ມີໃນອຸປະກອນນີ້. ກະລຸນາເລືອກບັນຊີອື່ນ.</string>
+    <string name="common_google_play_services_unknown_issue">ມີປັນຫາທີ່ບໍ່ຄາດຄິດໃນບໍລິການ Google Play.</string>
+    <string name="common_google_play_services_unsupported_title">ບໍລິການ Google Play</string>
+    <string name="common_google_play_services_unsupported_text">ບໍລິການ Google Play ທີ່ບາງແອັບພລິເຄຊັນຂອງທ່ານຕ້ອງອາໄສນັ້ນ ບໍ່ຖືກຮອງຮັບໃນອຸປະກອນຂອງທ່ານ. ກະລຸນາຕິດຕໍ່ຜູ້ຜະລິດສຳລັບການແນະນຳ.</string>
+    <string name="common_google_play_services_unsupported_date_text">ວັນທີຂອງອຸປະກອນບໍ່ຖືກຕ້ອງ. ກະລຸນາກວດສອບວັນທີຂອງອຸປະກອນຂອງທ່ານ.</string>
+    <string name="common_google_play_services_update_button">ອັບເດດ</string>
+    <string name="common_signin_button_text">ເຂົ້າສູ່ລະບົບ</string>
+    <string name="common_signin_button_text_long">ເຂົ້າສູ່ລະບົບດ້ວຍ Google</string>
+</resources>

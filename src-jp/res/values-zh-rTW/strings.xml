@@ -1,0 +1,28 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <string name="common_google_play_services_notification_ticker">Google Play 服務發生錯誤</string>
+    <string name="common_google_play_services_notification_needs_installation_title">應用程式要求安裝 Google Play 服務。</string>
+    <string name="common_google_play_services_notification_needs_update_title">應用程式要求更新 Google Play 服務。</string>
+    <string name="common_google_play_services_needs_enabling_title">應用程式要求啟用 Google Play 服務。</string>
+    <string name="common_google_play_services_error_notification_requested_by_msg">「%1$s」提出要求</string>
+    <string name="common_google_play_services_install_title">取得 Google Play 服務</string>
+    <string name="common_google_play_services_install_text_phone">您的手機並未安裝 Google Play 服務，所以無法執行這個應用程式。</string>
+    <string name="common_google_play_services_install_text_tablet">您的平板電腦並未安裝 Google Play 服務，所以無法執行這個應用程式。</string>
+    <string name="common_google_play_services_install_button">取得 Google Play 服務</string>
+    <string name="common_google_play_services_enable_title">啟用 Google Play 服務</string>
+    <string name="common_google_play_services_enable_text">您必須啟用 Google Play 服務，這個應用程式才能運作。</string>
+    <string name="common_google_play_services_enable_button">啟用 Google Play 服務</string>
+    <string name="common_google_play_services_update_title">更新 Google Play 服務</string>
+    <string name="common_google_play_services_update_text">您必須更新 Google Play 服務，才能執行這個應用程式。</string>
+    <string name="common_google_play_services_network_error_title">網路錯誤</string>
+    <string name="common_google_play_services_network_error_text">需要數據連線才能連上 Google Play 服務。</string>
+    <string name="common_google_play_services_invalid_account_title">無效的帳戶</string>
+    <string name="common_google_play_services_invalid_account_text">這個裝置上沒有您所指定的帳戶，請選擇其他帳戶。</string>
+    <string name="common_google_play_services_unknown_issue">Google Play 服務發生不明問題。</string>
+    <string name="common_google_play_services_unsupported_title">Google Play 服務</string>
+    <string name="common_google_play_services_unsupported_text">您的裝置不支援部分應用程式所需的 Google Play 服務。如需協助，請與您的裝置製造商聯絡。</string>
+    <string name="common_google_play_services_unsupported_date_text">裝置上的日期似乎不正確，請檢查裝置上的日期。</string>
+    <string name="common_google_play_services_update_button">更新</string>
+    <string name="common_signin_button_text">登入</string>
+    <string name="common_signin_button_text_long">使用 Google 帳戶登入</string>
+</resources>
