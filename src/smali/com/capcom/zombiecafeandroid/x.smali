@@ -45,7 +45,5 @@
 
     const/4 v0, 0x0
 
-    invoke-static {v0}, Lcom/capcom/zombiecafeandroid/CC_Android;->fromNative_Chartboost(I)V
-
     return-void
 .end method

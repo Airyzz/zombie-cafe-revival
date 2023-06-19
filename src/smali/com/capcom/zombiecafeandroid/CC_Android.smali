@@ -530,16 +530,8 @@
 .end method
 
 .method public static fromNative_Chartboost(I)V
-    .locals 2
-
-    new-instance v0, Landroid/os/Bundle;
-
-    invoke-direct {v0}, Landroid/os/Bundle;-><init>()V
-
-    const/16 v1, 0x3057
-
-    invoke-static {v1, v0}, Lcom/capcom/zombiecafeandroid/ZombieCafeAndroid;->runSystemThread(ILandroid/os/Bundle;)V
-
+    .locals 0
+    
     return-void
 .end method
 
