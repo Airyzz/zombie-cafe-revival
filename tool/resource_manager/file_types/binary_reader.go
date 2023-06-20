@@ -1,4 +1,4 @@
-package main
+package filetypes
 
 import (
 	"encoding/binary"
@@ -29,7 +29,7 @@ func readInt32(file *os.File) int32 {
 
 func readFloat(file *os.File) float32 {
 	data := readNextBytes(file, 4)
-	return math.Float32frombits(binary.BigEndian.Uint32(data))
+	return math.Float32frombits(binary.LittleEndian.Uint32(data))
 }
 
 func readByte(file *os.File) byte {
