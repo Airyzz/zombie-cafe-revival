@@ -1,4 +1,4 @@
-package filetypes
+package file_types
 
 import (
 	"fmt"
@@ -76,6 +76,45 @@ func readSingleFurnitureData(file *os.File) furnitureData {
 	return furniture
 }
 
+func writeFurniture(file *os.File, data furnitureData) {
+
+	writeByte(file, data.UnlockLevel)
+	writeString(file, data.Name)
+	writeInt32(file, data.Price)
+	writeBool(file, data.PurchaseWithToxin)
+
+	writeByte(file, data.SizeX)
+	writeByte(file, data.SizeY)
+	writeInt16(file, data.U6)
+	writeInt16(file, data.U7)
+	writeInt16(file, data.U8)
+	writeInt16(file, data.U9)
+
+	writeByte(file, data.Type)
+	writeByte(file, data.Category)
+
+	for _, b := range data.Color {
+		writeByte(file, byte(b))
+	}
+
+	writeInt16(file, data.MoneyPerHour)
+	writeInt16(file, data.MaximumMoney)
+	writeFloat(file, data.RatingBonus)
+	writeInt32(file, data.BuyMoneyAmount)
+
+	writeByte(file, data.U17)
+	writeFloat(file, data.StoveSpeedMult)
+
+	writeString(file, data.Description)
+
+	writeFloat(file, data.ExperiencePoints)
+	writeBool(file, data.IsAvailableInStore)
+
+	writeByte(file, data.U21)
+	writeBool(file, data.U22)
+	writeInt16(file, data.U23)
+}
+
 func readFurnitureData(file *os.File) []furnitureData {
 	num := int(readInt32(file))
 	data := []furnitureData{}
@@ -86,4 +125,13 @@ func readFurnitureData(file *os.File) []furnitureData {
 	}
 
 	return data
+}
+
+func writeFurnitureData(file *os.File, furnitures []furnitureData) {
+
+	writeInt32(file, int32(len(furnitures)))
+
+	for i := 0; i < len(furnitures); i++ {
+		writeFurniture(file, furnitures[i])
+	}
 }

@@ -1,3 +1,3 @@
-module resource_manager
+module tool/resource_manager
 
 go 1.20

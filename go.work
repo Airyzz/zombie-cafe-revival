@@ -1,0 +1,6 @@
+go 1.20
+
+use (
+	./tool/build_tool
+	./tool/resource_manager
+)

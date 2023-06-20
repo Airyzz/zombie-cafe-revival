@@ -1,4 +1,4 @@
-package filetypes
+package file_types
 
 import (
 	"encoding/binary"
