@@ -31,6 +31,7 @@ func main() {
 
 	os.RemoveAll(out_directory)
 	copyFiles(in_directory, out_directory)
+
 	file_types.SerializeFiles(filepath.Join(in_directory, "assets", "data"), filepath.Join(out_directory, "assets", "data"))
 }
 

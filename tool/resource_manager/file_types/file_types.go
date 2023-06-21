@@ -18,6 +18,16 @@ func DeserializeFurniture(file *os.File) string {
 	return string(b)
 }
 
+func DeserializeFood(file *os.File) string {
+	data := readFoodData(file)
+	b, err := json.MarshalIndent(data, "", "    ")
+	if err != nil {
+		fmt.Println(err)
+	}
+
+	return string(b)
+}
+
 func SerializeFurniture(file *os.File, jsonData string) {
 	var data []furnitureData
 	err := json.Unmarshal([]byte(jsonData), &data)
@@ -28,17 +38,31 @@ func SerializeFurniture(file *os.File, jsonData string) {
 	writeFurnitureData(file, data)
 }
 
+func SerializeFood(file *os.File, jsonData string) {
+	var data []foodData
+	err := json.Unmarshal([]byte(jsonData), &data)
+	if err != nil {
+		fmt.Println(err)
+	}
+
+	writeFoodData(file, data)
+}
+
 func DeserializeFiles(in_directory string, out_directory string) {
+
 	deserialize_map := map[string]func(*os.File) string{
 		"furnitureData.bin.mid": DeserializeFurniture,
+		"foodData.bin.mid":      DeserializeFood,
 	}
 
 	for key, value := range deserialize_map {
 		path := filepath.Join(in_directory, key)
+
 		fmt.Println(path)
 		f, err := os.Open(path)
 		if err != nil {
-			log.Fatal(err)
+			log.Println(err)
+			continue
 		}
 
 		deserialized := value(f)
@@ -63,6 +87,7 @@ func SerializeFiles(in_directory string, out_directory string) {
 
 	deserialize_map := map[string]func(*os.File, string){
 		"furnitureData.bin.mid": SerializeFurniture,
+		"foodData.bin.mid":      SerializeFood,
 	}
 
 	for key, value := range deserialize_map {
@@ -71,7 +96,7 @@ func SerializeFiles(in_directory string, out_directory string) {
 		b, err := os.ReadFile(path)
 
 		if err != nil {
-			log.Fatal(err)
+			continue
 		}
 
 		outpath := filepath.Join(out_directory, key)
