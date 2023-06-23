@@ -1,3 +1,8 @@
 src/build
 out/*
 build
+src/lib/cpp/CMakeFiles/*
+src/lib/cpp/Makefile
+src/lib/cpp/CMakeCache.txt
+src/lib/cpp/libZombieCafe.so
+src/lib/cpp/cmake_install.cmake
