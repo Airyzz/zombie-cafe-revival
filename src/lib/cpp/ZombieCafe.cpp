@@ -10,10 +10,10 @@
 void* libHandle = nullptr;
 
 void* getLibHandle() {
-  if(libHandle  == nullptr) {
+  //if(libHandle  == nullptr) {
     libHandle = dlopen("libZombieCafeAndroid_original.so", RTLD_LAZY);
     LOGI("Successfully loaded libZombieCafeAndroid_original.so");
-  }
+  //}
   
   if(libHandle == nullptr) {
     LOGI("Failed to get handle for libZombieCafeAndroid_original.so");
@@ -21,6 +21,100 @@ void* getLibHandle() {
 
   return libHandle;
 }
+
+typedef void (*voidFunc_t)(JNIEnv* env, jobject object);
+void genericVoidCall(JNIEnv* env, jobject object, const char* funcName) {
+  LOGI("\t\t\tCalling hooked function: %s", funcName);
+  void* handle = getLibHandle();
+  if(handle) {
+    auto func = (voidFunc_t)dlsym(handle, funcName);
+    if(func != nullptr) {
+      func(env, object);
+    } else {
+      LOGI("Failed to get pointer for func %s", funcName);
+    }
+  } else {
+    LOGI("Failed to get pointer for lib");
+  }
+}
+
+extern "C" JNIEXPORT void JNICALL
+Java_com_capcom_zombiecafeandroid_ZombieCafeAndroid_DialogCallBack(JNIEnv* env, jobject object) {
+  genericVoidCall(env, object, "Java_com_capcom_zombiecafeandroid_ZombieCafeAndroid_DialogCallBack");
+}
+
+extern "C" JNIEXPORT void JNICALL
+Java_com_capcom_zombiecafeandroid_ZombieCafeAndroid_ClearDialogFlag(JNIEnv* env, jobject object) {
+  genericVoidCall(env, object, "Java_com_capcom_zombiecafeandroid_ZombieCafeAndroid_ClearDialogFlag");
+}
+
+extern "C" JNIEXPORT void JNICALL
+Java_com_capcom_zombiecafeandroid_ZombieCafeAndroid_InitMethodCalls(JNIEnv* env, jobject object) {
+  genericVoidCall(env, object, "Java_com_capcom_zombiecafeandroid_ZombieCafeAndroid_InitMethodCalls");
+}
+
+extern "C" JNIEXPORT void JNICALL
+Java_com_capcom_zombiecafeandroid_ZombieCafeAndroid_ReloadTask_reloadTextures(JNIEnv* env, jobject object) {
+  genericVoidCall(env, object, "Java_com_capcom_zombiecafeandroid_ZombieCafeAndroid_ReloadTask_reloadTextures");
+}
+
+extern "C" JNIEXPORT void JNICALL
+Java_com_capcom_zombiecafeandroid_SmurfsRenderer_setTexture(JNIEnv* env, jobject object) {
+  LOGI("SMURFS RENDERER SET TEXTYRE CALL");
+  genericVoidCall(env, object, "Java_com_capcom_zombiecafeandroid_SmurfsRenderer_setTexture");
+}
+
+extern "C" JNIEXPORT void JNICALL
+Java_com_capcom_zombiecafeandroid_ZombieCafeAndroid_WatchedTrailer(JNIEnv* env, jobject object) {
+  genericVoidCall(env, object, "Java_com_capcom_zombiecafeandroid_ZombieCafeAndroid_WatchedTrailer");
+}
+
+extern "C" JNIEXPORT void JNICALL
+Java_com_capcom_zombiecafeandroid_ZombieCafeAndroid_OnFriendScreen(JNIEnv* env, jobject object) {
+  genericVoidCall(env, object, "Java_com_capcom_zombiecafeandroid_ZombieCafeAndroid_OnFriendScreen");
+}
+
+extern "C" JNIEXPORT void JNICALL
+Java_com_capcom_zombiecafeandroid_ZombieCafeAndroid_updateAccelerometer(JNIEnv* env, jobject object) {
+  genericVoidCall(env, object, "Java_com_capcom_zombiecafeandroid_ZombieCafeAndroid_updateAccelerometer");
+}
+
+extern "C" JNIEXPORT void JNICALL
+Java_com_capcom_zombiecafeandroid_ZombieCafeAndroid_deviceShaken(JNIEnv* env, jobject object) {
+  genericVoidCall(env, object, "Java_com_capcom_zombiecafeandroid_ZombieCafeAndroid_deviceShaken");
+}
+
+extern "C" JNIEXPORT void JNICALL
+Java_com_capcom_zombiecafeandroid_ZombieCafeAndroid_pause(JNIEnv* env, jobject object) {
+  genericVoidCall(env, object, "Java_com_capcom_zombiecafeandroid_ZombieCafeAndroid_deviceShaken");
+}
+
+extern "C" JNIEXPORT void JNICALL
+Java_com_capcom_zombiecafeandroid_SmurfsGLSurfaceView_DebugGame(JNIEnv* env, jobject object) {
+  genericVoidCall(env, object, "Java_com_capcom_zombiecafeandroid_SmurfsGLSurfaceView_DebugGame");
+}
+
+extern "C" JNIEXPORT void JNICALL
+Java_com_capcom_zombiecafeandroid_ZombieCafeAndroid_HandleBackButton(JNIEnv* env, jobject object) {
+  genericVoidCall(env, object, "Java_com_capcom_zombiecafeandroid_ZombieCafeAndroid_HandleBackButton");
+}
+
+extern "C" JNIEXPORT void JNICALL
+Java_com_capcom_zombiecafeandroid_ZombieCafeAndroid_StartNotifications(JNIEnv* env, jobject object) {
+  genericVoidCall(env, object, "Java_com_capcom_zombiecafeandroid_ZombieCafeAndroid_StartNotifications");
+}
+
+extern "C" JNIEXPORT void JNICALL
+Java_com_capcom_zombiecafeandroid_CapcomFacebook_onFacebook(JNIEnv* env, jobject object) {
+  genericVoidCall(env, object, "Java_com_capcom_zombiecafeandroid_CapcomFacebook_onFacebook");
+}
+
+extern "C" JNIEXPORT void JNICALL
+Java_com_capcom_zombiecafeandroid_FacebookCallback(JNIEnv* env, jobject object) {
+  genericVoidCall(env, object, "Java_com_capcom_zombiecafeandroid_FacebookCallback");
+}
+
+
 
 typedef jint (*jni_OnLoad)(JavaVM* vm, void* reserved);
 JNIEXPORT jint JNICALL JNI_OnLoad(JavaVM* vm, void* reserved) {
@@ -32,7 +126,7 @@ JNIEXPORT jint JNICALL JNI_OnLoad(JavaVM* vm, void* reserved) {
     if(p_onLoad != nullptr) {
       return p_onLoad(vm, reserved);
     } else {
-      LOGI("Failed to get pointer for func createGame");
+      LOGI("Failed to get pointer for func JNI_OnLoad");
     }
   }
 }
@@ -128,6 +222,138 @@ Java_com_capcom_zombiecafeandroid_ZombieCafeAndroid_CheckIfInHelpScreen(JNIEnv* 
       LOGI("Failed to get pointer for func ZombieCafeAndroid_CheckIfInHelpScreen_t");
     }
   
+  } else {
+    LOGI("Failed to get pointer for lib");
+  }
+
+  return 0;
+}
+
+typedef jboolean (*ZombieCafeAndroid_CheckDoneLoading_t)(JNIEnv* env, jobject object);
+extern "C" JNIEXPORT jboolean JNICALL
+Java_com_capcom_zombiecafeandroid_ZombieCafeAndroid_CheckDoneLoading(JNIEnv* env, jobject object) {
+  void* handle = getLibHandle();
+  LOGI("Calling func ZombieCafeAndroid_CheckDoneLoading_t");
+  if(handle) {
+    auto p_CheckDoneLoading = (ZombieCafeAndroid_CheckDoneLoading_t)dlsym(handle, "Java_com_capcom_zombiecafeandroid_ZombieCafeAndroid_CheckDoneLoading");
+    if(p_CheckDoneLoading != nullptr) {
+      return p_CheckDoneLoading(env, object);
+    } else {
+      LOGI("Failed to get pointer for func ZombieCafeAndroid_CheckDoneLoading_t");
+    }
+  
+  } else {
+    LOGI("Failed to get pointer for lib");
+  }
+
+  return 0;
+}
+
+typedef void (*ZombieCafeAndroid_mouseDown_t)(JNIEnv* env, jobject object, float f2, float f3, int i3);
+extern "C" JNIEXPORT void JNICALL
+Java_com_capcom_zombiecafeandroid_ZombieCafeAndroid_mouseDown(JNIEnv* env, jobject object, float f2, float f3, int i3) {
+  void* handle = getLibHandle();
+  if(handle) {
+    auto p_mouseDown = (ZombieCafeAndroid_mouseDown_t)dlsym(handle, "Java_com_capcom_zombiecafeandroid_ZombieCafeAndroid_mouseDown");
+    if(p_mouseDown != nullptr) {
+      p_mouseDown(env, object, f2, f3, i3);
+    } else {
+      LOGI("Failed to get pointer for func ZombieCafeAndroid_mouseDown_t");
+    }
+  } else {
+    LOGI("Failed to get pointer for lib");
+  }
+}
+
+typedef void (*ZombieCafeAndroid_mouseUp_t)(JNIEnv* env, jobject object, float f2, float f3, int i3);
+extern "C" JNIEXPORT void JNICALL
+Java_com_capcom_zombiecafeandroid_ZombieCafeAndroid_mouseUp(JNIEnv* env, jobject object, float f2, float f3, int i3) {
+  void* handle = getLibHandle();
+  if(handle) {
+    auto p_mouseDown = (ZombieCafeAndroid_mouseUp_t)dlsym(handle, "Java_com_capcom_zombiecafeandroid_ZombieCafeAndroid_mouseUp");
+    if(p_mouseDown != nullptr) {
+      p_mouseDown(env, object, f2, f3, i3);
+    } else {
+      LOGI("Failed to get pointer for func ZombieCafeAndroid_mouseUp_t");
+    }
+  } else {
+    LOGI("Failed to get pointer for lib");
+  }
+}
+
+typedef void (*ZombieCafeAndroid_mouseMove_t)(JNIEnv* env, jobject object, void* fArray, int i2);
+extern "C" JNIEXPORT void JNICALL
+Java_com_capcom_zombiecafeandroid_ZombieCafeAndroid_mouseMove(JNIEnv* env, jobject object, void* fArray, int i2) {
+  void* handle = getLibHandle();
+  if(handle) {
+    auto p_mouseMove = (ZombieCafeAndroid_mouseMove_t)dlsym(handle, "Java_com_capcom_zombiecafeandroid_ZombieCafeAndroid_mouseMove");
+    if(p_mouseMove != nullptr) {
+      p_mouseMove(env, object, fArray, i2);
+    } else {
+      LOGI("Failed to get pointer for func ZombieCafeAndroid_mouseMove_t");
+    }
+  } else {
+    LOGI("Failed to get pointer for lib");
+  }
+}
+
+typedef void (*NetworkTask_NewRequestServerCallback_t)(JNIEnv* env, jobject object, jboolean b, jbyteArray arr, int i, int i2);
+extern "C" JNIEXPORT void JNICALL
+Java_com_capcom_zombiecafeandroid_NetworkTask_NewRequestServerCallback(JNIEnv* env, jobject object, jboolean b, jbyteArray arr, int i, int i2) {
+  void* handle = getLibHandle();
+  if(handle) {
+    auto p_func = (NetworkTask_NewRequestServerCallback_t)dlsym(handle, "Java_com_capcom_zombiecafeandroid_NetworkTask_NewRequestServerCallback");
+    if(p_func != nullptr) {
+      p_func(env, object, b, arr, i, i2);
+    } else {
+      LOGI("Failed to get pointer for func NetworkTask_NewRequestServerCallback_t");
+    }
+  } else {
+    LOGI("Failed to get pointer for lib");
+  }
+}
+
+extern "C" JNIEXPORT void JNICALL
+Java_com_capcom_zombiecafeandroid_NetworkTaskPost_NewRequestServerCallback(JNIEnv* env, jobject object, jboolean b, jbyteArray arr, int i, int i2) {
+  void* handle = getLibHandle();
+  if(handle) {
+    auto p_func = (NetworkTask_NewRequestServerCallback_t)dlsym(handle, "Java_com_capcom_zombiecafeandroid_NetworkTaskPost_NewRequestServerCallback");
+    if(p_func != nullptr) {
+      p_func(env, object, b, arr, i, i2);
+    } else {
+      LOGI("Failed to get pointer for func Java_com_capcom_zombiecafeandroid_NetworkTaskPost_NewRequestServerCallback");
+    }
+  } else {
+    LOGI("Failed to get pointer for lib");
+  }
+}
+
+extern "C" JNIEXPORT void JNICALL
+Java_com_capcom_zombiecafeandroid_URLManager_NewRequestServerCallback(JNIEnv* env, jobject object, jboolean b, jbyteArray arr, int i, int i2) {
+  void* handle = getLibHandle();
+  if(handle) {
+    auto p_func = (NetworkTask_NewRequestServerCallback_t)dlsym(handle, "Java_com_capcom_zombiecafeandroid_URLManager_NewRequestServerCallback");
+    if(p_func != nullptr) {
+      p_func(env, object, b, arr, i, i2);
+    } else {
+      LOGI("Failed to get pointer for func Java_com_capcom_zombiecafeandroid_URLManager_NewRequestServerCallback");
+    }
+  } else {
+    LOGI("Failed to get pointer for lib");
+  }
+}
+
+typedef void (*URLManager_NewRequestCallback_t)(JNIEnv* env, jobject object, jbyteArray arr, int i);
+extern "C" JNIEXPORT void JNICALL
+Java_com_capcom_zombiecafeandroid_URLManager_NewRequestCallback(JNIEnv* env, jobject object, jbyteArray arr, int i) {
+  void* handle = getLibHandle();
+  if(handle) {
+    auto p_func = (URLManager_NewRequestCallback_t)dlsym(handle, "Java_com_capcom_zombiecafeandroid_URLManager_NewRequestCallback");
+    if(p_func != nullptr) {
+      p_func(env, object, arr, i);
+    } else {
+      LOGI("Failed to get pointer for func Java_com_capcom_zombiecafeandroid_URLManager_NewRequestCallback");
+    }
   } else {
     LOGI("Failed to get pointer for lib");
   }
