@@ -7,57 +7,30 @@
 #include <cstring>
 #include <iostream>
 #include <sys/mman.h>
+#include "Memory.h"
 
 #define LOGI(...) \
   ((void)__android_log_print(ANDROID_LOG_INFO, "zombieCafeExtension::", __VA_ARGS__))
 
-#define LIBRARY_ADDRESS_BY_HANDLE(dlhandle) ((NULL == dlhandle) ? NULL : (void*)*(size_t const*)(dlhandle))
-
-
-#define _SYS_PAGE_SIZE_ (sysconf(_SC_PAGE_SIZE))
-#define _PAGE_START_OF_(x) ((uintptr_t)x & ~(uintptr_t)(_SYS_PAGE_SIZE_ - 1))
-#define _PAGE_END_OF_(x, len) (_PAGE_START_OF_((uintptr_t)x + len - 1))
-#define _PAGE_LEN_OF_(x, len) (_PAGE_END_OF_(x, len) - _PAGE_START_OF_(x) + _SYS_PAGE_SIZE_)
-#define _PAGE_OFFSET_OF_(x) ((uintptr_t)x - _PAGE_START_OF_(x))
-
-int setAddressProtection(void *address, size_t length, int protection)
-    {
-        uintptr_t pageStart = _PAGE_START_OF_(address);
-        uintptr_t pageLen = _PAGE_LEN_OF_(address, length);
-        int ret = mprotect(reinterpret_cast<void *>(pageStart), pageLen, protection);
-        return ret;
-    }
 
 typedef jint (*jni_OnLoad)(JavaVM* vm, void* reserved);
 JNIEXPORT jint JNICALL JNI_OnLoad(JavaVM* vm, void* reserved) {
-  LOGI("JNI_OnLoad CALLED!!!!!");
+  LOGI("Zombie Cafe Extension Loaded!");
+  int base = (int)Memory::getBaseAddress(); 
+  
+  void* address = (void*)(base + 0x1a14dc);
+  Memory::setProtection(address, 10, PROT_READ | PROT_WRITE | PROT_EXEC);
+  const char source[] = "ZCR - %s\0";
+  std::memcpy(address, &source, 9);
 
-  void* handle = dlopen("libZombieCafeAndroid.so", RTLD_LAZY);
-  void* p_onLoad = dlsym(handle, "JNI_OnLoad");
+  Memory::setNop((void*)(base + 0x9dee8), 4);
   
 
-  Dl_info info;
-  
-  dladdr(p_onLoad, &info);
-  int baseAddress = (int)info.dli_fbase;
-
-  LOGI("Info Address: %x", info.dli_fbase);
-  LOGI("Read at address: %s", (char*)(info.dli_fbase));
-
-
-  
-  void* address = (void*)(baseAddress + 0x1a14dc);
-  LOGI("Reading with offset: %s", (char*)address);
-  LOGI("Page address: %x", _PAGE_START_OF_(address));
-
-  
-  int protection_result = setAddressProtection(address, 10, PROT_READ | PROT_WRITE | PROT_EXEC);
-  LOGI("result: %d", protection_result);
-  LOGI("err: %d", errno);
-
-
-  const char source[] = "Zombie Cafe Revival!\0";
-  std::memcpy(address, &source, 21);
+  //Nop delete texture (this will cause memory leak, fix this!!!)
+  Memory::setNop((void*)(base + 0x13d530), 4);
+  Memory::setNop((void*)(base + 0x13d550), 4);
+  Memory::setNop((void*)(base + 0x13d9e8), 4);
+  Memory::setNop((void*)(base + 0x13d9ee), 4);
 
   return JNI_VERSION_1_4;
 }
