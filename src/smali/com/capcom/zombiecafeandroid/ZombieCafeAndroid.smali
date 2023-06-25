@@ -337,6 +337,10 @@
 
     invoke-static {v0}, Ljava/lang/System;->loadLibrary(Ljava/lang/String;)V
 
+    const-string v0, "ZombieCafeExtension"
+
+    invoke-static {v0}, Ljava/lang/System;->loadLibrary(Ljava/lang/String;)V
+
     sput-boolean v1, Lcom/capcom/zombiecafeandroid/ZombieCafeAndroid;->mMusicOnce:Z
 
     sput-object v2, Lcom/capcom/zombiecafeandroid/ZombieCafeAndroid;->i:Landroid/app/ProgressDialog;

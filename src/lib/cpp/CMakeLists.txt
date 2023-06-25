@@ -1,11 +1,11 @@
 cmake_minimum_required(VERSION 3.18.1)
 
-project("ZombieCafe")
+project("ZombieCafeExtension")
 
-add_library(ZombieCafe SHARED
-            ZombieCafe.cpp)
+add_library(ZombieCafeExtension SHARED
+            ZombieCafeExtension.cpp)
 
 
-target_link_libraries(ZombieCafe
+target_link_libraries(ZombieCafeExtension
                       android
                       log)
