@@ -2,3 +2,4 @@ src/build
 out/*
 build
 src/lib/cpp/build/*
+.vscode/settings.json
