@@ -75,8 +75,6 @@ func GetCopyFiles() []string {
 		"assets/data/animation/walkNW.bin.mid",
 		"assets/data/animation/walkSW.bin.mid",
 		"assets/data/animationData.bin.mid",
-		"assets/data/characterArt.bin.mid",
-		"assets/data/characterArt2.bin.mid",
 		"assets/data/constants.bin.mid",
 		"assets/data/cookbookData.bin.mid",
 		"assets/data/enemyCafeData.bin.mid",
