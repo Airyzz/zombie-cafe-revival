@@ -8,6 +8,19 @@ import (
 	"os"
 )
 
+func isAtEnd(file *os.File) bool {
+	bytes := make([]byte, 1)
+
+	n, _ := file.Read(bytes)
+
+	if n == 0 {
+		return true
+	}
+
+	file.Seek(-1, 1)
+	return false
+}
+
 func readUint16(file *os.File) uint16 {
 	data := readNextBytes(file, 2)
 	return binary.BigEndian.Uint16(data)
