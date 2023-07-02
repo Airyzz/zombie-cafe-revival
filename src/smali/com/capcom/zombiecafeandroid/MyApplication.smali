@@ -21,9 +21,6 @@
 
     const-string v1, "INITIALIZED"
 
-    invoke-static {v0, v1}, Landroid/util/Log;->d(Ljava/lang/String;Ljava/lang/String;)I
-
-    invoke-static {p0}, Lcom/fiksu/asotracking/d;->a(Landroid/app/Application;)V
     :try_end_0
     .catch Lcom/fiksu/asotracking/c; {:try_start_0 .. :try_end_0} :catch_0
 

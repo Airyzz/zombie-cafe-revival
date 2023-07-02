@@ -18,14 +18,24 @@ JNIEXPORT jint JNICALL JNI_OnLoad(JavaVM* vm, void* reserved) {
   LOGI("Zombie Cafe Extension Loaded!");
   int base = (int)Memory::getBaseAddress(); 
   
-  void* address = (void*)(base + 0x1a14dc);
-  Memory::setProtection(address, 10, PROT_READ | PROT_WRITE | PROT_EXEC);
-  const char source[] = "ZCR - %s\0";
-  std::memcpy(address, &source, 9);
+  const char* infoStr = "ZCR - %s\0";
+  Memory::memcpyProtected((void*)(base + 0x1a14dc), infoStr, strlen(infoStr) + 1);
+
+                          //http://zombiecafe.capcomcanada.com/updater/%s
+  const char* updaterUrl = "http://10.0.10.17:3333/updater/%s\0";
+  Memory::memcpyProtected((void*)(base + 0x1a6610), updaterUrl, strlen(updaterUrl) + 1);
+
+                    //http://zombiecafe.capcomcanada.com/x
+  const char* xUrl = "http://10.0.10.17:3333/x\0";
+  Memory::memcpyProtected((void*)(base + 0x1a839c), xUrl, strlen(xUrl) + 1);
+
+                      //http://zombiecafe.capcomcanada.com/zca
+  const char* zcaUrl = "http://10.0.10.17:3333/zca\0";
+  Memory::memcpyProtected((void*)(base + 0x1a842c), zcaUrl, strlen(zcaUrl) + 1);
+
 
   Memory::setNop((void*)(base + 0x9dee8), 4);
   
-
   //Nop delete texture (this will cause memory leak, fix this!!!)
   Memory::setNop((void*)(base + 0x13d530), 4);
   Memory::setNop((void*)(base + 0x13d550), 4);

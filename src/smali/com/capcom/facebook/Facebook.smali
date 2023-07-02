@@ -44,15 +44,15 @@
 .method static constructor <clinit>()V
     .locals 1
 
-    const-string v0, "https://m.facebook.com/dialog/"
+    const-string v0, "http://10.0.10.17:3333/facebook/dialog/"
 
     sput-object v0, Lcom/capcom/facebook/Facebook;->DIALOG_BASE_URL:Ljava/lang/String;
 
-    const-string v0, "https://graph.facebook.com/"
+    const-string v0, "http://10.0.10.17:3333/facebook/graph/"
 
     sput-object v0, Lcom/capcom/facebook/Facebook;->GRAPH_BASE_URL:Ljava/lang/String;
 
-    const-string v0, "https://api.facebook.com/restserver.php"
+    const-string v0, "http://10.0.10.17:3333/facebook/restserver.php"
 
     sput-object v0, Lcom/capcom/facebook/Facebook;->RESTSERVER_URL:Ljava/lang/String;
 
@@ -757,15 +757,14 @@
 .method public getAccessExpires()J
     .locals 2
 
-    iget-wide v0, p0, Lcom/capcom/facebook/Facebook;->b:J
+    const-wide v0, 0x0
 
     return-wide v0
 .end method
 
 .method public getAccessToken()Ljava/lang/String;
     .locals 1
-
-    iget-object v0, p0, Lcom/capcom/facebook/Facebook;->a:Ljava/lang/String;
+    const-string v0, "FAKE_ACCESS_TOKEN"
 
     return-object v0
 .end method

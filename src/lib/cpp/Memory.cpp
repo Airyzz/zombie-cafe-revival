@@ -52,4 +52,9 @@ namespace Memory {
 
         return true;
     }   
+
+    void *memcpyProtected(void * to, const void * from, size_t len) {
+        setProtection(to, len, PROT_READ | PROT_WRITE | PROT_EXEC);
+        return std::memcpy(to, from, len);
+    }
 }
