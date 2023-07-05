@@ -31,6 +31,11 @@ func readUint32(file *os.File) uint32 {
 	return binary.BigEndian.Uint32(data)
 }
 
+func readUint32LittleEndian(file *os.File) uint32 {
+	data := readNextBytes(file, 4)
+	return binary.LittleEndian.Uint32(data)
+}
+
 func readInt16(file *os.File) int16 {
 	data := readNextBytes(file, 2)
 	return int16(binary.BigEndian.Uint16(data))

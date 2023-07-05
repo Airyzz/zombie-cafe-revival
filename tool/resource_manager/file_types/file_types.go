@@ -58,6 +58,17 @@ func DeserializeOffsets(file *os.File) string {
 	return string(b)
 }
 
+func DeserializeCCTexture(file *os.File) string {
+	data, _ := readCCTexture(file)
+	b, err := json.MarshalIndent(data, "", "    ")
+
+	if err != nil {
+		fmt.Println(err)
+	}
+
+	return string(b)
+}
+
 func SerializeFurniture(file *os.File, jsonData string) {
 	var data []furnitureData
 	err := json.Unmarshal([]byte(jsonData), &data)
@@ -132,6 +143,7 @@ func DeserializeFiles(in_directory string, out_directory string) {
 		"recipeOffsets.bin.mid":          DeserializeOffsets,
 		"recipeOffsets2.bin.mid":         DeserializeOffsets,
 		"zcOffsets.bin.mid":              DeserializeOffsets,
+		"ingameUiImages.cct.mid":         DeserializeCCTexture,
 	}
 
 	for key, value := range deserialize_map {
