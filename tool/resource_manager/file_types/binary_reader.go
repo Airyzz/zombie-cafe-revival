@@ -46,6 +46,11 @@ func readInt32(file *os.File) int32 {
 	return int32(binary.BigEndian.Uint32(data))
 }
 
+func readInt32LittleEndian(file *os.File) int32 {
+	data := readNextBytes(file, 4)
+	return int32(binary.LittleEndian.Uint32(data))
+}
+
 func readFloat(file *os.File) float32 {
 	data := readNextBytes(file, 4)
 	return math.Float32frombits(binary.LittleEndian.Uint32(data))

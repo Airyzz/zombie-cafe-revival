@@ -18,6 +18,12 @@ func writeUint32(file *os.File, value uint32) {
 	file.Write(b)
 }
 
+func writeUint32LittleEndian(file *os.File, value uint32) {
+	b := make([]byte, 4)
+	binary.LittleEndian.PutUint32(b, value)
+	file.Write(b)
+}
+
 func writeInt16(file *os.File, value int16) {
 	b := make([]byte, 2)
 	binary.BigEndian.PutUint16(b, uint16(value))

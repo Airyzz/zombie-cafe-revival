@@ -6,67 +6,80 @@ import (
 	"log"
 	"os"
 	"path/filepath"
+
+	"github.com/disintegration/imaging"
 )
 
-func DeserializeFurniture(file *os.File) string {
+func writeJson(data []byte, out_path string) {
+	f, err := os.Create(out_path + ".json")
+	if err != nil {
+		log.Fatal(err)
+	}
+
+	f.Write(data)
+	f.Close()
+}
+
+func DeserializeFurniture(file *os.File, out_path string) {
 	data := readFurnitureData(file)
 	b, err := json.MarshalIndent(data, "", "    ")
 	if err != nil {
 		fmt.Println(err)
 	}
 
-	return string(b)
+	writeJson(b, out_path)
 }
 
-func DeserializeFood(file *os.File) string {
+func DeserializeFood(file *os.File, out_path string) {
 	data := readFoodData(file)
 	b, err := json.MarshalIndent(data, "", "    ")
 	if err != nil {
 		fmt.Println(err)
 	}
 
-	return string(b)
+	writeJson(b, out_path)
 }
 
-func DeserializeCharacters(file *os.File) string {
+func DeserializeCharacters(file *os.File, out_path string) {
 	data := readCharacterData(file)
 	b, err := json.MarshalIndent(data, "", "    ")
 	if err != nil {
 		fmt.Println(err)
 	}
 
-	return string(b)
+	writeJson(b, out_path)
 }
 
-func DeserializeCharacterArt(file *os.File) string {
+func DeserializeCharacterArt(file *os.File, out_path string) {
 	data := readCharacterArtData(file)
 	b, err := json.MarshalIndent(data, "", "    ")
 	if err != nil {
 		fmt.Println(err)
 	}
 
-	return string(b)
+	writeJson(b, out_path)
 }
 
-func DeserializeOffsets(file *os.File) string {
+func DeserializeOffsets(file *os.File, out_path string) {
 	data := readImageOffsets(file)
 	b, err := json.MarshalIndent(data, "", "    ")
 	if err != nil {
 		fmt.Println(err)
 	}
 
-	return string(b)
+	writeJson(b, out_path)
 }
 
-func DeserializeCCTexture(file *os.File) string {
-	data, _ := readCCTexture(file)
+func DeserializeCCTexture(file *os.File, out_path string) {
+	data, image := readCCTexture(file)
 	b, err := json.MarshalIndent(data, "", "    ")
 
 	if err != nil {
 		fmt.Println(err)
 	}
 
-	return string(b)
+	writeJson(b, out_path)
+	imaging.Save(image, out_path+".png")
 }
 
 func SerializeFurniture(file *os.File, jsonData string) {
@@ -121,7 +134,7 @@ func SerializeOffsets(file *os.File, jsonData string) {
 
 func DeserializeFiles(in_directory string, out_directory string) {
 
-	deserialize_map := map[string]func(*os.File) string{
+	deserialize_map := map[string]func(*os.File, string){
 		"furnitureData.bin.mid":          DeserializeFurniture,
 		"foodData.bin.mid":               DeserializeFood,
 		"characterData.bin.mid":          DeserializeCharacters,
@@ -143,10 +156,24 @@ func DeserializeFiles(in_directory string, out_directory string) {
 		"recipeOffsets.bin.mid":          DeserializeOffsets,
 		"recipeOffsets2.bin.mid":         DeserializeOffsets,
 		"zcOffsets.bin.mid":              DeserializeOffsets,
+		"characterParts.cct.mid":         DeserializeCCTexture,
+		"characterParts2.cct.mid":        DeserializeCCTexture,
+		"characterParts3.cct.mid":        DeserializeCCTexture,
+		"characterParts4.cct.mid":        DeserializeCCTexture,
+		"characterParts5.cct.mid":        DeserializeCCTexture,
+		"furniture.cct.mid":              DeserializeCCTexture,
+		"furniture2.cct.mid":             DeserializeCCTexture,
+		"furniture3.cct.mid":             DeserializeCCTexture,
 		"ingameUiImages.cct.mid":         DeserializeCCTexture,
+		"loading.cct.mid":                DeserializeCCTexture,
+		"mapTiles.cct.mid":               DeserializeCCTexture,
+		"menuImages.cct.mid":             DeserializeCCTexture,
+		"menuTitleImages.cct.mid":        DeserializeCCTexture,
+		"recipeImages.cct.mid":           DeserializeCCTexture,
+		"recipeImages2.cct.mid":          DeserializeCCTexture,
 	}
 
-	for key, value := range deserialize_map {
+	for key, deserializer := range deserialize_map {
 		path := filepath.Join(in_directory, key)
 
 		fmt.Println(path)
@@ -156,19 +183,9 @@ func DeserializeFiles(in_directory string, out_directory string) {
 			continue
 		}
 
-		deserialized := value(f)
+		outpath := filepath.Join(out_directory, key)
+		deserializer(f, outpath)
 		f.Close()
-
-		outpath := filepath.Join(out_directory, key+".json")
-
-		f, err = os.Create(outpath)
-		if err != nil {
-			log.Fatal(err)
-		}
-
-		f.Write([]byte(deserialized))
-		f.Close()
-
 	}
 }
 
