@@ -2,7 +2,6 @@ package file_types
 
 import (
 	"encoding/binary"
-	"fmt"
 	"log"
 	"math"
 	"os"
@@ -68,7 +67,6 @@ func readBool(file *os.File) bool {
 
 func readString(file *os.File) string {
 	length := readInt16(file)
-	fmt.Println(fmt.Sprintf("Reading string with length: %d", length))
 	data := readNextBytes(file, int(length))
 	return string(data)
 }

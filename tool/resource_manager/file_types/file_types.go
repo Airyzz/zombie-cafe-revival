@@ -3,9 +3,12 @@ package file_types
 import (
 	"encoding/json"
 	"fmt"
+	"image/color"
 	"log"
+	"math"
 	"os"
 	"path/filepath"
+	"strings"
 
 	"github.com/disintegration/imaging"
 )
@@ -16,7 +19,9 @@ func writeJson(data []byte, out_path string) {
 		log.Fatal(err)
 	}
 
-	f.Write(data)
+	new_data := strings.ReplaceAll(string(data), "\r\n", "\n")
+
+	f.Write([]byte(new_data))
 	f.Close()
 }
 
@@ -130,6 +135,8 @@ func SerializeOffsets(file *os.File, jsonData string) {
 	}
 
 	writeImageOffsets(file, data)
+}
+
 }
 
 func DeserializeFiles(in_directory string, out_directory string) {
