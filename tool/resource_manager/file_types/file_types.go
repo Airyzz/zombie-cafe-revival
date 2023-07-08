@@ -3,9 +3,12 @@ package file_types
 import (
 	"encoding/json"
 	"fmt"
+	"image/color"
 	"log"
+	"math"
 	"os"
 	"path/filepath"
+	"strings"
 
 	"github.com/disintegration/imaging"
 )
@@ -16,7 +19,9 @@ func writeJson(data []byte, out_path string) {
 		log.Fatal(err)
 	}
 
-	f.Write(data)
+	new_data := strings.ReplaceAll(string(data), "\r\n", "\n")
+
+	f.Write([]byte(new_data))
 	f.Close()
 }
 
@@ -140,6 +145,82 @@ func SerializeOffsets(file *os.File, jsonData string) {
 	}
 
 	writeImageOffsets(file, data)
+}
+
+type PackedTextureData struct {
+	offsetsName string
+	scale       float32
+}
+
+func UnpackTextures(in_directory string, out_directory string) {
+
+	// for some reason the developers hard coded some scaling factors...
+	file_map := map[string]PackedTextureData{
+		"recipeImages.cct.mid":    {"recipeOffsets.bin.mid", .5},
+		"recipeImages2.cct.mid":   {"recipeOffsets2.bin.mid", .5},
+		"mapTiles.cct.mid":        {"mapTilesOffsets.bin.mid", 1},
+		"furniture.cct.mid":       {"furnitureOffsets.bin.mid", 1},
+		"furniture2.cct.mid":      {"furnitureOffsets2.bin.mid", 0.75},
+		"furniture3.cct.mid":      {"furnitureOffsets3.bin.mid", 1},
+		"characterParts.cct.mid":  {"characterOffsets.bin.mid", 0.75},
+		"characterParts2.cct.mid": {"characterOffsets2.bin.mid", 0.75},
+		"ingameUiImages.cct.mid":  {"ingameUiOffsets.bin.mid", 1},
+		"menuImages.cct.mid":      {"menuOffsets.bin.mid", 1},
+		"menuTitleImages.cct.mid": {"menuTitleOffsets.bin.mid", 1},
+	}
+
+	for cct, data := range file_map {
+		path := filepath.Join(in_directory, cct)
+		offsets_path := filepath.Join(in_directory, data.offsetsName)
+
+		cct_file, err := os.Open(path)
+		if err != nil {
+			log.Println(err)
+			continue
+		}
+
+		offsets_file, err := os.Open(offsets_path)
+		if err != nil {
+			log.Println(err)
+			continue
+		}
+
+		out_folder := filepath.Join(out_directory, strings.Split(cct, ".")[0])
+		os.MkdirAll(out_folder, os.ModeAppend)
+
+		_, packed_image := readCCTexture(cct_file)
+		offsets := readImageOffsets(offsets_file)
+
+		scale := data.scale
+
+		for image_index := range offsets.Offsets {
+			image_entry := offsets.Offsets[image_index]
+			width := int(math.Round(float64(image_entry.W) * float64(scale)))
+			height := int(math.Round(float64(image_entry.H) * float64(scale)))
+			image := imaging.New(width, height, color.Transparent)
+
+			for x := 0; x < width; x++ {
+				for y := 0; y < height; y++ {
+
+					source_x := x + int(math.Round(float64(image_entry.X)*float64(scale)))
+					source_y := y + int(math.Round(float64(image_entry.Y)*float64(scale)))
+
+					color := packed_image.NRGBAAt(source_x, source_y)
+					image.SetNRGBA(x, y, color)
+				}
+			}
+
+			name := fmt.Sprintf("%d_%s.png", image_index, image_entry.Name)
+
+			if image_entry.Name == "" {
+				name = fmt.Sprintf("%d.png", image_index)
+
+			}
+			out_path := filepath.Join(out_folder, name)
+			fmt.Println("Writing: " + out_path)
+			imaging.Save(image, out_path)
+		}
+	}
 }
 
 func DeserializeFiles(in_directory string, out_directory string) {

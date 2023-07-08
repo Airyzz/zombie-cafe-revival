@@ -26,5 +26,7 @@ func main() {
 		file_types.DeserializeFiles(in_directory, out_directory)
 	} else if mode == "pack" {
 		file_types.SerializeFiles(in_directory, out_directory)
+	} else if mode == "unpack_textures" {
+		file_types.UnpackTextures(in_directory, out_directory)
 	}
 }

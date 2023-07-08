@@ -12,10 +12,10 @@ type furnitureData struct {
 	PurchaseWithToxin  bool
 	SizeX              byte
 	SizeY              byte
-	U6                 int16
-	U7                 int16
-	U8                 int16
-	U9                 int16
+	ImageIndexNorth    int16
+	ImageIndexEast     int16
+	ImageIndexSouth    int16
+	ImageIndexWest     int16
 	Type               byte
 	Category           byte
 	Color              []int
@@ -23,7 +23,7 @@ type furnitureData struct {
 	MaximumMoney       int16
 	RatingBonus        float32
 	BuyMoneyAmount     int32
-	U17                byte
+	ImagePackIndex     byte
 	StoveSpeedMult     float32
 	Description        string
 	ExperiencePoints   float32
@@ -44,10 +44,10 @@ func readSingleFurnitureData(file *os.File) furnitureData {
 	furniture.PurchaseWithToxin = readBool(file)
 	furniture.SizeX = readByte(file)
 	furniture.SizeY = readByte(file)
-	furniture.U6 = readInt16(file)
-	furniture.U7 = readInt16(file)
-	furniture.U8 = readInt16(file)
-	furniture.U9 = readInt16(file)
+	furniture.ImageIndexNorth = readInt16(file)
+	furniture.ImageIndexEast = readInt16(file)
+	furniture.ImageIndexSouth = readInt16(file)
+	furniture.ImageIndexWest = readInt16(file)
 	furniture.Type = readByte(file)
 	furniture.Category = readByte(file)
 
@@ -63,7 +63,7 @@ func readSingleFurnitureData(file *os.File) furnitureData {
 	furniture.MaximumMoney = readInt16(file)
 	furniture.RatingBonus = readFloat(file)
 	furniture.BuyMoneyAmount = readInt32(file)
-	furniture.U17 = readByte(file)
+	furniture.ImagePackIndex = readByte(file)
 	furniture.StoveSpeedMult = readFloat(file)
 	furniture.Description = readString(file)
 
@@ -85,10 +85,10 @@ func writeFurniture(file *os.File, data furnitureData) {
 
 	writeByte(file, data.SizeX)
 	writeByte(file, data.SizeY)
-	writeInt16(file, data.U6)
-	writeInt16(file, data.U7)
-	writeInt16(file, data.U8)
-	writeInt16(file, data.U9)
+	writeInt16(file, data.ImageIndexNorth)
+	writeInt16(file, data.ImageIndexEast)
+	writeInt16(file, data.ImageIndexSouth)
+	writeInt16(file, data.ImageIndexWest)
 
 	writeByte(file, data.Type)
 	writeByte(file, data.Category)
@@ -102,7 +102,7 @@ func writeFurniture(file *os.File, data furnitureData) {
 	writeFloat(file, data.RatingBonus)
 	writeInt32(file, data.BuyMoneyAmount)
 
-	writeByte(file, data.U17)
+	writeByte(file, data.ImagePackIndex)
 	writeFloat(file, data.StoveSpeedMult)
 
 	writeString(file, data.Description)
