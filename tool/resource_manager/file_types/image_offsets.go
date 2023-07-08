@@ -16,10 +16,10 @@ type imageOffset struct {
 	W    int16
 	H    int16
 
-	U5 int16
-	U6 int16
-	U7 int16
-	U8 int16
+	XOffset        int16
+	YOffset        int16
+	XOffsetFlipped int16
+	YOffsetFlipped int16
 }
 
 func readSingleOffset(file *os.File, fileType int) imageOffset {
@@ -35,10 +35,10 @@ func readSingleOffset(file *os.File, fileType int) imageOffset {
 	d.H = readInt16(file)
 
 	if fileType == 2 {
-		d.U5 = readInt16(file)
-		d.U6 = readInt16(file)
-		d.U7 = readInt16(file)
-		d.U8 = readInt16(file)
+		d.XOffset = readInt16(file)
+		d.YOffset = readInt16(file)
+		d.XOffsetFlipped = readInt16(file)
+		d.YOffsetFlipped = readInt16(file)
 	}
 
 	return d
@@ -56,10 +56,10 @@ func writeSingleOffset(file *os.File, data imageOffset, fileType int) {
 	writeInt16(file, data.H)
 
 	if fileType == 2 {
-		writeInt16(file, data.U5)
-		writeInt16(file, data.U6)
-		writeInt16(file, data.U7)
-		writeInt16(file, data.U8)
+		writeInt16(file, data.XOffset)
+		writeInt16(file, data.YOffset)
+		writeInt16(file, data.XOffsetFlipped)
+		writeInt16(file, data.YOffsetFlipped)
 	}
 }
 

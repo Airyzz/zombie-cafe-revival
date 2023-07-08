@@ -155,10 +155,19 @@ type PackedCharacterData struct {
 	characterArtFile string
 }
 
-func PackCharacters(in_directory string, out_directory string) {
+func PackCharacters(in_directory string, out_directory string, out_data_directory string) {
 	entries, _ := os.ReadDir(in_directory)
 	files := []string{}
 	folders := []string{}
+
+	fmt.Println(filepath.Base(in_directory))
+	file_map := map[string]PackedCharacterData{
+		"characterParts":  {PackedTextureData{"characterOffsets.bin.mid", 0.75}, "characterArt.bin.mid"},
+		"characterParts2": {PackedTextureData{"characterOffsets2.bin.mid", 0.75}, "characterArt2.bin.mid"},
+	}
+
+	folder_name := filepath.Base(in_directory)
+	out_data := file_map[folder_name]
 
 	piecesPerPack := -1
 
@@ -177,7 +186,6 @@ func PackCharacters(in_directory string, out_directory string) {
 					numImages += 1
 					file_path := filepath.Join(folder_path, file.Name())
 					files = append(files, file_path)
-					fmt.Println(file_path)
 				}
 			}
 
@@ -191,9 +199,9 @@ func PackCharacters(in_directory string, out_directory string) {
 
 	fmt.Printf("Num pieces per pack: %d\n", piecesPerPack)
 
-	img, offsets := writePackedTexture(files, 0.75)
+	img, offsets := writePackedTexture(files, out_data.textureData.scale)
 	offsets.Type = 2
-	out_offsets_path := filepath.Join(out_directory, "characterOffsets.bin.mid")
+	out_offsets_path := filepath.Join(out_directory, out_data.textureData.offsetsName)
 	f, err := os.Create(out_offsets_path)
 
 	if err != nil {
@@ -203,7 +211,7 @@ func PackCharacters(in_directory string, out_directory string) {
 	writeImageOffsets(f, offsets)
 	f.Close()
 
-	out_character_art_path := filepath.Join(out_directory, "characterArt.bin.mid")
+	out_character_art_path := filepath.Join(out_data_directory, out_data.characterArtFile)
 	characterArtData := characterArtData{}
 
 	characterArtData.PiecesPerString = byte(piecesPerPack)
@@ -224,7 +232,7 @@ func PackCharacters(in_directory string, out_directory string) {
 	cct.Height = int32(img.Bounds().Size().Y)
 	cct.U4 = 1184868
 
-	out_cct_path := filepath.Join(out_directory, "characterParts.cct.mid")
+	out_cct_path := filepath.Join(out_directory, folder_name+".cct.mid")
 	f, err = os.Create(out_cct_path)
 
 	if err != nil {
@@ -241,11 +249,11 @@ func UnpackCharacters(in_directory string, out_directory string, data_directory 
 		// JP Version uses 1x scale, English uses 0.75
 		"characterParts.cct.mid":  {PackedTextureData{"characterOffsets.bin.mid", 0.75}, "characterArt.bin.mid"},
 		"characterParts2.cct.mid": {PackedTextureData{"characterOffsets2.bin.mid", 0.75}, "characterArt2.bin.mid"},
-		/*
-			JP Version:
-			"characterParts3.cct.mid": {PackedTextureData{"characterOffsets3.bin.mid", 1}, "characterArt3.bin.mid"},
-			"characterParts4.cct.mid": {PackedTextureData{"characterOffsets4.bin.mid", 1}, "characterArt4.bin.mid"},
-			"characterParts5.cct.mid": {PackedTextureData{"characterOffsets5.bin.mid", 1}, "characterArt5.bin.mid"},*/
+
+		//JP Version:
+		"characterParts3.cct.mid": {PackedTextureData{"characterOffsets3.bin.mid", 1}, "characterArt3.bin.mid"},
+		"characterParts4.cct.mid": {PackedTextureData{"characterOffsets4.bin.mid", 1}, "characterArt4.bin.mid"},
+		"characterParts5.cct.mid": {PackedTextureData{"characterOffsets5.bin.mid", 1}, "characterArt5.bin.mid"},
 	}
 
 	for cct, data := range file_map {
@@ -305,8 +313,6 @@ func UnpackTextures(in_directory string, out_directory string) {
 		"ingameUiImages.cct.mid":  {"ingameUiOffsets.bin.mid", 1},
 		"menuImages.cct.mid":      {"menuOffsets.bin.mid", 1},
 		"menuTitleImages.cct.mid": {"menuTitleOffsets.bin.mid", 1},
-		"characterParts.cct.mid":  {"characterOffsets.bin.mid", 0.75},
-		"characterParts2.cct.mid": {"characterOffsets2.bin.mid", 0.75},
 	}
 
 	for cct, data := range file_map {
@@ -405,10 +411,6 @@ func SerializeFiles(in_directory string, out_directory string) {
 		"furnitureData.bin.mid":          SerializeFurniture,
 		"foodData.bin.mid":               SerializeFood,
 		"characterData.bin.mid":          SerializeCharacters,
-		"characterArt.bin.mid":           SerializeCharacterArt,
-		"characterArt2.bin.mid":          SerializeCharacterArt,
-		"characterOffsets.bin.mid":       SerializeOffsets,
-		"characterOffsets2.bin.mid":      SerializeOffsets,
 		"cafeUiOffsets.bin.mid":          SerializeOffsets,
 		"dialogOffsets.bin.mid":          SerializeOffsets,
 		"furnitureOffsets.bin.mid":       SerializeOffsets,

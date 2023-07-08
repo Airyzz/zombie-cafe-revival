@@ -34,6 +34,6 @@ func main() {
 	} else if mode == "unpack_characters" {
 		file_types.UnpackCharacters(in_directory, out_directory, data_directory)
 	} else if mode == "pack_characters" {
-		file_types.PackCharacters(in_directory, out_directory)
+		file_types.PackCharacters(in_directory, out_directory, out_directory)
 	}
 }
