@@ -36,6 +36,12 @@ func writeInt32(file *os.File, value int32) {
 	file.Write(b)
 }
 
+func writeInt32LittleEndian(file *os.File, value int32) {
+	b := make([]byte, 4)
+	binary.LittleEndian.PutUint32(b, uint32(value))
+	file.Write(b)
+}
+
 func writeFloat(file *os.File, value float32) {
 	b := make([]byte, 4)
 	binary.LittleEndian.PutUint32(b, math.Float32bits(value))

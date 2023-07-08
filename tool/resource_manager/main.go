@@ -16,6 +16,9 @@ func main() {
 	var out_directory string
 	flag.StringVar(&out_directory, "o", "", "Path of output directory")
 
+	var data_directory string
+	flag.StringVar(&data_directory, "d", "", "Path of data directory")
+
 	flag.Parse()
 
 	if mode == "" {
@@ -28,5 +31,9 @@ func main() {
 		file_types.SerializeFiles(in_directory, out_directory)
 	} else if mode == "unpack_textures" {
 		file_types.UnpackTextures(in_directory, out_directory)
+	} else if mode == "unpack_characters" {
+		file_types.UnpackCharacters(in_directory, out_directory, data_directory)
+	} else if mode == "pack_characters" {
+		file_types.PackCharacters(in_directory, out_directory)
 	}
 }

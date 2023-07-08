@@ -3,9 +3,7 @@ package file_types
 import (
 	"encoding/json"
 	"fmt"
-	"image/color"
 	"log"
-	"math"
 	"os"
 	"path/filepath"
 	"strings"
@@ -152,6 +150,148 @@ type PackedTextureData struct {
 	scale       float32
 }
 
+type PackedCharacterData struct {
+	textureData      PackedTextureData
+	characterArtFile string
+}
+
+func PackCharacters(in_directory string, out_directory string) {
+	entries, _ := os.ReadDir(in_directory)
+	files := []string{}
+	folders := []string{}
+
+	piecesPerPack := -1
+
+	for _, entry := range entries {
+		if entry.IsDir() {
+			folders = append(folders, entry.Name())
+
+			folder_path := filepath.Join(in_directory, entry.Name())
+			dir_files, _ := os.ReadDir(folder_path)
+			numImages := 0
+			for _, file := range dir_files {
+				if !file.IsDir() {
+					if !strings.HasSuffix(file.Name(), ".png") {
+						continue
+					}
+					numImages += 1
+					file_path := filepath.Join(folder_path, file.Name())
+					files = append(files, file_path)
+					fmt.Println(file_path)
+				}
+			}
+
+			if piecesPerPack == -1 {
+				piecesPerPack = numImages
+			} else if numImages != piecesPerPack {
+				log.Fatal("Inconsistent number of textures per image pack")
+			}
+		}
+	}
+
+	fmt.Printf("Num pieces per pack: %d\n", piecesPerPack)
+
+	img, offsets := writePackedTexture(files, 0.75)
+	offsets.Type = 2
+	out_offsets_path := filepath.Join(out_directory, "characterOffsets.bin.mid")
+	f, err := os.Create(out_offsets_path)
+
+	if err != nil {
+		log.Fatal(err)
+	}
+
+	writeImageOffsets(f, offsets)
+	f.Close()
+
+	out_character_art_path := filepath.Join(out_directory, "characterArt.bin.mid")
+	characterArtData := characterArtData{}
+
+	characterArtData.PiecesPerString = byte(piecesPerPack)
+	characterArtData.Strings = folders
+
+	f, err = os.Create(out_character_art_path)
+
+	if err != nil {
+		log.Fatal(err)
+	}
+
+	writeCharacterArtData(f, characterArtData)
+
+	cct := ccTexture{}
+	cct.Magic = "CCTX"
+	cct.U1 = 2
+	cct.Width = int32(img.Bounds().Size().X)
+	cct.Height = int32(img.Bounds().Size().Y)
+	cct.U4 = 1184868
+
+	out_cct_path := filepath.Join(out_directory, "characterParts.cct.mid")
+	f, err = os.Create(out_cct_path)
+
+	if err != nil {
+		log.Fatal(err)
+	}
+
+	writeCCTexture(f, cct, img)
+	f.Close()
+
+}
+
+func UnpackCharacters(in_directory string, out_directory string, data_directory string) {
+	file_map := map[string]PackedCharacterData{
+		// JP Version uses 1x scale, English uses 0.75
+		"characterParts.cct.mid":  {PackedTextureData{"characterOffsets.bin.mid", 0.75}, "characterArt.bin.mid"},
+		"characterParts2.cct.mid": {PackedTextureData{"characterOffsets2.bin.mid", 0.75}, "characterArt2.bin.mid"},
+		/*
+			JP Version:
+			"characterParts3.cct.mid": {PackedTextureData{"characterOffsets3.bin.mid", 1}, "characterArt3.bin.mid"},
+			"characterParts4.cct.mid": {PackedTextureData{"characterOffsets4.bin.mid", 1}, "characterArt4.bin.mid"},
+			"characterParts5.cct.mid": {PackedTextureData{"characterOffsets5.bin.mid", 1}, "characterArt5.bin.mid"},*/
+	}
+
+	for cct, data := range file_map {
+		path := filepath.Join(in_directory, cct)
+		offsets_path := filepath.Join(in_directory, data.textureData.offsetsName)
+		character_art_path := filepath.Join(data_directory, data.characterArtFile)
+
+		cct_file, err := os.Open(path)
+		if err != nil {
+			log.Println(err)
+			continue
+		}
+
+		offsets_file, err := os.Open(offsets_path)
+		if err != nil {
+			log.Println(err)
+			continue
+		}
+
+		art_file, err := os.Open(character_art_path)
+		if err != nil {
+			log.Println(err)
+			continue
+		}
+
+		textures := readPackedTextures(cct_file, offsets_file, data.textureData.scale)
+		character_art_strings := readCharacterArtData(art_file)
+
+		piecesPerCharacter := int(character_art_strings.PiecesPerString)
+		for character_index := range character_art_strings.Strings {
+			out_folder := filepath.Join(out_directory, strings.Split(cct, ".")[0], character_art_strings.Strings[character_index])
+			os.MkdirAll(out_folder, os.ModePerm)
+			fmt.Println("Saving: " + character_art_strings.Strings[character_index])
+
+			for i := 0; i < piecesPerCharacter; i++ {
+				index := (character_index * piecesPerCharacter) + i
+				texture := textures[index]
+				file_path := filepath.Join(out_folder, texture.Name)
+				imaging.Save(texture.Image, file_path)
+				b, _ := json.MarshalIndent(texture.Offset, "", "    ")
+				writeJson(b, file_path)
+			}
+		}
+	}
+}
+
 func UnpackTextures(in_directory string, out_directory string) {
 
 	// for some reason the developers hard coded some scaling factors...
@@ -162,11 +302,11 @@ func UnpackTextures(in_directory string, out_directory string) {
 		"furniture.cct.mid":       {"furnitureOffsets.bin.mid", 1},
 		"furniture2.cct.mid":      {"furnitureOffsets2.bin.mid", 0.75},
 		"furniture3.cct.mid":      {"furnitureOffsets3.bin.mid", 1},
-		"characterParts.cct.mid":  {"characterOffsets.bin.mid", 0.75},
-		"characterParts2.cct.mid": {"characterOffsets2.bin.mid", 0.75},
 		"ingameUiImages.cct.mid":  {"ingameUiOffsets.bin.mid", 1},
 		"menuImages.cct.mid":      {"menuOffsets.bin.mid", 1},
 		"menuTitleImages.cct.mid": {"menuTitleOffsets.bin.mid", 1},
+		"characterParts.cct.mid":  {"characterOffsets.bin.mid", 0.75},
+		"characterParts2.cct.mid": {"characterOffsets2.bin.mid", 0.75},
 	}
 
 	for cct, data := range file_map {
@@ -186,39 +326,15 @@ func UnpackTextures(in_directory string, out_directory string) {
 		}
 
 		out_folder := filepath.Join(out_directory, strings.Split(cct, ".")[0])
-		os.MkdirAll(out_folder, os.ModeAppend)
+		os.MkdirAll(out_folder, os.ModePerm)
 
-		_, packed_image := readCCTexture(cct_file)
-		offsets := readImageOffsets(offsets_file)
+		textures := readPackedTextures(cct_file, offsets_file, data.scale)
 
-		scale := data.scale
-
-		for image_index := range offsets.Offsets {
-			image_entry := offsets.Offsets[image_index]
-			width := int(math.Round(float64(image_entry.W) * float64(scale)))
-			height := int(math.Round(float64(image_entry.H) * float64(scale)))
-			image := imaging.New(width, height, color.Transparent)
-
-			for x := 0; x < width; x++ {
-				for y := 0; y < height; y++ {
-
-					source_x := x + int(math.Round(float64(image_entry.X)*float64(scale)))
-					source_y := y + int(math.Round(float64(image_entry.Y)*float64(scale)))
-
-					color := packed_image.NRGBAAt(source_x, source_y)
-					image.SetNRGBA(x, y, color)
-				}
-			}
-
-			name := fmt.Sprintf("%d_%s.png", image_index, image_entry.Name)
-
-			if image_entry.Name == "" {
-				name = fmt.Sprintf("%d.png", image_index)
-
-			}
-			out_path := filepath.Join(out_folder, name)
-			fmt.Println("Writing: " + out_path)
-			imaging.Save(image, out_path)
+		for i := range textures {
+			result := textures[i]
+			out_path := filepath.Join(out_folder, result.Name)
+			// /fmt.Println("Writing: " + out_path)
+			imaging.Save(result.Image, out_path)
 		}
 	}
 }

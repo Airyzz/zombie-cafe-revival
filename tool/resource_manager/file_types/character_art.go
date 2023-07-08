@@ -5,13 +5,13 @@ import (
 )
 
 type characterArtData struct {
-	U1      byte
-	Strings []string
+	PiecesPerString byte
+	Strings         []string
 }
 
 func readCharacterArtData(file *os.File) characterArtData {
 	data := characterArtData{}
-	data.U1 = readByte(file)
+	data.PiecesPerString = readByte(file)
 	data.Strings = []string{}
 
 	for {
@@ -28,7 +28,7 @@ func readCharacterArtData(file *os.File) characterArtData {
 }
 
 func writeCharacterArtData(file *os.File, characters characterArtData) {
-	writeByte(file, characters.U1)
+	writeByte(file, byte(characters.PiecesPerString))
 	for _, v := range characters.Strings {
 		writeString(file, v)
 	}

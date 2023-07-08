@@ -1,0 +1,362 @@
+[
+    {
+        "Form": 255,
+        "Type": 0,
+        "Direction": 1,
+        "AnimationFile": "walkSW.bin"
+    },
+    {
+        "Form": 255,
+        "Type": 0,
+        "Direction": 2,
+        "AnimationFile": "walkNW.bin"
+    },
+    {
+        "Form": 255,
+        "Type": 1,
+        "Direction": 1,
+        "AnimationFile": "idleSW.bin"
+    },
+    {
+        "Form": 255,
+        "Type": 1,
+        "Direction": 2,
+        "AnimationFile": "idleNW.bin"
+    },
+    {
+        "Form": 255,
+        "Type": 2,
+        "Direction": 1,
+        "AnimationFile": "sitSW.bin"
+    },
+    {
+        "Form": 255,
+        "Type": 2,
+        "Direction": 2,
+        "AnimationFile": "sitNW.bin"
+    },
+    {
+        "Form": 255,
+        "Type": 3,
+        "Direction": 1,
+        "AnimationFile": "attackSW.bin"
+    },
+    {
+        "Form": 255,
+        "Type": 3,
+        "Direction": 2,
+        "AnimationFile": "attackNW.bin"
+    },
+    {
+        "Form": 255,
+        "Type": 4,
+        "Direction": 1,
+        "AnimationFile": "carrySW.bin"
+    },
+    {
+        "Form": 255,
+        "Type": 4,
+        "Direction": 2,
+        "AnimationFile": "carryNW.bin"
+    },
+    {
+        "Form": 255,
+        "Type": 5,
+        "Direction": 1,
+        "AnimationFile": "serveSW.bin"
+    },
+    {
+        "Form": 255,
+        "Type": 5,
+        "Direction": 2,
+        "AnimationFile": "serveNW.bin"
+    },
+    {
+        "Form": 255,
+        "Type": 6,
+        "Direction": 1,
+        "AnimationFile": "deathSW.bin"
+    },
+    {
+        "Form": 255,
+        "Type": 6,
+        "Direction": 2,
+        "AnimationFile": "deathNW.bin"
+    },
+    {
+        "Form": 255,
+        "Type": 7,
+        "Direction": 1,
+        "AnimationFile": "eatSW.bin"
+    },
+    {
+        "Form": 255,
+        "Type": 7,
+        "Direction": 2,
+        "AnimationFile": "eatNW.bin"
+    },
+    {
+        "Form": 255,
+        "Type": 8,
+        "Direction": 1,
+        "AnimationFile": "operateSW.bin"
+    },
+    {
+        "Form": 255,
+        "Type": 8,
+        "Direction": 2,
+        "AnimationFile": "operateNW.bin"
+    },
+    {
+        "Form": 255,
+        "Type": 9,
+        "Direction": 1,
+        "AnimationFile": "runSW.bin"
+    },
+    {
+        "Form": 255,
+        "Type": 9,
+        "Direction": 2,
+        "AnimationFile": "runNW.bin"
+    },
+    {
+        "Form": 255,
+        "Type": 10,
+        "Direction": 1,
+        "AnimationFile": "bumpSW.bin"
+    },
+    {
+        "Form": 255,
+        "Type": 10,
+        "Direction": 2,
+        "AnimationFile": "bumpNW.bin"
+    },
+    {
+        "Form": 255,
+        "Type": 11,
+        "Direction": 1,
+        "AnimationFile": "celebrateSW.bin"
+    },
+    {
+        "Form": 255,
+        "Type": 11,
+        "Direction": 2,
+        "AnimationFile": "celebrateNW.bin"
+    },
+    {
+        "Form": 255,
+        "Type": 12,
+        "Direction": 1,
+        "AnimationFile": "hitSW.bin"
+    },
+    {
+        "Form": 255,
+        "Type": 12,
+        "Direction": 2,
+        "AnimationFile": "hitNW.bin"
+    },
+    {
+        "Form": 255,
+        "Type": 13,
+        "Direction": 1,
+        "AnimationFile": "attack2SW.bin"
+    },
+    {
+        "Form": 255,
+        "Type": 13,
+        "Direction": 2,
+        "AnimationFile": "attack2NW.bin"
+    },
+    {
+        "Form": 255,
+        "Type": 14,
+        "Direction": 1,
+        "AnimationFile": "attackHumanSW.bin"
+    },
+    {
+        "Form": 255,
+        "Type": 14,
+        "Direction": 2,
+        "AnimationFile": "attackHumanNW.bin"
+    },
+    {
+        "Form": 255,
+        "Type": 15,
+        "Direction": 1,
+        "AnimationFile": "idle3SW.bin"
+    },
+    {
+        "Form": 255,
+        "Type": 15,
+        "Direction": 2,
+        "AnimationFile": "idle3NW.bin"
+    },
+    {
+        "Form": 255,
+        "Type": 16,
+        "Direction": 1,
+        "AnimationFile": "idle4SW.bin"
+    },
+    {
+        "Form": 255,
+        "Type": 16,
+        "Direction": 2,
+        "AnimationFile": "idle4NW.bin"
+    },
+    {
+        "Form": 255,
+        "Type": 17,
+        "Direction": 1,
+        "AnimationFile": "idle5SW.bin"
+    },
+    {
+        "Form": 255,
+        "Type": 17,
+        "Direction": 2,
+        "AnimationFile": "idle5NW.bin"
+    },
+    {
+        "Form": 255,
+        "Type": 18,
+        "Direction": 1,
+        "AnimationFile": "startledSW.bin"
+    },
+    {
+        "Form": 255,
+        "Type": 18,
+        "Direction": 2,
+        "AnimationFile": "startledNW.bin"
+    },
+    {
+        "Form": 255,
+        "Type": 19,
+        "Direction": 1,
+        "AnimationFile": "walk2SW.bin"
+    },
+    {
+        "Form": 255,
+        "Type": 19,
+        "Direction": 2,
+        "AnimationFile": "walk2NW.bin"
+    },
+    {
+        "Form": 255,
+        "Type": 20,
+        "Direction": 1,
+        "AnimationFile": "walk3SW.bin"
+    },
+    {
+        "Form": 255,
+        "Type": 20,
+        "Direction": 2,
+        "AnimationFile": "walk3NW.bin"
+    },
+    {
+        "Form": 255,
+        "Type": 21,
+        "Direction": 1,
+        "AnimationFile": "walk4SW.bin"
+    },
+    {
+        "Form": 255,
+        "Type": 21,
+        "Direction": 2,
+        "AnimationFile": "walk4NW.bin"
+    },
+    {
+        "Form": 255,
+        "Type": 22,
+        "Direction": 1,
+        "AnimationFile": "crouchSW.bin"
+    },
+    {
+        "Form": 255,
+        "Type": 22,
+        "Direction": 2,
+        "AnimationFile": "crouchNW.bin"
+    },
+    {
+        "Form": 255,
+        "Type": 23,
+        "Direction": 1,
+        "AnimationFile": "feastSW.bin"
+    },
+    {
+        "Form": 255,
+        "Type": 23,
+        "Direction": 2,
+        "AnimationFile": "feastNW.bin"
+    },
+    {
+        "Form": 255,
+        "Type": 24,
+        "Direction": 1,
+        "AnimationFile": "mouthwipeSW.bin"
+    },
+    {
+        "Form": 255,
+        "Type": 24,
+        "Direction": 2,
+        "AnimationFile": "mouthwipeNW.bin"
+    },
+    {
+        "Form": 255,
+        "Type": 25,
+        "Direction": 1,
+        "AnimationFile": "hungry1SW.bin"
+    },
+    {
+        "Form": 255,
+        "Type": 25,
+        "Direction": 2,
+        "AnimationFile": "hungry1NW.bin"
+    },
+    {
+        "Form": 255,
+        "Type": 26,
+        "Direction": 1,
+        "AnimationFile": "hungry2SW.bin"
+    },
+    {
+        "Form": 255,
+        "Type": 26,
+        "Direction": 2,
+        "AnimationFile": "hungry2NW.bin"
+    },
+    {
+        "Form": 255,
+        "Type": 27,
+        "Direction": 1,
+        "AnimationFile": "riseSW.bin"
+    },
+    {
+        "Form": 255,
+        "Type": 27,
+        "Direction": 2,
+        "AnimationFile": "riseNW.bin"
+    },
+    {
+        "Form": 255,
+        "Type": 28,
+        "Direction": 1,
+        "AnimationFile": "hungSW.bin"
+    },
+    {
+        "Form": 255,
+        "Type": 28,
+        "Direction": 2,
+        "AnimationFile": "hungNW.bin"
+    },
+    {
+        "Form": 255,
+        "Type": 29,
+        "Direction": 1,
+        "AnimationFile": "hung2SW.bin"
+    },
+    {
+        "Form": 255,
+        "Type": 29,
+        "Direction": 2,
+        "AnimationFile": "hung2NW.bin"
+    }
+]

@@ -3,6 +3,7 @@ package file_types
 import (
 	"bytes"
 	"compress/zlib"
+	"fmt"
 	"image"
 	"image/color"
 	"io"
@@ -29,6 +30,12 @@ func map16to256(value byte) byte {
 	return byte(math.Round(f))
 }
 
+func map256to16(value byte) byte {
+	f := float64(value) / 255
+	f *= 15.0
+	return byte(math.Round(f))
+}
+
 func readCCTexture(file *os.File) (ccTexture, *image.NRGBA) {
 	var data ccTexture
 
@@ -46,6 +53,8 @@ func readCCTexture(file *os.File) (ccTexture, *image.NRGBA) {
 
 	io.Copy(&out, r)
 	bytes := out.Bytes()
+
+	fmt.Printf("Decompressed: %d bytes!\n", len(bytes))
 
 	//red bytes 	0b11110000 00000000
 	//green bytes 	0b00001111 00000000
@@ -78,4 +87,43 @@ func readCCTexture(file *os.File) (ccTexture, *image.NRGBA) {
 	}
 
 	return data, i
+}
+
+func writeCCTexture(file *os.File, texture ccTexture, img *image.NRGBA) {
+
+	buffer := make([]byte, texture.Width*texture.Height*2)
+
+	for x := int32(0); x < texture.Width; x++ {
+		for y := int32(0); y < texture.Height; y++ {
+			index := 2 * (x + (y * texture.Width))
+			color := img.NRGBAAt(int(x), int(y))
+
+			r := map256to16(color.R)
+			g := map256to16(color.G)
+			b := map256to16(color.B)
+			a := map256to16(color.A)
+
+			rg := (r << 4) | g
+			ba := (b << 4) | a
+
+			buffer[index] = byte(ba)
+			buffer[index+1] = rg
+		}
+	}
+
+	var b bytes.Buffer
+	w, _ := zlib.NewWriterLevel(&b, zlib.BestCompression)
+	w.Write(buffer)
+	w.Close()
+
+	file.Write([]byte(texture.Magic))
+	writeInt32LittleEndian(file, texture.U1)
+	writeInt32LittleEndian(file, texture.Width)
+	writeInt32LittleEndian(file, texture.Height)
+
+	writeInt32LittleEndian(file, texture.U2)
+	writeInt32LittleEndian(file, texture.U3)
+	writeInt32LittleEndian(file, int32(len(b.Bytes())))
+
+	file.Write(b.Bytes())
 }
