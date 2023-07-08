@@ -82,6 +82,16 @@ func DeserializeCCTexture(file *os.File, out_path string) {
 	imaging.Save(image, out_path+".png")
 }
 
+func DeserializeAnimationData(file *os.File, out_path string) {
+	data := readAnimationData(file)
+	b, err := json.MarshalIndent(data, "", "    ")
+	if err != nil {
+		fmt.Println(err)
+	}
+
+	writeJson(b, out_path)
+}
+
 func SerializeFurniture(file *os.File, jsonData string) {
 	var data []furnitureData
 	err := json.Unmarshal([]byte(jsonData), &data)
@@ -171,6 +181,7 @@ func DeserializeFiles(in_directory string, out_directory string) {
 		"menuTitleImages.cct.mid":        DeserializeCCTexture,
 		"recipeImages.cct.mid":           DeserializeCCTexture,
 		"recipeImages2.cct.mid":          DeserializeCCTexture,
+		"animationData.bin.mid":          DeserializeAnimationData,
 	}
 
 	for key, deserializer := range deserialize_map {
