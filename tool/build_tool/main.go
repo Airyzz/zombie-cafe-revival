@@ -21,7 +21,7 @@ func main() {
 
 	flag.Parse()
 
-	/*if in_directory == "" {
+	if in_directory == "" {
 		log.Fatalln("In directory not specified")
 	}
 
@@ -30,7 +30,7 @@ func main() {
 	}
 
 	os.RemoveAll(out_directory)
-	copyFiles(in_directory, out_directory)*/
+	copyFiles(in_directory, out_directory)
 
 	file_types.SerializeFiles(filepath.Join(in_directory, "assets", "data"), filepath.Join(out_directory, "assets", "data"))
 	file_types.SerializeFiles(filepath.Join(in_directory, "assets", "images"), filepath.Join(out_directory, "assets", "images"))

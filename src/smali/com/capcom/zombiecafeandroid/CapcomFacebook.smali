@@ -462,11 +462,6 @@
 
     iget-object v1, p0, Lcom/capcom/zombiecafeandroid/CapcomFacebook;->d:Landroid/app/Activity;
 
-    invoke-virtual {v1}, Landroid/app/Activity;->getApplicationContext()Landroid/content/Context;
-
-    move-result-object v1
-
-    invoke-virtual {v0, v1}, Lcom/capcom/facebook/Facebook;->logout(Landroid/content/Context;)Ljava/lang/String;
     :try_end_0
     .catch Ljava/net/MalformedURLException; {:try_start_0 .. :try_end_0} :catch_0
     .catch Ljava/io/IOException; {:try_start_0 .. :try_end_0} :catch_1

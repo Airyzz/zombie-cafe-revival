@@ -44,15 +44,15 @@
 .method static constructor <clinit>()V
     .locals 1
 
-    const-string v0, "http://10.0.10.17:3333/facebook/dialog/"
+    const-string v0, "https://m.facebook.com/dialog/"
 
     sput-object v0, Lcom/capcom/facebook/Facebook;->DIALOG_BASE_URL:Ljava/lang/String;
 
-    const-string v0, "http://10.0.10.17:3333/facebook/graph/"
+    const-string v0, "https://graph.facebook.com/"
 
     sput-object v0, Lcom/capcom/facebook/Facebook;->GRAPH_BASE_URL:Ljava/lang/String;
 
-    const-string v0, "http://10.0.10.17:3333/facebook/restserver.php"
+    const-string v0, "https://api.facebook.com/restserver.php"
 
     sput-object v0, Lcom/capcom/facebook/Facebook;->RESTSERVER_URL:Ljava/lang/String;
 
@@ -599,7 +599,7 @@
     goto/16 :goto_0
 .end method
 
-.method public dialog(Landroid/content/Context;Ljava/lang/String;Landroid/os/Bundle;Lcom/capcom/facebook/f;)V
+.method public dialogoriginal(Landroid/content/Context;Ljava/lang/String;Landroid/os/Bundle;Lcom/capcom/facebook/f;)V
     .locals 3
 
     new-instance v0, Ljava/lang/StringBuilder;
@@ -742,6 +742,181 @@
     goto :goto_1
 .end method
 
+.method public dialog(Landroid/content/Context;Ljava/lang/String;Landroid/os/Bundle;Lcom/capcom/facebook/f;)V
+    .locals 3
+
+    new-instance v0, Ljava/lang/StringBuilder;
+
+    sget-object v1, Lcom/capcom/facebook/Facebook;->DIALOG_BASE_URL:Ljava/lang/String;
+
+    invoke-static {v1}, Ljava/lang/String;->valueOf(Ljava/lang/Object;)Ljava/lang/String;
+
+    move-result-object v1
+
+    invoke-direct {v0, v1}, Ljava/lang/StringBuilder;-><init>(Ljava/lang/String;)V
+
+    invoke-virtual {v0, p2}, Ljava/lang/StringBuilder;->append(Ljava/lang/String;)Ljava/lang/StringBuilder;
+
+    move-result-object v0
+
+    invoke-virtual {v0}, Ljava/lang/StringBuilder;->toString()Ljava/lang/String;
+
+    move-result-object v0
+
+    const-string v1, "display"
+
+    const-string v2, "touch"
+
+    invoke-virtual {p3, v1, v2}, Landroid/os/Bundle;->putString(Ljava/lang/String;Ljava/lang/String;)V
+
+    const-string v1, "redirect_uri"
+
+    const-string v2, "fbconnect://success"
+
+    invoke-virtual {p3, v1, v2}, Landroid/os/Bundle;->putString(Ljava/lang/String;Ljava/lang/String;)V
+
+    const-string v1, "oauth"
+
+    invoke-virtual {p2, v1}, Ljava/lang/String;->equals(Ljava/lang/Object;)Z
+
+    move-result v1
+
+    if-eqz v1, :cond_1
+
+    const-string v1, "type"
+
+    const-string v2, "user_agent"
+
+    invoke-virtual {p3, v1, v2}, Landroid/os/Bundle;->putString(Ljava/lang/String;Ljava/lang/String;)V
+
+    const-string v1, "client_id"
+
+    iget-object v2, p0, Lcom/capcom/facebook/Facebook;->c:Ljava/lang/String;
+
+    invoke-virtual {p3, v1, v2}, Landroid/os/Bundle;->putString(Ljava/lang/String;Ljava/lang/String;)V
+
+    :goto_0
+    invoke-virtual {p0}, Lcom/capcom/facebook/Facebook;->isSessionValid()Z
+
+    move-result v1
+
+    if-eqz v1, :cond_0
+
+    const-string v1, "access_token"
+
+    invoke-virtual {p0}, Lcom/capcom/facebook/Facebook;->getAccessToken()Ljava/lang/String;
+
+    move-result-object v2
+
+    invoke-virtual {p3, v1, v2}, Landroid/os/Bundle;->putString(Ljava/lang/String;Ljava/lang/String;)V
+
+    :cond_0
+    new-instance v1, Ljava/lang/StringBuilder;
+
+    invoke-static {v0}, Ljava/lang/String;->valueOf(Ljava/lang/Object;)Ljava/lang/String;
+
+    move-result-object v0
+
+    invoke-direct {v1, v0}, Ljava/lang/StringBuilder;-><init>(Ljava/lang/String;)V
+
+    const-string v0, "?"
+
+    invoke-virtual {v1, v0}, Ljava/lang/StringBuilder;->append(Ljava/lang/String;)Ljava/lang/StringBuilder;
+
+    move-result-object v0
+
+    invoke-static {p3}, Lcom/capcom/facebook/a;->a(Landroid/os/Bundle;)Ljava/lang/String;
+
+    move-result-object v1
+
+    invoke-virtual {v0, v1}, Ljava/lang/StringBuilder;->append(Ljava/lang/String;)Ljava/lang/StringBuilder;
+
+    move-result-object v0
+
+    invoke-virtual {v0}, Ljava/lang/StringBuilder;->toString()Ljava/lang/String;
+
+    move-result-object v0
+
+    const-string v1, "android.permission.INTERNET"
+
+    invoke-virtual {p1, v1}, Landroid/content/Context;->checkCallingOrSelfPermission(Ljava/lang/String;)I
+
+    move-result v1
+
+    if-eqz v1, :cond_2
+
+    const-string v0, "Error"
+
+    const-string v1, "Application requires permission to access the Internet"
+
+    new-instance v2, Landroid/app/AlertDialog$Builder;
+
+    invoke-direct {v2, p1}, Landroid/app/AlertDialog$Builder;-><init>(Landroid/content/Context;)V
+
+    invoke-virtual {v2, v0}, Landroid/app/AlertDialog$Builder;->setTitle(Ljava/lang/CharSequence;)Landroid/app/AlertDialog$Builder;
+
+    invoke-virtual {v2, v1}, Landroid/app/AlertDialog$Builder;->setMessage(Ljava/lang/CharSequence;)Landroid/app/AlertDialog$Builder;
+
+    invoke-virtual {v2}, Landroid/app/AlertDialog$Builder;->create()Landroid/app/AlertDialog;
+
+    move-result-object v0
+
+    invoke-virtual {v0}, Landroid/app/AlertDialog;->show()V
+
+    :goto_1
+    return-void
+
+    :cond_1
+    const-string v1, "app_id"
+
+    iget-object v2, p0, Lcom/capcom/facebook/Facebook;->c:Ljava/lang/String;
+
+    invoke-virtual {p3, v1, v2}, Landroid/os/Bundle;->putString(Ljava/lang/String;Ljava/lang/String;)V
+
+    goto :goto_0
+
+    :cond_2
+
+    invoke-virtual {p0}, Lcom/capcom/facebook/Facebook;->doThing()V
+
+    goto :goto_1
+.end method
+
+.method public doThing()V
+    .locals 2
+
+    sget-object v0, Lcom/capcom/zombiecafeandroid/CC_Android;->a:Lcom/capcom/zombiecafeandroid/ZombieCafeAndroid;
+
+    new-instance v1, Lcom/capcom/facebook/Facebook$1;
+
+    invoke-direct {v1, p0}, Lcom/capcom/facebook/Facebook$1;-><init>(Lcom/capcom/facebook/Facebook;)V
+
+    invoke-virtual {v0, v1}, Landroid/app/Activity;->runOnUiThread(Ljava/lang/Runnable;)V
+
+    return-void
+.end method
+
+.method toast()V
+    .locals 3
+
+    .line 10
+    sget-object v0, Lcom/capcom/zombiecafeandroid/CC_Android;->a:Lcom/capcom/zombiecafeandroid/ZombieCafeAndroid;
+
+    const-string v1, "Test String"
+
+    const/4 v2, 0x0
+
+    invoke-static {v0, v1, v2}, Landroid/widget/Toast;->makeText(Landroid/content/Context;Ljava/lang/CharSequence;I)Landroid/widget/Toast;
+
+    move-result-object v0
+
+    invoke-virtual {v0}, Landroid/widget/Toast;->show()V
+
+    .line 11
+    return-void
+.end method
+
+
 .method public dialog(Landroid/content/Context;Ljava/lang/String;Lcom/capcom/facebook/f;)V
     .locals 1
 
@@ -757,14 +932,15 @@
 .method public getAccessExpires()J
     .locals 2
 
-    const-wide v0, 0x0
+    iget-wide v0, p0, Lcom/capcom/facebook/Facebook;->b:J
 
     return-wide v0
 .end method
 
 .method public getAccessToken()Ljava/lang/String;
     .locals 1
-    const-string v0, "FAKE_ACCESS_TOKEN"
+
+    iget-object v0, p0, Lcom/capcom/facebook/Facebook;->a:Ljava/lang/String;
 
     return-object v0
 .end method

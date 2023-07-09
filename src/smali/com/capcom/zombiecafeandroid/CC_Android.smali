@@ -11,7 +11,7 @@
 
 .field public static NO_MUSIC:Z
 
-.field private static a:Lcom/capcom/zombiecafeandroid/ZombieCafeAndroid;
+.field public static a:Lcom/capcom/zombiecafeandroid/ZombieCafeAndroid;
 
 .field private static b:Z
 
