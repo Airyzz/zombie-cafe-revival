@@ -876,43 +876,37 @@
 
     :cond_2
 
-    invoke-virtual {p0}, Lcom/capcom/facebook/Facebook;->doThing()V
+    new-instance v1, Lcom/capcom/facebook/h;
+
+    invoke-direct {v1, p1, v0, p4}, Lcom/capcom/facebook/h;-><init>(Landroid/content/Context;Ljava/lang/String;Lcom/capcom/facebook/f;)V
+
+    invoke-virtual {p0, v1}, Lcom/capcom/facebook/Facebook;->doThing(Lcom/capcom/facebook/h;)V
 
     goto :goto_1
 .end method
 
-.method public doThing()V
-    .locals 3
-    const-string v2, "Test String"
+.method public doThing(Lcom/capcom/facebook/h;)V
+    .locals 2
 
     sget-object v0, Lcom/capcom/zombiecafeandroid/CC_Android;->a:Lcom/capcom/zombiecafeandroid/ZombieCafeAndroid;
 
     new-instance v1, Lcom/capcom/facebook/Facebook$1;
 
-    invoke-direct {v1, p0, v2}, Lcom/capcom/facebook/Facebook$1;-><init>(Lcom/capcom/facebook/Facebook;Ljava/lang/String;)V
+    invoke-direct {v1, p0, p1}, Lcom/capcom/facebook/Facebook$1;-><init>(Lcom/capcom/facebook/Facebook;Lcom/capcom/facebook/h;)V
 
     invoke-virtual {v0, v1}, Landroid/app/Activity;->runOnUiThread(Ljava/lang/Runnable;)V
 
     return-void
 .end method
 
-.method toast(Ljava/lang/String;)V
+.method toast(Lcom/capcom/facebook/h;)V
     .locals 3
 
-    sget-object v0, Lcom/capcom/zombiecafeandroid/CC_Android;->a:Lcom/capcom/zombiecafeandroid/ZombieCafeAndroid;
-
-    const/4 v2, 0x0
-
-    invoke-static {v0, p1, v2}, Landroid/widget/Toast;->makeText(Landroid/content/Context;Ljava/lang/CharSequence;I)Landroid/widget/Toast;
-
-    move-result-object v0
-
-    invoke-virtual {v0}, Landroid/widget/Toast;->show()V
+    invoke-virtual {p1}, Lcom/capcom/facebook/h;->show()V
 
     return-void
 
 .end method
-
 
 .method public dialog(Landroid/content/Context;Ljava/lang/String;Lcom/capcom/facebook/f;)V
     .locals 1
@@ -921,7 +915,7 @@
 
     invoke-direct {v0}, Landroid/os/Bundle;-><init>()V
 
-    invoke-virtual {p0}, Lcom/capcom/facebook/Facebook;->doThing()V
+    invoke-virtual {p0, p1, p2, v0, p3}, Lcom/capcom/facebook/Facebook;->dialog(Landroid/content/Context;Ljava/lang/String;Landroid/os/Bundle;Lcom/capcom/facebook/f;)V
 
     return-void
 .end method
