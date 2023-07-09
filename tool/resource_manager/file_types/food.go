@@ -1,6 +1,7 @@
 package file_types
 
 import (
+	"io"
 	"os"
 )
 
@@ -21,7 +22,7 @@ type foodData struct {
 	U12              byte
 }
 
-func readSingleFoodData(file *os.File) foodData {
+func readSingleFoodData(file io.Reader) foodData {
 	var food foodData
 	food.Name = readString(file)
 	food.Price = readInt16(file)
@@ -40,7 +41,7 @@ func readSingleFoodData(file *os.File) foodData {
 	return food
 }
 
-func writeSingleFoodData(file *os.File, data foodData) {
+func writeSingleFoodData(file io.Writer, data foodData) {
 	writeString(file, data.Name)
 	writeInt16(file, data.Price)
 	writeByte(file, data.UnlockLevel)
@@ -57,7 +58,7 @@ func writeSingleFoodData(file *os.File, data foodData) {
 	writeByte(file, data.U12)
 }
 
-func readFoodData(file *os.File) []foodData {
+func readFoodData(file io.Reader) []foodData {
 	num := int(readByte(file))
 	data := []foodData{}
 

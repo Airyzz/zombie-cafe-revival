@@ -7,9 +7,10 @@ import (
 	"io/ioutil"
 	"math/rand"
 	"net/http"
+	"server/storage"
 )
 
-func getGifts(w http.ResponseWriter, r *http.Request) {
+func getGifts(w http.ResponseWriter, r *http.Request, storage storage.Storage) {
 	fmt.Printf("got request for gifts: %s\n", r.URL.String())
 	data, _ := ioutil.ReadAll(r.Body)
 	fmt.Println(hex.Dump(data))

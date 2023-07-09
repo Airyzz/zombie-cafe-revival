@@ -2,7 +2,7 @@ package file_types
 
 import (
 	"fmt"
-	"os"
+	"io"
 )
 
 type characterData struct {
@@ -36,7 +36,7 @@ type characterData struct {
 	ZombieDescription string
 }
 
-func readSingleCharacter(file *os.File) characterData {
+func readSingleCharacter(file io.Reader) characterData {
 	var c characterData
 	c.CafeLevelRequired = readByte(file)
 	c.U2 = readByte(file)
@@ -74,7 +74,7 @@ func readSingleCharacter(file *os.File) characterData {
 	return c
 }
 
-func writeSingleCharacterData(file *os.File, data characterData) {
+func writeSingleCharacterData(file io.Writer, data characterData) {
 	writeByte(file, data.CafeLevelRequired)
 	writeByte(file, data.U2)
 	writeByte(file, data.U3)
@@ -104,7 +104,7 @@ func writeSingleCharacterData(file *os.File, data characterData) {
 	writeString(file, data.ZombieDescription)
 }
 
-func readCharacterData(file *os.File) []characterData {
+func readCharacterData(file io.Reader) []characterData {
 	num := int(readByte(file))
 	fmt.Println(fmt.Sprintf("Num characters: %d", num))
 	data := []characterData{}
@@ -116,7 +116,7 @@ func readCharacterData(file *os.File) []characterData {
 	return data
 }
 
-func writeCharacterData(file *os.File, characters []characterData) {
+func writeCharacterData(file io.Writer, characters []characterData) {
 
 	writeByte(file, byte(len(characters)))
 

@@ -4,9 +4,10 @@ import (
 	"encoding/json"
 	"fmt"
 	"net/http"
+	"server/storage"
 )
 
-func facebookEmulatorRestServer(w http.ResponseWriter, r *http.Request) {
+func facebookEmulatorRestServer(w http.ResponseWriter, r *http.Request, storage storage.Storage) {
 	fmt.Printf("got request for facebook rest server: %s\n", r.URL.String())
 	err := r.ParseMultipartForm(5 * 1024 * 1024)
 

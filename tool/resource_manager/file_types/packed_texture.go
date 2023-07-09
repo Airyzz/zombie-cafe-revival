@@ -5,6 +5,7 @@ import (
 	"fmt"
 	"image"
 	"image/color"
+	"io"
 	"log"
 	"math"
 	"os"
@@ -20,7 +21,7 @@ type TextureResult struct {
 	Offset imageOffset
 }
 
-func readPackedTextures(cctFile *os.File, offsetsFile *os.File, scale float32) []TextureResult {
+func readPackedTextures(cctFile io.Reader, offsetsFile io.Reader, scale float32) []TextureResult {
 	_, packed_image := readCCTexture(cctFile)
 	offsets := readImageOffsets(offsetsFile)
 

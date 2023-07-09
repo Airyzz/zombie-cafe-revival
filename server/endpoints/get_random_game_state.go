@@ -2,31 +2,24 @@ package endpoints
 
 import (
 	"fmt"
-	"io/ioutil"
-	"log"
 	"math/rand"
 	"net/http"
-	"os"
-	"path"
 	"server/storage"
+	"time"
 )
 
-func getRandomGameState(w http.ResponseWriter, r *http.Request) {
+func getRandomGameState(w http.ResponseWriter, r *http.Request, storage storage.Storage) {
 	fmt.Printf("got request for random game state: %s\n", r.URL.String())
 
-	dir := storage.GetSavegameDirectory()
-	files, err := ioutil.ReadDir(dir)
-	if err != nil {
-		log.Fatal(err)
-	}
+	files, _ := storage.ListFiles()
 
+	seed := time.Now().UnixNano()
+	rand.Seed(seed)
 	randomIndex := rand.Intn(len(files))
+	fmt.Printf("Seed: %d index: %d\n", seed, randomIndex)
 	pick := files[randomIndex]
 
-	fmt.Println(pick.Name())
-
-	file, _ := os.Open(path.Join(dir, pick.Name()))
-	data, _ := ioutil.ReadAll(file)
+	data, _ := storage.GetFile(pick)
 
 	w.Write(data)
 }

@@ -22,15 +22,15 @@ JNIEXPORT jint JNICALL JNI_OnLoad(JavaVM* vm, void* reserved) {
   Memory::memcpyProtected((void*)(base + 0x1a14dc), infoStr, strlen(infoStr) + 1);
 
                           //http://zombiecafe.capcomcanada.com/updater/%s
-  const char* updaterUrl = "http://10.0.10.17:3333/updater/%s\0";
+  const char* updaterUrl = "http://10.0.10.17:8787/updater/%s\0";
   Memory::memcpyProtected((void*)(base + 0x1a6610), updaterUrl, strlen(updaterUrl) + 1);
 
                     //http://zombiecafe.capcomcanada.com/x
-  const char* xUrl = "http://10.0.10.17:3333/x\0";
+  const char* xUrl = "http://10.0.10.17:8787/x\0";
   Memory::memcpyProtected((void*)(base + 0x1a839c), xUrl, strlen(xUrl) + 1);
 
                       //http://zombiecafe.capcomcanada.com/zca
-  const char* zcaUrl = "http://10.0.10.17:3333/zca\0";
+  const char* zcaUrl = "http://10.0.10.17:8787/zca\0";
   Memory::memcpyProtected((void*)(base + 0x1a842c), zcaUrl, strlen(zcaUrl) + 1);
 
 

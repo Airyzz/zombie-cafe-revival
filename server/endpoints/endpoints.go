@@ -2,10 +2,11 @@ package endpoints
 
 import (
 	"net/http"
+	"server/storage"
 )
 
-func GetEndpoints() map[string]func(http.ResponseWriter, *http.Request) {
-	return map[string]func(http.ResponseWriter, *http.Request){
+func GetEndpoints() map[string]func(http.ResponseWriter, *http.Request, storage.Storage) {
+	return map[string]func(http.ResponseWriter, *http.Request, storage.Storage){
 		"/":                           unkownRequest,
 		"/zca/gettimestamp.php":       getTimestamp,
 		"/zca/savegamestate.php":      saveGameState,

@@ -1,7 +1,7 @@
 package file_types
 
 import (
-	"os"
+	"io"
 )
 
 type animationData struct {
@@ -11,7 +11,7 @@ type animationData struct {
 	AnimationFile string
 }
 
-func readSingleAnimationData(file *os.File) animationData {
+func readSingleAnimationData(file io.Reader) animationData {
 	data := animationData{}
 	data.Form = readByte(file)
 	data.Type = readByte(file)
@@ -20,7 +20,7 @@ func readSingleAnimationData(file *os.File) animationData {
 	return data
 }
 
-func readAnimationData(file *os.File) []animationData {
+func readAnimationData(file io.Reader) []animationData {
 	data := []animationData{}
 
 	length := readByte(file)

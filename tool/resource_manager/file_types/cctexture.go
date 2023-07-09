@@ -8,7 +8,6 @@ import (
 	"image/color"
 	"io"
 	"math"
-	"os"
 
 	"github.com/disintegration/imaging"
 	"golang.org/x/image/colornames"
@@ -36,7 +35,7 @@ func map256to16(value byte) byte {
 	return byte(math.Round(f))
 }
 
-func readCCTexture(file *os.File) (ccTexture, *image.NRGBA) {
+func readCCTexture(file io.Reader) (ccTexture, *image.NRGBA) {
 	var data ccTexture
 
 	data.Magic = string(readNextBytes(file, 4))
@@ -89,7 +88,7 @@ func readCCTexture(file *os.File) (ccTexture, *image.NRGBA) {
 	return data, i
 }
 
-func writeCCTexture(file *os.File, texture ccTexture, img *image.NRGBA) {
+func writeCCTexture(file io.Writer, texture ccTexture, img *image.NRGBA) {
 
 	buffer := make([]byte, texture.Width*texture.Height*2)
 

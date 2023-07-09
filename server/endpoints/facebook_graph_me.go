@@ -6,9 +6,10 @@ import (
 	"fmt"
 	"io/ioutil"
 	"net/http"
+	"server/storage"
 )
 
-func facebookEmulatorGraphMe(w http.ResponseWriter, r *http.Request) {
+func facebookEmulatorGraphMe(w http.ResponseWriter, r *http.Request, storage storage.Storage) {
 	fmt.Printf("got request for facebook: %s\n", r.URL.String())
 	data, _ := ioutil.ReadAll(r.Body)
 	fmt.Println(hex.Dump(data))

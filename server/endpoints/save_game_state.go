@@ -5,11 +5,10 @@ import (
 	"fmt"
 	"io"
 	"net/http"
-	"os"
 	"server/storage"
 )
 
-func saveGameState(w http.ResponseWriter, r *http.Request) {
+func saveGameState(w http.ResponseWriter, r *http.Request, storage storage.Storage) {
 	fmt.Printf("got request to save game: %s\n", r.URL.String())
 	err := r.ParseMultipartForm(5 * 1024 * 1024)
 
@@ -28,7 +27,10 @@ func saveGameState(w http.ResponseWriter, r *http.Request) {
 	defer file.Close()
 
 	io.Copy(&buf, file)
-	dest_path := storage.GetFilepathForSaveDeviceID(udid)
-	os.WriteFile(dest_path, buf.Bytes(), 0666)
+
+	err = storage.StoreFile(udid, buf.Bytes())
+	if err != nil {
+		fmt.Println("There was an error storting the file")
+	}
 	buf.Reset()
 }

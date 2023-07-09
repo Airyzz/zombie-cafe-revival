@@ -1,7 +1,7 @@
 package file_types
 
 import (
-	"os"
+	"io"
 )
 
 type characterArtData struct {
@@ -9,7 +9,7 @@ type characterArtData struct {
 	Strings         []string
 }
 
-func readCharacterArtData(file *os.File) characterArtData {
+func readCharacterArtData(file io.Reader) characterArtData {
 	data := characterArtData{}
 	data.PiecesPerString = readByte(file)
 	data.Strings = []string{}
@@ -27,7 +27,7 @@ func readCharacterArtData(file *os.File) characterArtData {
 	return data
 }
 
-func writeCharacterArtData(file *os.File, characters characterArtData) {
+func writeCharacterArtData(file io.Writer, characters characterArtData) {
 	writeByte(file, byte(characters.PiecesPerString))
 	for _, v := range characters.Strings {
 		writeString(file, v)

@@ -2,7 +2,7 @@ package file_types
 
 import (
 	"fmt"
-	"os"
+	"io"
 )
 
 type furnitureData struct {
@@ -33,7 +33,7 @@ type furnitureData struct {
 	U23                int16
 }
 
-func readSingleFurnitureData(file *os.File) furnitureData {
+func readSingleFurnitureData(file io.Reader) furnitureData {
 
 	var furniture furnitureData
 
@@ -76,7 +76,7 @@ func readSingleFurnitureData(file *os.File) furnitureData {
 	return furniture
 }
 
-func writeFurniture(file *os.File, data furnitureData) {
+func writeFurniture(file io.Writer, data furnitureData) {
 
 	writeByte(file, data.UnlockLevel)
 	writeString(file, data.Name)
@@ -115,7 +115,7 @@ func writeFurniture(file *os.File, data furnitureData) {
 	writeInt16(file, data.U23)
 }
 
-func readFurnitureData(file *os.File) []furnitureData {
+func readFurnitureData(file io.Reader) []furnitureData {
 	num := int(readInt32(file))
 	data := []furnitureData{}
 
@@ -127,7 +127,7 @@ func readFurnitureData(file *os.File) []furnitureData {
 	return data
 }
 
-func writeFurnitureData(file *os.File, furnitures []furnitureData) {
+func writeFurnitureData(file io.Writer, furnitures []furnitureData) {
 
 	writeInt32(file, int32(len(furnitures)))
 

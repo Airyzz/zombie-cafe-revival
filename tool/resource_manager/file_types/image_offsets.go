@@ -1,7 +1,7 @@
 package file_types
 
 import (
-	"os"
+	"io"
 )
 
 type imageOffsets struct {
@@ -22,7 +22,7 @@ type imageOffset struct {
 	YOffsetFlipped int16
 }
 
-func readSingleOffset(file *os.File, fileType int) imageOffset {
+func readSingleOffset(file io.Reader, fileType int) imageOffset {
 	var d imageOffset
 
 	if fileType == 2 {
@@ -44,7 +44,7 @@ func readSingleOffset(file *os.File, fileType int) imageOffset {
 	return d
 }
 
-func writeSingleOffset(file *os.File, data imageOffset, fileType int) {
+func writeSingleOffset(file io.Writer, data imageOffset, fileType int) {
 
 	if fileType == 2 {
 		writeString(file, data.Name)
@@ -63,7 +63,7 @@ func writeSingleOffset(file *os.File, data imageOffset, fileType int) {
 	}
 }
 
-func readImageOffsets(file *os.File) imageOffsets {
+func readImageOffsets(file io.Reader) imageOffsets {
 	data := imageOffsets{}
 
 	data.Type = readByte(file)
@@ -79,7 +79,7 @@ func readImageOffsets(file *os.File) imageOffsets {
 	return data
 }
 
-func writeImageOffsets(file *os.File, data imageOffsets) {
+func writeImageOffsets(file io.Writer, data imageOffsets) {
 	writeByte(file, data.Type)
 	writeInt16(file, int16(len(data.Offsets)))
 
