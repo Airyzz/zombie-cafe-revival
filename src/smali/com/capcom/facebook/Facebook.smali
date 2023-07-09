@@ -39,7 +39,6 @@
 
 .field private g:Lcom/capcom/facebook/f;
 
-
 # direct methods
 .method static constructor <clinit>()V
     .locals 1
@@ -883,37 +882,35 @@
 .end method
 
 .method public doThing()V
-    .locals 2
+    .locals 3
+    const-string v2, "Test String"
 
     sget-object v0, Lcom/capcom/zombiecafeandroid/CC_Android;->a:Lcom/capcom/zombiecafeandroid/ZombieCafeAndroid;
 
     new-instance v1, Lcom/capcom/facebook/Facebook$1;
 
-    invoke-direct {v1, p0}, Lcom/capcom/facebook/Facebook$1;-><init>(Lcom/capcom/facebook/Facebook;)V
+    invoke-direct {v1, p0, v2}, Lcom/capcom/facebook/Facebook$1;-><init>(Lcom/capcom/facebook/Facebook;Ljava/lang/String;)V
 
     invoke-virtual {v0, v1}, Landroid/app/Activity;->runOnUiThread(Ljava/lang/Runnable;)V
 
     return-void
 .end method
 
-.method toast()V
+.method toast(Ljava/lang/String;)V
     .locals 3
 
-    .line 10
     sget-object v0, Lcom/capcom/zombiecafeandroid/CC_Android;->a:Lcom/capcom/zombiecafeandroid/ZombieCafeAndroid;
-
-    const-string v1, "Test String"
 
     const/4 v2, 0x0
 
-    invoke-static {v0, v1, v2}, Landroid/widget/Toast;->makeText(Landroid/content/Context;Ljava/lang/CharSequence;I)Landroid/widget/Toast;
+    invoke-static {v0, p1, v2}, Landroid/widget/Toast;->makeText(Landroid/content/Context;Ljava/lang/CharSequence;I)Landroid/widget/Toast;
 
     move-result-object v0
 
     invoke-virtual {v0}, Landroid/widget/Toast;->show()V
 
-    .line 11
     return-void
+
 .end method
 
 
@@ -924,7 +921,7 @@
 
     invoke-direct {v0}, Landroid/os/Bundle;-><init>()V
 
-    invoke-virtual {p0, p1, p2, v0, p3}, Lcom/capcom/facebook/Facebook;->dialog(Landroid/content/Context;Ljava/lang/String;Landroid/os/Bundle;Lcom/capcom/facebook/f;)V
+    invoke-virtual {p0}, Lcom/capcom/facebook/Facebook;->doThing()V
 
     return-void
 .end method
