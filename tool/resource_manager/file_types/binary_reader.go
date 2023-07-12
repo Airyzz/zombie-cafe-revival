@@ -32,6 +32,11 @@ func readInt32(file io.Reader) int32 {
 	return int32(binary.BigEndian.Uint32(data))
 }
 
+func readInt64(file io.Reader) int64 {
+	data := readNextBytes(file, 8)
+	return int64(binary.BigEndian.Uint64(data))
+}
+
 func readInt32LittleEndian(file io.Reader) int32 {
 	data := readNextBytes(file, 4)
 	return int32(binary.LittleEndian.Uint32(data))
@@ -42,6 +47,11 @@ func readFloat(file io.Reader) float32 {
 	return math.Float32frombits(binary.LittleEndian.Uint32(data))
 }
 
+func readFloat64(file io.Reader) float64 {
+	data := readNextBytes(file, 8)
+	return math.Float64frombits(binary.LittleEndian.Uint64(data))
+}
+
 func readByte(file io.Reader) byte {
 	data := readNextBytes(file, 1)
 	return data[0]
@@ -49,6 +59,10 @@ func readByte(file io.Reader) byte {
 
 func readBool(file io.Reader) bool {
 	data := readNextBytes(file, 1)
+	if data[0] > 1 {
+		log.Panicln("Read bool read a byte that was not 0 or 1")
+	}
+
 	return data[0] == 1
 }
 
@@ -56,6 +70,27 @@ func readString(file io.Reader) string {
 	length := readInt16(file)
 	data := readNextBytes(file, int(length))
 	return string(data)
+}
+
+type date struct {
+	Year   int16
+	Month  byte
+	Day    byte
+	Hour   byte
+	Minute byte
+	Second byte
+}
+
+func readDate(file io.Reader) date {
+	var d date
+	d.Year = readInt16(file)
+	d.Month = readByte(file)
+	d.Day = readByte(file)
+	d.Hour = readByte(file)
+	d.Minute = readByte(file)
+	d.Second = readByte(file)
+
+	return d
 }
 
 func readNextBytes(file io.Reader, number int) []byte {

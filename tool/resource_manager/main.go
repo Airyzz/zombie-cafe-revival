@@ -35,5 +35,11 @@ func main() {
 		file_types.UnpackCharacters(in_directory, out_directory, data_directory)
 	} else if mode == "pack_characters" {
 		file_types.PackCharacters(in_directory, out_directory, out_directory)
+	} else if mode == "validate_save" {
+		file_types.ValidateSave(in_directory)
+	} else if mode == "validate_cafe" {
+		file_types.ValidateCafe(in_directory)
+	} else if mode == "validate_friend_data" {
+		file_types.ValidateFriendData(in_directory)
 	}
 }

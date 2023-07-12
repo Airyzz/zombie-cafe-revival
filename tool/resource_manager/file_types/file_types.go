@@ -450,3 +450,42 @@ func SerializeFiles(in_directory string, out_directory string) {
 		value(f, string(b))
 	}
 }
+
+func ValidateSave(in_directory string) {
+	f, err := os.Open(in_directory)
+
+	if err != nil {
+		return
+
+	}
+
+	save := readSaveGame(f)
+	js, _ := json.MarshalIndent(save, "", "    ")
+	fmt.Println(string(js))
+}
+
+func ValidateCafe(in_directory string) {
+	f, err := os.Open(in_directory)
+
+	if err != nil {
+		return
+
+	}
+
+	save := readCafe(f)
+	js, _ := json.MarshalIndent(save, "", "    ")
+	fmt.Println(string(js))
+}
+
+func ValidateFriendData(in_directory string) {
+	f, err := os.Open(in_directory)
+
+	if err != nil {
+		return
+
+	}
+
+	readFriendData(f)
+	//js, _ := json.MarshalIndent(save, "", "    ")
+	//fmt.Println(string(js))
+}
