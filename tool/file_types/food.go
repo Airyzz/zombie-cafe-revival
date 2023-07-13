@@ -5,7 +5,7 @@ import (
 	"os"
 )
 
-type foodData struct {
+type Food struct {
 	Name             string
 	Price            int16
 	UnlockLevel      byte
@@ -22,8 +22,8 @@ type foodData struct {
 	U12              byte
 }
 
-func readSingleFoodData(file io.Reader) foodData {
-	var food foodData
+func readSingleFoodData(file io.Reader) Food {
+	var food Food
 	food.Name = readString(file)
 	food.Price = readInt16(file)
 	food.UnlockLevel = readByte(file)
@@ -41,7 +41,7 @@ func readSingleFoodData(file io.Reader) foodData {
 	return food
 }
 
-func writeSingleFoodData(file io.Writer, data foodData) {
+func writeSingleFoodData(file io.Writer, data Food) {
 	writeString(file, data.Name)
 	writeInt16(file, data.Price)
 	writeByte(file, data.UnlockLevel)
@@ -58,9 +58,9 @@ func writeSingleFoodData(file io.Writer, data foodData) {
 	writeByte(file, data.U12)
 }
 
-func readFoodData(file io.Reader) []foodData {
+func ReadFoods(file io.Reader) []Food {
 	num := int(readByte(file))
-	data := []foodData{}
+	data := []Food{}
 
 	for i := 0; i < num; i++ {
 		foodData := readSingleFoodData(file)
@@ -70,7 +70,7 @@ func readFoodData(file io.Reader) []foodData {
 	return data
 }
 
-func writeFoodData(file *os.File, foods []foodData) {
+func WriteFoods(file *os.File, foods []Food) {
 
 	writeByte(file, byte(len(foods)))
 

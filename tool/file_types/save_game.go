@@ -4,7 +4,7 @@ import (
 	"io"
 )
 
-type character struct {
+type CharacterInstance struct {
 	Type byte
 	Name string
 	U2   byte
@@ -24,7 +24,7 @@ type character struct {
 	U16  int32
 }
 
-type cafeStateData struct {
+type CafeState struct {
 	U1               float64
 	ExperiencePoints float32
 	Toxin            int32
@@ -35,20 +35,20 @@ type cafeStateData struct {
 	U8               float32
 	U9               int32
 	U10              bool
-	Character        character
+	Character        CharacterInstance
 	NumZombies       byte
-	Zombies          []character
+	Zombies          []CharacterInstance
 	U11              int32
 	U12              []int8
 	U13              bool
 }
 
-type saveGame struct {
-	State     cafeStateData
+type SaveGame struct {
+	State     CafeState
 	U14       int16
-	U15       date
+	U15       Date
 	U16       int16
-	U17       date
+	U17       Date
 	NumOrders int16
 	U18       byte
 	U19       byte
@@ -66,8 +66,8 @@ func readSaveStrings(file io.Reader) {
 	}
 }
 
-func readCharacter(file io.Reader, fileVersion int) character {
-	var c character
+func readCharacter(file io.Reader, fileVersion int) CharacterInstance {
+	var c CharacterInstance
 	c.Type = readByte(file)
 	c.Name = readString(file)
 	c.U2 = readByte(file)
@@ -94,8 +94,8 @@ func readCharacter(file io.Reader, fileVersion int) character {
 	return c
 }
 
-func readCafeState(file io.Reader, version int) cafeStateData {
-	var save cafeStateData
+func readCafeState(file io.Reader, version int) CafeState {
+	var save CafeState
 	save.U1 = readFloat64(file)
 	save.ExperiencePoints = readFloat(file)
 	save.Toxin = readInt32(file)
@@ -108,7 +108,7 @@ func readCafeState(file io.Reader, version int) cafeStateData {
 	save.U10 = readBool(file)
 	save.Character = readCharacter(file, version)
 	save.NumZombies = readByte(file)
-	save.Zombies = make([]character, save.NumZombies)
+	save.Zombies = make([]CharacterInstance, save.NumZombies)
 
 	for i := 0; i < int(save.NumZombies); i++ {
 		save.Zombies[i] = readCharacter(file, version)
@@ -132,7 +132,7 @@ func readCafeState(file io.Reader, version int) cafeStateData {
 	return save
 }
 
-func readSaveGameVersion63(file io.Reader, save saveGame) saveGame {
+func readSaveGameVersion63(file io.Reader, save SaveGame) SaveGame {
 	const version = 63
 	save.State = readCafeState(file, 63)
 
@@ -157,8 +157,8 @@ func readSaveGameVersion63(file io.Reader, save saveGame) saveGame {
 	return save
 }
 
-func readSaveGame(file io.Reader) saveGame {
-	var s saveGame
+func ReadSaveGame(file io.Reader) SaveGame {
+	var s SaveGame
 	version := readByte(file)
 
 	if version == 63 {

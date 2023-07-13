@@ -4,13 +4,13 @@ import (
 	"io"
 )
 
-type characterArtData struct {
+type CharacterArt struct {
 	PiecesPerString byte
 	Strings         []string
 }
 
-func readCharacterArtData(file io.Reader) characterArtData {
-	data := characterArtData{}
+func ReadCharacterArt(file io.Reader) CharacterArt {
+	data := CharacterArt{}
 	data.PiecesPerString = readByte(file)
 	data.Strings = []string{}
 
@@ -27,7 +27,7 @@ func readCharacterArtData(file io.Reader) characterArtData {
 	return data
 }
 
-func writeCharacterArtData(file io.Writer, characters characterArtData) {
+func WriteCharacterArt(file io.Writer, characters CharacterArt) {
 	writeByte(file, byte(characters.PiecesPerString))
 	for _, v := range characters.Strings {
 		writeString(file, v)

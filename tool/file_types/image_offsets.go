@@ -4,12 +4,12 @@ import (
 	"io"
 )
 
-type imageOffsets struct {
+type ImageOffsets struct {
 	Type    byte
-	Offsets []imageOffset
+	Offsets []Offset
 }
 
-type imageOffset struct {
+type Offset struct {
 	Name string
 	X    int16
 	Y    int16
@@ -22,8 +22,8 @@ type imageOffset struct {
 	YOffsetFlipped int16
 }
 
-func readSingleOffset(file io.Reader, fileType int) imageOffset {
-	var d imageOffset
+func readSingleOffset(file io.Reader, fileType int) Offset {
+	var d Offset
 
 	if fileType == 2 {
 		d.Name = readString(file)
@@ -44,7 +44,7 @@ func readSingleOffset(file io.Reader, fileType int) imageOffset {
 	return d
 }
 
-func writeSingleOffset(file io.Writer, data imageOffset, fileType int) {
+func writeSingleOffset(file io.Writer, data Offset, fileType int) {
 
 	if fileType == 2 {
 		writeString(file, data.Name)
@@ -63,14 +63,14 @@ func writeSingleOffset(file io.Writer, data imageOffset, fileType int) {
 	}
 }
 
-func readImageOffsets(file io.Reader) imageOffsets {
-	data := imageOffsets{}
+func ReadImageOffsets(file io.Reader) ImageOffsets {
+	data := ImageOffsets{}
 
 	data.Type = readByte(file)
 
 	num := int(readInt16(file))
 
-	data.Offsets = []imageOffset{}
+	data.Offsets = []Offset{}
 
 	for i := 0; i < num; i++ {
 		data.Offsets = append(data.Offsets, readSingleOffset(file, int(data.Type)))
@@ -79,7 +79,7 @@ func readImageOffsets(file io.Reader) imageOffsets {
 	return data
 }
 
-func writeImageOffsets(file io.Writer, data imageOffsets) {
+func WriteImageOffsets(file io.Writer, data ImageOffsets) {
 	writeByte(file, data.Type)
 	writeInt16(file, int16(len(data.Offsets)))
 

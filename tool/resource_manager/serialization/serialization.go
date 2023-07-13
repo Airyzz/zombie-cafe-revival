@@ -1,7 +1,8 @@
-package file_types
+package serialization
 
 import (
 	"encoding/json"
+	"file_types"
 	"fmt"
 	"log"
 	"os"
@@ -24,7 +25,7 @@ func writeJson(data []byte, out_path string) {
 }
 
 func DeserializeFurniture(file *os.File, out_path string) {
-	data := readFurnitureData(file)
+	data := file_types.ReadFurnitureData(file)
 	b, err := json.MarshalIndent(data, "", "    ")
 	if err != nil {
 		fmt.Println(err)
@@ -34,7 +35,7 @@ func DeserializeFurniture(file *os.File, out_path string) {
 }
 
 func DeserializeFood(file *os.File, out_path string) {
-	data := readFoodData(file)
+	data := file_types.ReadFoods(file)
 	b, err := json.MarshalIndent(data, "", "    ")
 	if err != nil {
 		fmt.Println(err)
@@ -44,7 +45,7 @@ func DeserializeFood(file *os.File, out_path string) {
 }
 
 func DeserializeCharacters(file *os.File, out_path string) {
-	data := readCharacterData(file)
+	data := file_types.ReadCharacters(file)
 	b, err := json.MarshalIndent(data, "", "    ")
 	if err != nil {
 		fmt.Println(err)
@@ -54,7 +55,7 @@ func DeserializeCharacters(file *os.File, out_path string) {
 }
 
 func DeserializeCharacterArt(file *os.File, out_path string) {
-	data := readCharacterArtData(file)
+	data := file_types.ReadCharacterArt(file)
 	b, err := json.MarshalIndent(data, "", "    ")
 	if err != nil {
 		fmt.Println(err)
@@ -64,7 +65,7 @@ func DeserializeCharacterArt(file *os.File, out_path string) {
 }
 
 func DeserializeOffsets(file *os.File, out_path string) {
-	data := readImageOffsets(file)
+	data := file_types.ReadImageOffsets(file)
 	b, err := json.MarshalIndent(data, "", "    ")
 	if err != nil {
 		fmt.Println(err)
@@ -74,7 +75,7 @@ func DeserializeOffsets(file *os.File, out_path string) {
 }
 
 func DeserializeCCTexture(file *os.File, out_path string) {
-	data, image := readCCTexture(file)
+	data, image := file_types.ReadCCTexture(file)
 	b, err := json.MarshalIndent(data, "", "    ")
 
 	if err != nil {
@@ -86,7 +87,7 @@ func DeserializeCCTexture(file *os.File, out_path string) {
 }
 
 func DeserializeAnimationData(file *os.File, out_path string) {
-	data := readAnimationData(file)
+	data := file_types.ReadAnimationData(file)
 	b, err := json.MarshalIndent(data, "", "    ")
 	if err != nil {
 		fmt.Println(err)
@@ -96,53 +97,53 @@ func DeserializeAnimationData(file *os.File, out_path string) {
 }
 
 func SerializeFurniture(file *os.File, jsonData string) {
-	var data []furnitureData
+	var data []file_types.Furniture
 	err := json.Unmarshal([]byte(jsonData), &data)
 	if err != nil {
 		fmt.Println(err)
 	}
 
-	writeFurnitureData(file, data)
+	file_types.WriteFurnitureData(file, data)
 }
 
 func SerializeFood(file *os.File, jsonData string) {
-	var data []foodData
+	var data []file_types.Food
 	err := json.Unmarshal([]byte(jsonData), &data)
 	if err != nil {
 		fmt.Println(err)
 	}
 
-	writeFoodData(file, data)
+	file_types.WriteFoods(file, data)
 }
 
 func SerializeCharacters(file *os.File, jsonData string) {
-	var data []characterData
+	var data []file_types.Character
 	err := json.Unmarshal([]byte(jsonData), &data)
 	if err != nil {
 		fmt.Println(err)
 	}
 
-	writeCharacterData(file, data)
+	file_types.WriteCharacters(file, data)
 }
 
 func SerializeCharacterArt(file *os.File, jsonData string) {
-	var data characterArtData
+	var data file_types.CharacterArt
 	err := json.Unmarshal([]byte(jsonData), &data)
 	if err != nil {
 		fmt.Println(err)
 	}
 
-	writeCharacterArtData(file, data)
+	file_types.WriteCharacterArt(file, data)
 }
 
 func SerializeOffsets(file *os.File, jsonData string) {
-	var data imageOffsets
+	var data file_types.ImageOffsets
 	err := json.Unmarshal([]byte(jsonData), &data)
 	if err != nil {
 		fmt.Println(err)
 	}
 
-	writeImageOffsets(file, data)
+	file_types.WriteImageOffsets(file, data)
 }
 
 type PackedTextureData struct {
@@ -156,7 +157,7 @@ type PackedCharacterData struct {
 }
 
 func PackCharacters(in_directory string, out_directory string, out_data_directory string) {
-	entries, _ := os.ReadDir(in_directory)
+	/*entries, _ := os.ReadDir(in_directory)
 	files := []string{}
 	folders := []string{}
 
@@ -199,7 +200,7 @@ func PackCharacters(in_directory string, out_directory string, out_data_director
 
 	fmt.Printf("Num pieces per pack: %d\n", piecesPerPack)
 
-	img, offsets := writePackedTexture(files, out_data.textureData.scale)
+	img, offsets := file_types.WritePackedTexture(files, out_data.textureData.scale)
 	offsets.Type = 2
 	out_offsets_path := filepath.Join(out_directory, out_data.textureData.offsetsName)
 	f, err := os.Create(out_offsets_path)
@@ -208,11 +209,11 @@ func PackCharacters(in_directory string, out_directory string, out_data_director
 		log.Fatal(err)
 	}
 
-	writeImageOffsets(f, offsets)
+	file_types.WriteImageOffsets(f, offsets)
 	f.Close()
 
 	out_character_art_path := filepath.Join(out_data_directory, out_data.characterArtFile)
-	characterArtData := characterArtData{}
+	characterArtData := file_types.CharacterArt{}
 
 	characterArtData.PiecesPerString = byte(piecesPerPack)
 	characterArtData.Strings = folders
@@ -223,9 +224,9 @@ func PackCharacters(in_directory string, out_directory string, out_data_director
 		log.Fatal(err)
 	}
 
-	writeCharacterArtData(f, characterArtData)
+	file_types.WriteCharacterArt(f, characterArtData)
 
-	cct := ccTexture{}
+	cct := file_types.CCTexture{}
 	cct.Magic = "CCTX"
 	cct.U1 = 2
 	cct.Width = int32(img.Bounds().Size().X)
@@ -239,8 +240,8 @@ func PackCharacters(in_directory string, out_directory string, out_data_director
 		log.Fatal(err)
 	}
 
-	writeCCTexture(f, cct, img)
-	f.Close()
+	file_types.WriteCCTexture(f, cct, img)
+	f.Close()*/
 
 }
 
@@ -279,8 +280,8 @@ func UnpackCharacters(in_directory string, out_directory string, data_directory 
 			continue
 		}
 
-		textures := readPackedTextures(cct_file, offsets_file, data.textureData.scale)
-		character_art_strings := readCharacterArtData(art_file)
+		textures := file_types.ReadPackedTextures(cct_file, offsets_file, data.textureData.scale)
+		character_art_strings := file_types.ReadCharacterArt(art_file)
 
 		piecesPerCharacter := int(character_art_strings.PiecesPerString)
 		for character_index := range character_art_strings.Strings {
@@ -334,7 +335,7 @@ func UnpackTextures(in_directory string, out_directory string) {
 		out_folder := filepath.Join(out_directory, strings.Split(cct, ".")[0])
 		os.MkdirAll(out_folder, os.ModePerm)
 
-		textures := readPackedTextures(cct_file, offsets_file, data.scale)
+		textures := file_types.ReadPackedTextures(cct_file, offsets_file, data.scale)
 
 		for i := range textures {
 			result := textures[i]
@@ -449,43 +450,4 @@ func SerializeFiles(in_directory string, out_directory string) {
 
 		value(f, string(b))
 	}
-}
-
-func ValidateSave(in_directory string) {
-	f, err := os.Open(in_directory)
-
-	if err != nil {
-		return
-
-	}
-
-	save := readSaveGame(f)
-	js, _ := json.MarshalIndent(save, "", "    ")
-	fmt.Println(string(js))
-}
-
-func ValidateCafe(in_directory string) {
-	f, err := os.Open(in_directory)
-
-	if err != nil {
-		return
-
-	}
-
-	save := readCafe(f)
-	js, _ := json.MarshalIndent(save, "", "    ")
-	fmt.Println(string(js))
-}
-
-func ValidateFriendData(in_directory string) {
-	f, err := os.Open(in_directory)
-
-	if err != nil {
-		return
-
-	}
-
-	readFriendData(f)
-	//js, _ := json.MarshalIndent(save, "", "    ")
-	//fmt.Println(string(js))
 }

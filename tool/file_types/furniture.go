@@ -5,7 +5,7 @@ import (
 	"io"
 )
 
-type furnitureData struct {
+type Furniture struct {
 	UnlockLevel        byte
 	Name               string
 	Price              int32
@@ -33,9 +33,9 @@ type furnitureData struct {
 	U23                int16
 }
 
-func readSingleFurnitureData(file io.Reader) furnitureData {
+func readSingleFurnitureData(file io.Reader) Furniture {
 
-	var furniture furnitureData
+	var furniture Furniture
 
 	furniture.UnlockLevel = readByte(file)
 	furniture.Name = readString(file)
@@ -76,7 +76,7 @@ func readSingleFurnitureData(file io.Reader) furnitureData {
 	return furniture
 }
 
-func writeFurniture(file io.Writer, data furnitureData) {
+func writeFurniture(file io.Writer, data Furniture) {
 
 	writeByte(file, data.UnlockLevel)
 	writeString(file, data.Name)
@@ -115,9 +115,9 @@ func writeFurniture(file io.Writer, data furnitureData) {
 	writeInt16(file, data.U23)
 }
 
-func readFurnitureData(file io.Reader) []furnitureData {
+func ReadFurnitureData(file io.Reader) []Furniture {
 	num := int(readInt32(file))
-	data := []furnitureData{}
+	data := []Furniture{}
 
 	for i := 0; i < num; i++ {
 		furniture := readSingleFurnitureData(file)
@@ -127,7 +127,7 @@ func readFurnitureData(file io.Reader) []furnitureData {
 	return data
 }
 
-func writeFurnitureData(file io.Writer, furnitures []furnitureData) {
+func WriteFurnitureData(file io.Writer, furnitures []Furniture) {
 
 	writeInt32(file, int32(len(furnitures)))
 

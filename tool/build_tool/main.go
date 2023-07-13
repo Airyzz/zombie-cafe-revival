@@ -9,7 +9,7 @@ import (
 	"path/filepath"
 	"strings"
 	"tool/build_tool/copylist"
-	"tool/resource_manager/file_types"
+	"tool/resource_manager/serialization"
 )
 
 func main() {
@@ -32,10 +32,10 @@ func main() {
 	os.RemoveAll(out_directory)
 	copyFiles(in_directory, out_directory)
 
-	file_types.SerializeFiles(filepath.Join(in_directory, "assets", "data"), filepath.Join(out_directory, "assets", "data"))
-	file_types.SerializeFiles(filepath.Join(in_directory, "assets", "images"), filepath.Join(out_directory, "assets", "images"))
-	file_types.PackCharacters(filepath.Join(in_directory, "assets", "images", "characterParts"), filepath.Join(out_directory, "assets", "images"), filepath.Join(out_directory, "assets", "data"))
-	file_types.PackCharacters(filepath.Join(in_directory, "assets", "images", "characterParts2"), filepath.Join(out_directory, "assets", "images"), filepath.Join(out_directory, "assets", "data"))
+	serialization.SerializeFiles(filepath.Join(in_directory, "assets", "data"), filepath.Join(out_directory, "assets", "data"))
+	serialization.SerializeFiles(filepath.Join(in_directory, "assets", "images"), filepath.Join(out_directory, "assets", "images"))
+	serialization.PackCharacters(filepath.Join(in_directory, "assets", "images", "characterParts"), filepath.Join(out_directory, "assets", "images"), filepath.Join(out_directory, "assets", "data"))
+	serialization.PackCharacters(filepath.Join(in_directory, "assets", "images", "characterParts2"), filepath.Join(out_directory, "assets", "images"), filepath.Join(out_directory, "assets", "data"))
 
 }
 

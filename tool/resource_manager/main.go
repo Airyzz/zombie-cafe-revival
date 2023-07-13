@@ -1,9 +1,12 @@
 package main
 
 import (
+	"file_types"
 	"flag"
+	"fmt"
 	"log"
-	"tool/resource_manager/file_types"
+	"os"
+	"tool/resource_manager/serialization"
 )
 
 func main() {
@@ -26,20 +29,29 @@ func main() {
 	}
 
 	if mode == "unpack" {
-		file_types.DeserializeFiles(in_directory, out_directory)
+		serialization.DeserializeFiles(in_directory, out_directory)
 	} else if mode == "pack" {
-		file_types.SerializeFiles(in_directory, out_directory)
+		serialization.SerializeFiles(in_directory, out_directory)
 	} else if mode == "unpack_textures" {
-		file_types.UnpackTextures(in_directory, out_directory)
+		serialization.UnpackTextures(in_directory, out_directory)
 	} else if mode == "unpack_characters" {
-		file_types.UnpackCharacters(in_directory, out_directory, data_directory)
+		serialization.UnpackCharacters(in_directory, out_directory, data_directory)
 	} else if mode == "pack_characters" {
-		file_types.PackCharacters(in_directory, out_directory, out_directory)
+		serialization.PackCharacters(in_directory, out_directory, out_directory)
 	} else if mode == "validate_save" {
 		file_types.ValidateSave(in_directory)
 	} else if mode == "validate_cafe" {
 		file_types.ValidateCafe(in_directory)
 	} else if mode == "validate_friend_data" {
-		file_types.ValidateFriendData(in_directory)
+		f, err := os.Open(in_directory)
+		if err != nil {
+			fmt.Println("Could not open file")
+		}
+		result := file_types.ValidateFriendData(f)
+		if result {
+			fmt.Println("File is valid!")
+		} else {
+			fmt.Println("File is not valid :(")
+		}
 	}
 }

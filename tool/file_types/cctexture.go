@@ -13,7 +13,7 @@ import (
 	"golang.org/x/image/colornames"
 )
 
-type ccTexture struct {
+type CCTexture struct {
 	Magic  string
 	U1     int32
 	Width  int32
@@ -35,8 +35,8 @@ func map256to16(value byte) byte {
 	return byte(math.Round(f))
 }
 
-func readCCTexture(file io.Reader) (ccTexture, *image.NRGBA) {
-	var data ccTexture
+func ReadCCTexture(file io.Reader) (CCTexture, *image.NRGBA) {
+	var data CCTexture
 
 	data.Magic = string(readNextBytes(file, 4))
 	data.U1 = readInt32LittleEndian(file)
@@ -88,7 +88,7 @@ func readCCTexture(file io.Reader) (ccTexture, *image.NRGBA) {
 	return data, i
 }
 
-func writeCCTexture(file io.Writer, texture ccTexture, img *image.NRGBA) {
+func WriteCCTexture(file io.Writer, texture CCTexture, img *image.NRGBA) {
 
 	buffer := make([]byte, texture.Width*texture.Height*2)
 

@@ -5,7 +5,7 @@ import (
 	"io"
 )
 
-type cafe struct {
+type Cafe struct {
 	Version  byte
 	SizeX    byte
 	SizeY    byte
@@ -14,108 +14,108 @@ type cafe struct {
 	MapSizeX int32
 	MapSizeY int32
 	U7       bool
-	Tiles    []cafeTile
+	Tiles    []CafeTile
 	U8       int32
 }
 
-type cafeWall struct {
+type CafeWall struct {
 	U1               int16
 	U2               bool
 	U3               bool
 	U4               bool
 	U5               int32
 	HasDecoration    bool
-	DecorationObject *cafeObject
+	DecorationObject *CafeObject
 }
 
-type cafeFurniture struct {
+type CafeFurniture struct {
 	U1             byte
-	Food           *cafeFoodData
-	Stove          *stove
-	ServingCounter *servingCounter
+	Food           *CafeFoodData
+	Stove          *Stove
+	ServingCounter *ServingCounter
 	U2             int32
 	Orientation    byte
 	HasObject      bool
-	Object         *cafeObject
+	Object         *CafeObject
 	U3             byte
 	U4             int16
-	U5             date
+	U5             Date
 }
 
-type cafeObject struct {
+type CafeObject struct {
 	Type      byte
-	Wall      *cafeWall
-	Furniture *cafeFurniture
+	Wall      *CafeWall
+	Furniture *CafeFurniture
 	U1        int32
 	U2        int16
 	U3        int16
 	U4        bool
 }
 
-type cafeTile struct {
+type CafeTile struct {
 	U1 int16
 	U2 int32
 	U3 bool
 	U4 bool
-	U5 *cafeObject
+	U5 *CafeObject
 	U6 bool
-	U7 *cafeObject
+	U7 *CafeObject
 	U8 bool
-	U9 *cafeObject
+	U9 *CafeObject
 }
 
-type foodStack struct {
+type FoodStack struct {
 	U1 byte
 	U2 byte
 	U3 int32
 	U4 int16
 	U5 byte
 	U6 string
-	U7 date
+	U7 Date
 }
 
-type cafeFoodData struct {
+type CafeFoodData struct {
 	U1     int32
 	U2     byte
 	U3     bool
-	Object *cafeObject
+	Object *CafeObject
 	U4     byte
 	U5     int16
-	U6     date
-	U7     foodStack
+	U6     Date
+	U7     FoodStack
 }
 
-type stove struct {
+type Stove struct {
 	U1           int32
 	U2           byte
 	HasObject    bool
-	Object       *cafeObject
+	Object       *CafeObject
 	U5           byte
 	U6           int16
-	U7           date
+	U7           Date
 	HasFoodStack bool
-	FoodStack    *foodStack
+	FoodStack    *FoodStack
 	U8           int64
 	U9           int64
 }
 
-type servingCounter struct {
+type ServingCounter struct {
 	U1        int32
 	U2        byte
 	HasObject bool
-	Object    *cafeObject
+	Object    *CafeObject
 	U3        byte
 	U4        int16
-	U5        date
+	U5        Date
 
 	U6 int32
 
 	NumFoodStacks int16
-	FoodStacks    []foodStack
+	FoodStacks    []FoodStack
 }
 
-func readStove(file io.Reader, version int) stove {
-	var s stove
+func readStove(file io.Reader, version int) Stove {
+	var s Stove
 
 	if version <= 48 {
 		s.U1 = int32(readByte(file))
@@ -152,8 +152,8 @@ func readStove(file io.Reader, version int) stove {
 	return s
 }
 
-func readServingCounter(file io.Reader, version int) servingCounter {
-	var s servingCounter
+func readServingCounter(file io.Reader, version int) ServingCounter {
+	var s ServingCounter
 
 	if version > 48 {
 		s.U1 = readInt32(file)
@@ -185,7 +185,7 @@ func readServingCounter(file io.Reader, version int) servingCounter {
 	}
 
 	s.NumFoodStacks = readInt16(file)
-	s.FoodStacks = make([]foodStack, s.NumFoodStacks)
+	s.FoodStacks = make([]FoodStack, s.NumFoodStacks)
 	for i := 0; i < int(s.NumFoodStacks); i++ {
 		s.FoodStacks[i] = readFoodStack(file, version)
 	}
@@ -193,8 +193,8 @@ func readServingCounter(file io.Reader, version int) servingCounter {
 	return s
 }
 
-func readFoodStack(file io.Reader, version int) foodStack {
-	var f foodStack
+func readFoodStack(file io.Reader, version int) FoodStack {
+	var f FoodStack
 	f.U1 = readByte(file)
 	if version > 24 {
 		f.U1 = readByte(file)
@@ -218,8 +218,8 @@ func readFoodStack(file io.Reader, version int) foodStack {
 	return f
 }
 
-func readFood(file io.Reader, version int) cafeFoodData {
-	var f cafeFoodData
+func readFood(file io.Reader, version int) CafeFoodData {
+	var f CafeFoodData
 	if version <= 48 {
 		f.U1 = int32(readByte(file))
 	} else {
@@ -246,8 +246,8 @@ func readFood(file io.Reader, version int) cafeFoodData {
 	return f
 }
 
-func readCafeFurniture(file io.Reader, version int) cafeFurniture {
-	var c cafeFurniture
+func readCafeFurniture(file io.Reader, version int) CafeFurniture {
+	var c CafeFurniture
 
 	isFood := readBool(file)
 	if isFood {
@@ -292,8 +292,8 @@ func readCafeFurniture(file io.Reader, version int) cafeFurniture {
 	return c
 }
 
-func readCafeWall(file io.Reader, version int) cafeWall {
-	var c cafeWall
+func readCafeWall(file io.Reader, version int) CafeWall {
+	var c CafeWall
 
 	if version > 58 {
 		c.U1 = readInt16(file)
@@ -308,7 +308,7 @@ func readCafeWall(file io.Reader, version int) cafeWall {
 	c.HasDecoration = readBool(file)
 
 	if c.HasDecoration {
-		var obj cafeObject
+		var obj CafeObject
 		obj = readCafeObject(file, version)
 		c.DecorationObject = &obj
 	}
@@ -316,8 +316,8 @@ func readCafeWall(file io.Reader, version int) cafeWall {
 	return c
 }
 
-func readCafeObject(file io.Reader, version int) cafeObject {
-	var o cafeObject
+func readCafeObject(file io.Reader, version int) CafeObject {
+	var o CafeObject
 
 	o.Type = readByte(file)
 
@@ -341,8 +341,8 @@ func readCafeObject(file io.Reader, version int) cafeObject {
 	return o
 }
 
-func readCafeTile(file io.Reader, version int) cafeTile {
-	var t cafeTile
+func readCafeTile(file io.Reader, version int) CafeTile {
+	var t CafeTile
 
 	if version <= 58 {
 		t.U1 = int16(readByte(file))
@@ -373,8 +373,8 @@ func readCafeTile(file io.Reader, version int) cafeTile {
 	return t
 }
 
-func readCafe(file io.Reader) cafe {
-	var c cafe
+func ReadCafe(file io.Reader) Cafe {
+	var c Cafe
 
 	c.Version = readByte(file)
 	fmt.Printf("Cafe version: %d\n", c.Version)
@@ -407,7 +407,7 @@ func readCafe(file io.Reader) cafe {
 
 	numTiles := int(c.MapSizeX * c.MapSizeY)
 
-	c.Tiles = make([]cafeTile, numTiles)
+	c.Tiles = make([]CafeTile, numTiles)
 
 	for i := 0; i < numTiles; i++ {
 		c.Tiles[i] = readCafeTile(file, int(c.Version))

@@ -4,15 +4,15 @@ import (
 	"io"
 )
 
-type animationData struct {
+type AnimationData struct {
 	Form          byte
 	Type          byte
 	Direction     byte
 	AnimationFile string
 }
 
-func readSingleAnimationData(file io.Reader) animationData {
-	data := animationData{}
+func readSingleAnimationData(file io.Reader) AnimationData {
+	data := AnimationData{}
 	data.Form = readByte(file)
 	data.Type = readByte(file)
 	data.Direction = readByte(file)
@@ -20,8 +20,8 @@ func readSingleAnimationData(file io.Reader) animationData {
 	return data
 }
 
-func readAnimationData(file io.Reader) []animationData {
-	data := []animationData{}
+func ReadAnimationData(file io.Reader) []AnimationData {
+	data := []AnimationData{}
 
 	length := readByte(file)
 

@@ -72,7 +72,7 @@ func readString(file io.Reader) string {
 	return string(data)
 }
 
-type date struct {
+type Date struct {
 	Year   int16
 	Month  byte
 	Day    byte
@@ -81,8 +81,8 @@ type date struct {
 	Second byte
 }
 
-func readDate(file io.Reader) date {
-	var d date
+func readDate(file io.Reader) Date {
+	var d Date
 	d.Year = readInt16(file)
 	d.Month = readByte(file)
 	d.Day = readByte(file)

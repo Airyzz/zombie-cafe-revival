@@ -5,7 +5,7 @@ import (
 	"io"
 )
 
-type characterData struct {
+type Character struct {
 	CafeLevelRequired  byte
 	U2                 byte
 	U3                 byte
@@ -36,8 +36,8 @@ type characterData struct {
 	ZombieDescription string
 }
 
-func readSingleCharacter(file io.Reader) characterData {
-	var c characterData
+func readSingleCharacter(file io.Reader) Character {
+	var c Character
 	c.CafeLevelRequired = readByte(file)
 	c.U2 = readByte(file)
 	c.U3 = readByte(file)
@@ -74,7 +74,7 @@ func readSingleCharacter(file io.Reader) characterData {
 	return c
 }
 
-func writeSingleCharacterData(file io.Writer, data characterData) {
+func writeSingleCharacterData(file io.Writer, data Character) {
 	writeByte(file, data.CafeLevelRequired)
 	writeByte(file, data.U2)
 	writeByte(file, data.U3)
@@ -104,10 +104,10 @@ func writeSingleCharacterData(file io.Writer, data characterData) {
 	writeString(file, data.ZombieDescription)
 }
 
-func readCharacterData(file io.Reader) []characterData {
+func ReadCharacters(file io.Reader) []Character {
 	num := int(readByte(file))
 	fmt.Println(fmt.Sprintf("Num characters: %d", num))
-	data := []characterData{}
+	data := []Character{}
 
 	for i := 0; i < num; i++ {
 		character := readSingleCharacter(file)
@@ -116,7 +116,7 @@ func readCharacterData(file io.Reader) []characterData {
 	return data
 }
 
-func writeCharacterData(file io.Writer, characters []characterData) {
+func WriteCharacters(file io.Writer, characters []Character) {
 
 	writeByte(file, byte(len(characters)))
 
