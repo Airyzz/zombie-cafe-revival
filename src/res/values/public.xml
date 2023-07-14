@@ -6,6 +6,8 @@
     <public type="drawable" name="twitter" id="0x7f020004" />
     <public type="drawable" name="youtube" id="0x7f020005" />
     <public type="drawable" name="camera" id="0x7f020000" />
+    <public type="mipmap" name="ic_launcher_background" id="0x7f0e0000" />
+    <public type="mipmap" name="ic_launcher_foreground" id="0x7f0e0001" />
     <public type="layout" name="billing" id="0x7f030000" />
     <public type="layout" name="billing_not_supported" id="0x7f030001" />
     <public type="layout" name="camera" id="0x7f030002" />
