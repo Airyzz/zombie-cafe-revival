@@ -11,7 +11,7 @@ type FriendCafe struct {
 
 func ReadFriendData(file io.Reader) FriendCafe {
 	var s FriendCafe
-	version := readByte(file)
+	version := ReadByte(file)
 
 	if version != 63 {
 		panic("Unable to handle this cafe version")

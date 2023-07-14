@@ -1,0 +1,1 @@
+Texture files have been intentionally seperated from `file_types` as tinygo was having issues with the image manipulation library we use. 

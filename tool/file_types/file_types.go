@@ -1,6 +1,7 @@
 package file_types
 
 import (
+	"fmt"
 	"io"
 	"os"
 )
@@ -29,14 +30,16 @@ func ValidateCafe(in_directory string) {
 
 func ValidateFriendData(in_file io.Reader) bool {
 
-	result := true
-	/*defer func() {
-		if r := recover(); r != nil {
-			result = false
-		}
-	}()
-	*/
-	//ReadFriendData(in_file)
+	ReadFriendData(in_file)
 
-	return result
+	buf := make([]byte, 1)
+	n, err := in_file.Read(buf)
+
+	fmt.Printf("Read bytes: %d\n", n)
+
+	if n == 0 && err == io.EOF {
+		return true
+	}
+
+	return false
 }

@@ -1,6 +1,7 @@
 package serialization
 
 import (
+	"cctpacker/cct_file"
 	"encoding/json"
 	"file_types"
 	"fmt"
@@ -75,7 +76,7 @@ func DeserializeOffsets(file *os.File, out_path string) {
 }
 
 func DeserializeCCTexture(file *os.File, out_path string) {
-	data, image := file_types.ReadCCTexture(file)
+	data, image := cct_file.ReadCCTexture(file)
 	b, err := json.MarshalIndent(data, "", "    ")
 
 	if err != nil {
@@ -157,7 +158,7 @@ type PackedCharacterData struct {
 }
 
 func PackCharacters(in_directory string, out_directory string, out_data_directory string) {
-	/*entries, _ := os.ReadDir(in_directory)
+	entries, _ := os.ReadDir(in_directory)
 	files := []string{}
 	folders := []string{}
 
@@ -200,7 +201,7 @@ func PackCharacters(in_directory string, out_directory string, out_data_director
 
 	fmt.Printf("Num pieces per pack: %d\n", piecesPerPack)
 
-	img, offsets := file_types.WritePackedTexture(files, out_data.textureData.scale)
+	img, offsets := cct_file.WritePackedTexture(files, out_data.textureData.scale)
 	offsets.Type = 2
 	out_offsets_path := filepath.Join(out_directory, out_data.textureData.offsetsName)
 	f, err := os.Create(out_offsets_path)
@@ -226,7 +227,7 @@ func PackCharacters(in_directory string, out_directory string, out_data_director
 
 	file_types.WriteCharacterArt(f, characterArtData)
 
-	cct := file_types.CCTexture{}
+	cct := cct_file.CCTexture{}
 	cct.Magic = "CCTX"
 	cct.U1 = 2
 	cct.Width = int32(img.Bounds().Size().X)
@@ -240,8 +241,8 @@ func PackCharacters(in_directory string, out_directory string, out_data_director
 		log.Fatal(err)
 	}
 
-	file_types.WriteCCTexture(f, cct, img)
-	f.Close()*/
+	cct_file.WriteCCTexture(f, cct, img)
+	f.Close()
 
 }
 
@@ -262,7 +263,7 @@ func UnpackCharacters(in_directory string, out_directory string, data_directory 
 		offsets_path := filepath.Join(in_directory, data.textureData.offsetsName)
 		character_art_path := filepath.Join(data_directory, data.characterArtFile)
 
-		cct_file, err := os.Open(path)
+		file, err := os.Open(path)
 		if err != nil {
 			log.Println(err)
 			continue
@@ -280,7 +281,7 @@ func UnpackCharacters(in_directory string, out_directory string, data_directory 
 			continue
 		}
 
-		textures := file_types.ReadPackedTextures(cct_file, offsets_file, data.textureData.scale)
+		textures := cct_file.ReadPackedTextures(file, offsets_file, data.textureData.scale)
 		character_art_strings := file_types.ReadCharacterArt(art_file)
 
 		piecesPerCharacter := int(character_art_strings.PiecesPerString)
@@ -320,7 +321,7 @@ func UnpackTextures(in_directory string, out_directory string) {
 		path := filepath.Join(in_directory, cct)
 		offsets_path := filepath.Join(in_directory, data.offsetsName)
 
-		cct_file, err := os.Open(path)
+		file, err := os.Open(path)
 		if err != nil {
 			log.Println(err)
 			continue
@@ -335,7 +336,7 @@ func UnpackTextures(in_directory string, out_directory string) {
 		out_folder := filepath.Join(out_directory, strings.Split(cct, ".")[0])
 		os.MkdirAll(out_folder, os.ModePerm)
 
-		textures := file_types.ReadPackedTextures(cct_file, offsets_file, data.scale)
+		textures := cct_file.ReadPackedTextures(file, offsets_file, data.scale)
 
 		for i := range textures {
 			result := textures[i]

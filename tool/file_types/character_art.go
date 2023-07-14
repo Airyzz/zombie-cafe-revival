@@ -11,11 +11,11 @@ type CharacterArt struct {
 
 func ReadCharacterArt(file io.Reader) CharacterArt {
 	data := CharacterArt{}
-	data.PiecesPerString = readByte(file)
+	data.PiecesPerString = ReadByte(file)
 	data.Strings = []string{}
 
 	for {
-		str := readString(file)
+		str := ReadString(file)
 
 		if str == "" {
 			break
@@ -28,10 +28,10 @@ func ReadCharacterArt(file io.Reader) CharacterArt {
 }
 
 func WriteCharacterArt(file io.Writer, characters CharacterArt) {
-	writeByte(file, byte(characters.PiecesPerString))
+	WriteByte(file, byte(characters.PiecesPerString))
 	for _, v := range characters.Strings {
-		writeString(file, v)
+		WriteString(file, v)
 	}
 
-	writeString(file, "")
+	WriteString(file, "")
 }

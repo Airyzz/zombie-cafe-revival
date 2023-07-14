@@ -56,11 +56,11 @@ type SaveGame struct {
 }
 
 func readSaveStrings(file io.Reader) {
-	readShort := readInt16(file)
+	readShort := ReadInt16(file)
 	num := readShort - 1
 	if num >= 0 {
 		for i := num; i >= 1; i-- {
-			readString(file)
+			ReadString(file)
 		}
 
 	}
@@ -68,26 +68,26 @@ func readSaveStrings(file io.Reader) {
 
 func readCharacter(file io.Reader, fileVersion int) CharacterInstance {
 	var c CharacterInstance
-	c.Type = readByte(file)
-	c.Name = readString(file)
-	c.U2 = readByte(file)
-	c.U3 = readByte(file)
-	c.U4 = readFloat(file)
-	c.U5 = readByte(file)
-	c.U6 = readInt64(file)
-	c.U7 = readByte(file)
-	c.U8 = readInt64(file)
-	c.U9 = readInt64(file)
-	c.U10 = readInt32(file)
-	c.U11 = readInt32(file)
-	c.U12 = readInt32(file)
-	c.U13 = readInt32(file)
+	c.Type = ReadByte(file)
+	c.Name = ReadString(file)
+	c.U2 = ReadByte(file)
+	c.U3 = ReadByte(file)
+	c.U4 = ReadFloat(file)
+	c.U5 = ReadByte(file)
+	c.U6 = ReadInt64(file)
+	c.U7 = ReadByte(file)
+	c.U8 = ReadInt64(file)
+	c.U9 = ReadInt64(file)
+	c.U10 = ReadInt32(file)
+	c.U11 = ReadInt32(file)
+	c.U12 = ReadInt32(file)
+	c.U13 = ReadInt32(file)
 
 	if fileVersion > 29 {
-		c.U14 = readByte(file)
+		c.U14 = ReadByte(file)
 		if fileVersion > 46 {
-			c.U15 = readInt32(file)
-			c.U16 = readInt32(file)
+			c.U15 = ReadInt32(file)
+			c.U16 = ReadInt32(file)
 		}
 	}
 
@@ -96,18 +96,18 @@ func readCharacter(file io.Reader, fileVersion int) CharacterInstance {
 
 func readCafeState(file io.Reader, version int) CafeState {
 	var save CafeState
-	save.U1 = readFloat64(file)
-	save.ExperiencePoints = readFloat(file)
-	save.Toxin = readInt32(file)
-	save.Money = readInt32(file)
-	save.Level = readInt32(file)
-	save.U6 = readInt32(file)
-	save.U7 = readInt32(file)
-	save.U8 = readFloat(file)
-	save.U9 = readInt32(file)
-	save.U10 = readBool(file)
+	save.U1 = ReadFloat64(file)
+	save.ExperiencePoints = ReadFloat(file)
+	save.Toxin = ReadInt32(file)
+	save.Money = ReadInt32(file)
+	save.Level = ReadInt32(file)
+	save.U6 = ReadInt32(file)
+	save.U7 = ReadInt32(file)
+	save.U8 = ReadFloat(file)
+	save.U9 = ReadInt32(file)
+	save.U10 = ReadBool(file)
 	save.Character = readCharacter(file, version)
-	save.NumZombies = readByte(file)
+	save.NumZombies = ReadByte(file)
 	save.Zombies = make([]CharacterInstance, save.NumZombies)
 
 	for i := 0; i < int(save.NumZombies); i++ {
@@ -115,18 +115,18 @@ func readCafeState(file io.Reader, version int) CafeState {
 	}
 
 	if version > 62 {
-		save.U11 = readInt32(file)
+		save.U11 = ReadInt32(file)
 	} else {
-		save.U11 = int32(readByte(file))
+		save.U11 = int32(ReadByte(file))
 	}
 
 	save.U12 = make([]int8, save.U11)
 	for i := 0; i < int(save.U11); i++ {
-		save.U12[i] = int8(readByte(file))
+		save.U12[i] = int8(ReadByte(file))
 	}
 
 	if version > 33 {
-		save.U13 = readBool(file)
+		save.U13 = ReadBool(file)
 	}
 
 	return save
@@ -138,28 +138,28 @@ func readSaveGameVersion63(file io.Reader, save SaveGame) SaveGame {
 
 	readSaveStrings(file)
 
-	save.U15 = readDate(file)
+	save.U15 = ReadDate(file)
 
 	readSaveStrings(file)
 
-	save.U17 = readDate(file)
+	save.U17 = ReadDate(file)
 
-	save.NumOrders = readInt16(file)
+	save.NumOrders = ReadInt16(file)
 
 	if save.NumOrders > 0 {
 		panic("Have not implemented a way to handle deserialization of orders yet")
 	}
 
-	save.U18 = readByte(file)
-	save.U19 = readByte(file)
-	save.U20 = readBool(file)
+	save.U18 = ReadByte(file)
+	save.U19 = ReadByte(file)
+	save.U20 = ReadBool(file)
 
 	return save
 }
 
 func ReadSaveGame(file io.Reader) SaveGame {
 	var s SaveGame
-	version := readByte(file)
+	version := ReadByte(file)
 
 	if version == 63 {
 		return readSaveGameVersion63(file, s)

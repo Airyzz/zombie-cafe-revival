@@ -1,4 +1,4 @@
-package file_types
+package cct_file
 
 import (
 	"bytes"
@@ -8,6 +8,8 @@ import (
 	"image/color"
 	"io"
 	"math"
+
+	"file_types"
 
 	"github.com/disintegration/imaging"
 	"golang.org/x/image/colornames"
@@ -38,14 +40,14 @@ func map256to16(value byte) byte {
 func ReadCCTexture(file io.Reader) (CCTexture, *image.NRGBA) {
 	var data CCTexture
 
-	data.Magic = string(readNextBytes(file, 4))
-	data.U1 = readInt32LittleEndian(file)
-	data.Width = readInt32LittleEndian(file)
-	data.Height = readInt32LittleEndian(file)
+	data.Magic = string(file_types.ReadNextBytes(file, 4))
+	data.U1 = file_types.ReadInt32LittleEndian(file)
+	data.Width = file_types.ReadInt32LittleEndian(file)
+	data.Height = file_types.ReadInt32LittleEndian(file)
 
-	data.U2 = readInt32LittleEndian(file)
-	data.U3 = readInt32LittleEndian(file)
-	data.U4 = readInt32LittleEndian(file)
+	data.U2 = file_types.ReadInt32LittleEndian(file)
+	data.U3 = file_types.ReadInt32LittleEndian(file)
+	data.U4 = file_types.ReadInt32LittleEndian(file)
 
 	r, _ := zlib.NewReader(file)
 	var out bytes.Buffer
@@ -116,13 +118,13 @@ func WriteCCTexture(file io.Writer, texture CCTexture, img *image.NRGBA) {
 	w.Close()
 
 	file.Write([]byte(texture.Magic))
-	writeInt32LittleEndian(file, texture.U1)
-	writeInt32LittleEndian(file, texture.Width)
-	writeInt32LittleEndian(file, texture.Height)
+	file_types.WriteInt32LittleEndian(file, texture.U1)
+	file_types.WriteInt32LittleEndian(file, texture.Width)
+	file_types.WriteInt32LittleEndian(file, texture.Height)
 
-	writeInt32LittleEndian(file, texture.U2)
-	writeInt32LittleEndian(file, texture.U3)
-	writeInt32LittleEndian(file, int32(len(b.Bytes())))
+	file_types.WriteInt32LittleEndian(file, texture.U2)
+	file_types.WriteInt32LittleEndian(file, texture.U3)
+	file_types.WriteInt32LittleEndian(file, int32(len(b.Bytes())))
 
 	file.Write(b.Bytes())
 }

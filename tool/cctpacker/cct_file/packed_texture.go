@@ -1,11 +1,17 @@
-package file_types
+package cct_file
 
 import (
+	"encoding/json"
+	"file_types"
 	"fmt"
 	"image"
 	"image/color"
 	"io"
+	"log"
 	"math"
+	"os"
+	"path/filepath"
+	"tool/resource_manager/utils"
 
 	"github.com/disintegration/imaging"
 )
@@ -13,12 +19,12 @@ import (
 type TextureResult struct {
 	Image  image.Image
 	Name   string
-	Offset Offset
+	Offset file_types.Offset
 }
 
 func ReadPackedTextures(cctFile io.Reader, offsetsFile io.Reader, scale float32) []TextureResult {
 	_, packed_image := ReadCCTexture(cctFile)
-	offsets := ReadImageOffsets(offsetsFile)
+	offsets := file_types.ReadImageOffsets(offsetsFile)
 
 	result := []TextureResult{}
 
@@ -56,14 +62,14 @@ func ReadPackedTextures(cctFile io.Reader, offsetsFile io.Reader, scale float32)
 	return result
 }
 
-/*func WritePackedTexture(images []string, scale float32) (*image.NRGBA, ImageOffsets) {
+func WritePackedTexture(images []string, scale float32) (*image.NRGBA, file_types.ImageOffsets) {
 	rects := []utils.Rect{}
 
-	data := ImageOffsets{}
-	data.Offsets = make([]Offset, len(images))
+	data := file_types.ImageOffsets{}
+	data.Offsets = make([]file_types.Offset, len(images))
 
 	for i, file := range images {
-		var entryData Offset
+		var entryData file_types.Offset
 		b, err := os.ReadFile(file + ".json")
 
 		if err != nil {
@@ -125,4 +131,4 @@ func ReadPackedTextures(cctFile io.Reader, offsetsFile io.Reader, scale float32)
 	}
 
 	return img, data
-}*/
+}

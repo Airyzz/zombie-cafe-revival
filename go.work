@@ -5,4 +5,5 @@ use (
 	./tool/resource_manager
 	./tool/file_types
 	./tool/server
+	./tool/cctpacker
 )

@@ -24,42 +24,42 @@ type Food struct {
 
 func readSingleFoodData(file io.Reader) Food {
 	var food Food
-	food.Name = readString(file)
-	food.Price = readInt16(file)
-	food.UnlockLevel = readByte(file)
-	food.CookTimeMinutes = readInt16(file)
-	food.Servings = readInt16(file)
-	food.PricePerSeving = readInt16(file)
-	food.ExperiencePoints = readInt16(file)
-	food.ImageID = readInt16(file)
-	food.U7 = readByte(file)
-	food.U8 = readByte(file)
-	food.U9 = readByte(file)
-	food.U10 = readByte(file)
-	food.U11 = readInt16(file)
-	food.U12 = readByte(file)
+	food.Name = ReadString(file)
+	food.Price = ReadInt16(file)
+	food.UnlockLevel = ReadByte(file)
+	food.CookTimeMinutes = ReadInt16(file)
+	food.Servings = ReadInt16(file)
+	food.PricePerSeving = ReadInt16(file)
+	food.ExperiencePoints = ReadInt16(file)
+	food.ImageID = ReadInt16(file)
+	food.U7 = ReadByte(file)
+	food.U8 = ReadByte(file)
+	food.U9 = ReadByte(file)
+	food.U10 = ReadByte(file)
+	food.U11 = ReadInt16(file)
+	food.U12 = ReadByte(file)
 	return food
 }
 
 func writeSingleFoodData(file io.Writer, data Food) {
-	writeString(file, data.Name)
-	writeInt16(file, data.Price)
-	writeByte(file, data.UnlockLevel)
-	writeInt16(file, data.CookTimeMinutes)
-	writeInt16(file, data.Servings)
-	writeInt16(file, data.PricePerSeving)
-	writeInt16(file, data.ExperiencePoints)
-	writeInt16(file, data.ImageID)
-	writeByte(file, data.U7)
-	writeByte(file, data.U8)
-	writeByte(file, data.U9)
-	writeByte(file, data.U10)
-	writeInt16(file, data.U11)
-	writeByte(file, data.U12)
+	WriteString(file, data.Name)
+	WriteInt16(file, data.Price)
+	WriteByte(file, data.UnlockLevel)
+	WriteInt16(file, data.CookTimeMinutes)
+	WriteInt16(file, data.Servings)
+	WriteInt16(file, data.PricePerSeving)
+	WriteInt16(file, data.ExperiencePoints)
+	WriteInt16(file, data.ImageID)
+	WriteByte(file, data.U7)
+	WriteByte(file, data.U8)
+	WriteByte(file, data.U9)
+	WriteByte(file, data.U10)
+	WriteInt16(file, data.U11)
+	WriteByte(file, data.U12)
 }
 
 func ReadFoods(file io.Reader) []Food {
-	num := int(readByte(file))
+	num := int(ReadByte(file))
 	data := []Food{}
 
 	for i := 0; i < num; i++ {
@@ -72,7 +72,7 @@ func ReadFoods(file io.Reader) []Food {
 
 func WriteFoods(file *os.File, foods []Food) {
 
-	writeByte(file, byte(len(foods)))
+	WriteByte(file, byte(len(foods)))
 
 	for i := 0; i < len(foods); i++ {
 		writeSingleFoodData(file, foods[i])

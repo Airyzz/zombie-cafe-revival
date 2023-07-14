@@ -26,19 +26,19 @@ func readSingleOffset(file io.Reader, fileType int) Offset {
 	var d Offset
 
 	if fileType == 2 {
-		d.Name = readString(file)
+		d.Name = ReadString(file)
 	}
 
-	d.X = readInt16(file)
-	d.Y = readInt16(file)
-	d.W = readInt16(file)
-	d.H = readInt16(file)
+	d.X = ReadInt16(file)
+	d.Y = ReadInt16(file)
+	d.W = ReadInt16(file)
+	d.H = ReadInt16(file)
 
 	if fileType == 2 {
-		d.XOffset = readInt16(file)
-		d.YOffset = readInt16(file)
-		d.XOffsetFlipped = readInt16(file)
-		d.YOffsetFlipped = readInt16(file)
+		d.XOffset = ReadInt16(file)
+		d.YOffset = ReadInt16(file)
+		d.XOffsetFlipped = ReadInt16(file)
+		d.YOffsetFlipped = ReadInt16(file)
 	}
 
 	return d
@@ -47,28 +47,28 @@ func readSingleOffset(file io.Reader, fileType int) Offset {
 func writeSingleOffset(file io.Writer, data Offset, fileType int) {
 
 	if fileType == 2 {
-		writeString(file, data.Name)
+		WriteString(file, data.Name)
 	}
 
-	writeInt16(file, data.X)
-	writeInt16(file, data.Y)
-	writeInt16(file, data.W)
-	writeInt16(file, data.H)
+	WriteInt16(file, data.X)
+	WriteInt16(file, data.Y)
+	WriteInt16(file, data.W)
+	WriteInt16(file, data.H)
 
 	if fileType == 2 {
-		writeInt16(file, data.XOffset)
-		writeInt16(file, data.YOffset)
-		writeInt16(file, data.XOffsetFlipped)
-		writeInt16(file, data.YOffsetFlipped)
+		WriteInt16(file, data.XOffset)
+		WriteInt16(file, data.YOffset)
+		WriteInt16(file, data.XOffsetFlipped)
+		WriteInt16(file, data.YOffsetFlipped)
 	}
 }
 
 func ReadImageOffsets(file io.Reader) ImageOffsets {
 	data := ImageOffsets{}
 
-	data.Type = readByte(file)
+	data.Type = ReadByte(file)
 
-	num := int(readInt16(file))
+	num := int(ReadInt16(file))
 
 	data.Offsets = []Offset{}
 
@@ -80,8 +80,8 @@ func ReadImageOffsets(file io.Reader) ImageOffsets {
 }
 
 func WriteImageOffsets(file io.Writer, data ImageOffsets) {
-	writeByte(file, data.Type)
-	writeInt16(file, int16(len(data.Offsets)))
+	WriteByte(file, data.Type)
+	WriteInt16(file, int16(len(data.Offsets)))
 
 	for _, v := range data.Offsets {
 		writeSingleOffset(file, v, int(data.Type))

@@ -118,36 +118,36 @@ func readStove(file io.Reader, version int) Stove {
 	var s Stove
 
 	if version <= 48 {
-		s.U1 = int32(readByte(file))
+		s.U1 = int32(ReadByte(file))
 	} else {
-		s.U1 = readInt32(file)
+		s.U1 = ReadInt32(file)
 	}
 
-	s.U2 = readByte(file)
-	s.HasObject = readBool(file)
+	s.U2 = ReadByte(file)
+	s.HasObject = ReadBool(file)
 
 	if s.HasObject {
 		o := readCafeObject(file, version)
 		s.Object = &o
 	}
 
-	s.U5 = readByte(file)
+	s.U5 = ReadByte(file)
 	if version > 23 {
-		s.U6 = readInt16(file)
+		s.U6 = ReadInt16(file)
 	}
 
 	if version > 47 {
-		s.U7 = readDate(file)
+		s.U7 = ReadDate(file)
 	}
 
-	s.HasFoodStack = readBool(file)
+	s.HasFoodStack = ReadBool(file)
 	if s.HasFoodStack {
 		food := readFoodStack(file, version)
 		s.FoodStack = &food
 	}
 
-	s.U8 = readInt64(file)
-	s.U9 = readInt64(file)
+	s.U8 = ReadInt64(file)
+	s.U9 = ReadInt64(file)
 
 	return s
 }
@@ -155,90 +155,99 @@ func readStove(file io.Reader, version int) Stove {
 func readServingCounter(file io.Reader, version int) ServingCounter {
 	var s ServingCounter
 
+	fmt.Println("Reading serving counter")
+
 	if version > 48 {
-		s.U1 = readInt32(file)
+		s.U1 = ReadInt32(file)
 	} else {
-		s.U1 = int32(readByte(file))
+		s.U1 = int32(ReadByte(file))
 	}
 
-	s.U2 = readByte(file)
-	s.HasObject = readBool(file)
+	s.U2 = ReadByte(file)
+	s.HasObject = ReadBool(file)
 	if s.HasObject {
 		o := readCafeObject(file, version)
 		s.Object = &o
 	}
 
-	s.U3 = readByte(file)
+	s.U3 = ReadByte(file)
 
 	if version > 23 {
-		s.U4 = readInt16(file)
+		s.U4 = ReadInt16(file)
 	}
 
 	if version > 47 {
-		s.U5 = readDate(file)
+		s.U5 = ReadDate(file)
 	}
 
 	if version > 25 {
-		s.U6 = readInt32(file)
+		s.U6 = ReadInt32(file)
 	} else {
-		s.U6 = int32(readInt16(file))
+		s.U6 = int32(ReadInt16(file))
 	}
-
-	s.NumFoodStacks = readInt16(file)
+	fmt.Println(s)
+	s.NumFoodStacks = ReadInt16(file)
+	fmt.Printf("Num food stacks: %d\n", s.NumFoodStacks)
 	s.FoodStacks = make([]FoodStack, s.NumFoodStacks)
 	for i := 0; i < int(s.NumFoodStacks); i++ {
 		s.FoodStacks[i] = readFoodStack(file, version)
 	}
+
+	fmt.Printf("Read all food stacks!\n")
 
 	return s
 }
 
 func readFoodStack(file io.Reader, version int) FoodStack {
 	var f FoodStack
-	f.U1 = readByte(file)
+
+	fmt.Println("Reading food stack")
+	f.U1 = ReadByte(file)
 	if version > 24 {
-		f.U1 = readByte(file)
+		f.U1 = ReadByte(file)
 	}
 
 	if version > 48 {
-		f.U3 = readInt32(file)
+		f.U3 = ReadInt32(file)
 	}
 
 	if version <= 24 || (version > 24 && version <= 48) {
-		f.U4 = readInt16(file)
+		f.U4 = ReadInt16(file)
 	}
 
-	f.U5 = readByte(file)
-	f.U6 = readString(file)
+	f.U5 = ReadByte(file)
+	f.U6 = ReadString(file)
+	ReadString(file)
 
 	if version > 51 {
-		f.U7 = readDate(file)
+		f.U7 = ReadDate(file)
 	}
 
+	fmt.Print(f)
 	return f
 }
 
 func readFood(file io.Reader, version int) CafeFoodData {
 	var f CafeFoodData
 	if version <= 48 {
-		f.U1 = int32(readByte(file))
+		f.U1 = int32(ReadByte(file))
 	} else {
-		f.U1 = readInt32(file)
+		f.U1 = ReadInt32(file)
 	}
 
-	f.U2 = readByte(file)
-	f.U3 = readBool(file)
+	f.U2 = ReadByte(file)
+	f.U3 = ReadBool(file)
 	if f.U3 {
 		o := readCafeObject(file, version)
 		f.Object = &o
 	}
 
-	f.U4 = readByte(file)
+	f.U4 = ReadByte(file)
 
 	if version > 23 {
-		f.U5 = readInt16(file)
+		f.U5 = ReadInt16(file)
 		if version > 47 {
-			f.U6 = readDate(file)
+			f.U6 = ReadDate(file)
 		}
 	}
 
@@ -249,13 +258,13 @@ func readFood(file io.Reader, version int) CafeFoodData {
 func readCafeFurniture(file io.Reader, version int) CafeFurniture {
 	var c CafeFurniture
 
-	isFood := readBool(file)
+	isFood := ReadBool(file)
 	if isFood {
-		c.U1 = readByte(file)
+		c.U1 = ReadByte(file)
 		food := readFood(file, version)
 		c.Food = &food
 	} else {
-		furnitureType := readByte(file)
+		furnitureType := ReadByte(file)
 		if furnitureType == 1 {
 			stove := readStove(file, version)
 			c.Stove = &stove
@@ -264,26 +273,26 @@ func readCafeFurniture(file io.Reader, version int) CafeFurniture {
 			c.ServingCounter = &s
 		} else {
 			if version > 48 {
-				c.U2 = readInt32(file)
+				c.U2 = ReadInt32(file)
 			} else {
-				c.U2 = int32(readByte(file))
+				c.U2 = int32(ReadByte(file))
 			}
 
-			c.Orientation = readByte(file)
-			c.HasObject = readBool(file)
+			c.Orientation = ReadByte(file)
+			c.HasObject = ReadBool(file)
 			if c.HasObject {
 				o := readCafeObject(file, version)
 				c.Object = &o
 			}
 
-			c.U3 = readByte(file)
+			c.U3 = ReadByte(file)
 
 			if version > 23 {
-				c.U4 = readInt16(file)
+				c.U4 = ReadInt16(file)
 			}
 
 			if version > 47 {
-				c.U5 = readDate(file)
+				c.U5 = ReadDate(file)
 			}
 		}
 
@@ -296,16 +305,16 @@ func readCafeWall(file io.Reader, version int) CafeWall {
 	var c CafeWall
 
 	if version > 58 {
-		c.U1 = readInt16(file)
+		c.U1 = ReadInt16(file)
 	} else {
-		c.U1 = int16(readByte(file))
+		c.U1 = int16(ReadByte(file))
 	}
 
-	c.U2 = readBool(file)
-	c.U3 = readBool(file)
-	c.U4 = readBool(file)
-	c.U5 = readInt32(file)
-	c.HasDecoration = readBool(file)
+	c.U2 = ReadBool(file)
+	c.U3 = ReadBool(file)
+	c.U4 = ReadBool(file)
+	c.U5 = ReadInt32(file)
+	c.HasDecoration = ReadBool(file)
 
 	if c.HasDecoration {
 		var obj CafeObject
@@ -319,7 +328,7 @@ func readCafeWall(file io.Reader, version int) CafeWall {
 func readCafeObject(file io.Reader, version int) CafeObject {
 	var o CafeObject
 
-	o.Type = readByte(file)
+	o.Type = ReadByte(file)
 
 	if o.Type == 1 {
 		furniture := readCafeFurniture(file, version)
@@ -332,10 +341,10 @@ func readCafeObject(file io.Reader, version int) CafeObject {
 	}
 
 	if o.Type == 2 || o.Type == 1 {
-		o.U1 = readInt32(file)
-		o.U2 = readInt16(file)
-		o.U3 = readInt16(file)
-		o.U4 = readBool(file)
+		o.U1 = ReadInt32(file)
+		o.U2 = ReadInt16(file)
+		o.U3 = ReadInt16(file)
+		o.U4 = ReadBool(file)
 	}
 
 	return o
@@ -345,26 +354,26 @@ func readCafeTile(file io.Reader, version int) CafeTile {
 	var t CafeTile
 
 	if version <= 58 {
-		t.U1 = int16(readByte(file))
+		t.U1 = int16(ReadByte(file))
 	} else {
-		t.U1 = readInt16(file)
+		t.U1 = ReadInt16(file)
 	}
 
-	t.U2 = readInt32(file)
-	t.U3 = readBool(file)
-	t.U4 = readBool(file)
+	t.U2 = ReadInt32(file)
+	t.U3 = ReadBool(file)
+	t.U4 = ReadBool(file)
 	if t.U4 {
 		o := readCafeObject(file, version)
 		t.U5 = &o
 	}
 
-	t.U6 = readBool(file)
+	t.U6 = ReadBool(file)
 	if t.U6 {
 		o := readCafeObject(file, version)
 		t.U7 = &o
 	}
 
-	t.U8 = readBool(file)
+	t.U8 = ReadBool(file)
 	if t.U8 {
 		o := readCafeObject(file, version)
 		t.U9 = &o
@@ -376,23 +385,23 @@ func readCafeTile(file io.Reader, version int) CafeTile {
 func ReadCafe(file io.Reader) Cafe {
 	var c Cafe
 
-	c.Version = readByte(file)
+	c.Version = ReadByte(file)
 	fmt.Printf("Cafe version: %d\n", c.Version)
-	d := readFloat64(file)
+	d := ReadFloat64(file)
 	fmt.Printf("double: %f\n", d)
-	c.SizeX = readByte(file)
+	c.SizeX = ReadByte(file)
 	fmt.Printf("Size X: %d\n", c.SizeX)
-	c.SizeY = readByte(file)
+	c.SizeY = ReadByte(file)
 	fmt.Printf("Size Y: %d\n", c.SizeY)
-	c.U3 = readInt16(file)
-	c.U4 = readInt16(file)
+	c.U3 = ReadInt16(file)
+	c.U4 = ReadInt16(file)
 
 	fmt.Printf("U3: %d\n", c.U3)
 	fmt.Printf("U4: %d\n", c.U4)
 
 	if c.Version > 48 {
-		c.MapSizeX = readInt32(file)
-		c.MapSizeY = readInt32(file)
+		c.MapSizeX = ReadInt32(file)
+		c.MapSizeY = ReadInt32(file)
 
 		fmt.Printf("Map Size X: %d\n", c.MapSizeX)
 		fmt.Printf("Map Size Y: %d\n", c.MapSizeY)
@@ -401,11 +410,13 @@ func ReadCafe(file io.Reader) Cafe {
 
 	}
 
-	c.U7 = readBool(file)
+	c.U7 = ReadBool(file)
 
 	fmt.Printf("U7: %d\n", c.U7)
 
 	numTiles := int(c.MapSizeX * c.MapSizeY)
+
+	fmt.Printf("num Tiles: %d\n", numTiles)
 
 	c.Tiles = make([]CafeTile, numTiles)
 
@@ -413,18 +424,18 @@ func ReadCafe(file io.Reader) Cafe {
 		c.Tiles[i] = readCafeTile(file, int(c.Version))
 	}
 
-	c.U8 = readInt32(file)
+	c.U8 = ReadInt32(file)
 	fmt.Printf("Reading %d ints\n", c.U8)
 	// Tbh this might not be right
 	for i := 0; i < int(c.U8); i++ {
-		readInt32(file)
+		ReadInt32(file)
 	}
 
 	if c.Version > 61 {
-		num := readInt32(file)
+		num := ReadInt32(file)
 		fmt.Printf("Reading %d more ints\n", num)
 		for i := 0; i < int(num); i++ {
-			readInt32(file)
+			ReadInt32(file)
 		}
 	}
 

@@ -37,21 +37,21 @@ func readSingleFurnitureData(file io.Reader) Furniture {
 
 	var furniture Furniture
 
-	furniture.UnlockLevel = readByte(file)
-	furniture.Name = readString(file)
+	furniture.UnlockLevel = ReadByte(file)
+	furniture.Name = ReadString(file)
 	fmt.Println(furniture.Name)
-	furniture.Price = readInt32(file)
-	furniture.PurchaseWithToxin = readBool(file)
-	furniture.SizeX = readByte(file)
-	furniture.SizeY = readByte(file)
-	furniture.ImageIndexNorth = readInt16(file)
-	furniture.ImageIndexEast = readInt16(file)
-	furniture.ImageIndexSouth = readInt16(file)
-	furniture.ImageIndexWest = readInt16(file)
-	furniture.Type = readByte(file)
-	furniture.Category = readByte(file)
+	furniture.Price = ReadInt32(file)
+	furniture.PurchaseWithToxin = ReadBool(file)
+	furniture.SizeX = ReadByte(file)
+	furniture.SizeY = ReadByte(file)
+	furniture.ImageIndexNorth = ReadInt16(file)
+	furniture.ImageIndexEast = ReadInt16(file)
+	furniture.ImageIndexSouth = ReadInt16(file)
+	furniture.ImageIndexWest = ReadInt16(file)
+	furniture.Type = ReadByte(file)
+	furniture.Category = ReadByte(file)
 
-	colorBytes := readNextBytes(file, 4)
+	colorBytes := ReadNextBytes(file, 4)
 	colorInts := make([]int, len(colorBytes))
 
 	for i, b := range colorBytes {
@@ -59,64 +59,64 @@ func readSingleFurnitureData(file io.Reader) Furniture {
 	}
 
 	furniture.Color = colorInts
-	furniture.MoneyPerHour = readInt16(file)
-	furniture.MaximumMoney = readInt16(file)
-	furniture.RatingBonus = readFloat(file)
-	furniture.BuyMoneyAmount = readInt32(file)
-	furniture.ImagePackIndex = readByte(file)
-	furniture.StoveSpeedMult = readFloat(file)
-	furniture.Description = readString(file)
+	furniture.MoneyPerHour = ReadInt16(file)
+	furniture.MaximumMoney = ReadInt16(file)
+	furniture.RatingBonus = ReadFloat(file)
+	furniture.BuyMoneyAmount = ReadInt32(file)
+	furniture.ImagePackIndex = ReadByte(file)
+	furniture.StoveSpeedMult = ReadFloat(file)
+	furniture.Description = ReadString(file)
 
-	furniture.ExperiencePoints = readFloat(file)
-	furniture.IsAvailableInStore = readBool(file)
-	furniture.U21 = readByte(file)
-	furniture.U22 = readBool(file)
-	furniture.U23 = readInt16(file)
+	furniture.ExperiencePoints = ReadFloat(file)
+	furniture.IsAvailableInStore = ReadBool(file)
+	furniture.U21 = ReadByte(file)
+	furniture.U22 = ReadBool(file)
+	furniture.U23 = ReadInt16(file)
 
 	return furniture
 }
 
 func writeFurniture(file io.Writer, data Furniture) {
 
-	writeByte(file, data.UnlockLevel)
-	writeString(file, data.Name)
-	writeInt32(file, data.Price)
-	writeBool(file, data.PurchaseWithToxin)
+	WriteByte(file, data.UnlockLevel)
+	WriteString(file, data.Name)
+	WriteInt32(file, data.Price)
+	WriteBool(file, data.PurchaseWithToxin)
 
-	writeByte(file, data.SizeX)
-	writeByte(file, data.SizeY)
-	writeInt16(file, data.ImageIndexNorth)
-	writeInt16(file, data.ImageIndexEast)
-	writeInt16(file, data.ImageIndexSouth)
-	writeInt16(file, data.ImageIndexWest)
+	WriteByte(file, data.SizeX)
+	WriteByte(file, data.SizeY)
+	WriteInt16(file, data.ImageIndexNorth)
+	WriteInt16(file, data.ImageIndexEast)
+	WriteInt16(file, data.ImageIndexSouth)
+	WriteInt16(file, data.ImageIndexWest)
 
-	writeByte(file, data.Type)
-	writeByte(file, data.Category)
+	WriteByte(file, data.Type)
+	WriteByte(file, data.Category)
 
 	for _, b := range data.Color {
-		writeByte(file, byte(b))
+		WriteByte(file, byte(b))
 	}
 
-	writeInt16(file, data.MoneyPerHour)
-	writeInt16(file, data.MaximumMoney)
-	writeFloat(file, data.RatingBonus)
-	writeInt32(file, data.BuyMoneyAmount)
+	WriteInt16(file, data.MoneyPerHour)
+	WriteInt16(file, data.MaximumMoney)
+	WriteFloat(file, data.RatingBonus)
+	WriteInt32(file, data.BuyMoneyAmount)
 
-	writeByte(file, data.ImagePackIndex)
-	writeFloat(file, data.StoveSpeedMult)
+	WriteByte(file, data.ImagePackIndex)
+	WriteFloat(file, data.StoveSpeedMult)
 
-	writeString(file, data.Description)
+	WriteString(file, data.Description)
 
-	writeFloat(file, data.ExperiencePoints)
-	writeBool(file, data.IsAvailableInStore)
+	WriteFloat(file, data.ExperiencePoints)
+	WriteBool(file, data.IsAvailableInStore)
 
-	writeByte(file, data.U21)
-	writeBool(file, data.U22)
-	writeInt16(file, data.U23)
+	WriteByte(file, data.U21)
+	WriteBool(file, data.U22)
+	WriteInt16(file, data.U23)
 }
 
 func ReadFurnitureData(file io.Reader) []Furniture {
-	num := int(readInt32(file))
+	num := int(ReadInt32(file))
 	data := []Furniture{}
 
 	for i := 0; i < num; i++ {
@@ -129,7 +129,7 @@ func ReadFurnitureData(file io.Reader) []Furniture {
 
 func WriteFurnitureData(file io.Writer, furnitures []Furniture) {
 
-	writeInt32(file, int32(len(furnitures)))
+	WriteInt32(file, int32(len(furnitures)))
 
 	for i := 0; i < len(furnitures); i++ {
 		writeFurniture(file, furnitures[i])
