@@ -1,0 +1,13 @@
+name = "zombie-cafe-server"
+main = "./build/worker.mjs"
+compatibility_date = "2022-05-13"
+compatibility_flags = [
+    "streams_enable_constructors"
+]
+
+kv_namespaces = [
+    { binding = "zombie_cafe_revival_saves", id = "d3ef91be2c39461fac64a4e09ebc698d", preview_id = "e015c6d6549645adad9031a65a7f2858" }
+]
+
+[build]
+command = "make build"
