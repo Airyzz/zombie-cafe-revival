@@ -232,7 +232,6 @@ func PackCharacters(in_directory string, out_directory string, out_data_director
 	cct.U1 = 2
 	cct.Width = int32(img.Bounds().Size().X)
 	cct.Height = int32(img.Bounds().Size().Y)
-	cct.U4 = 1184868
 
 	out_cct_path := filepath.Join(out_directory, folder_name+".cct.mid")
 	f, err = os.Create(out_cct_path)
@@ -244,6 +243,77 @@ func PackCharacters(in_directory string, out_directory string, out_data_director
 	cct_file.WriteCCTexture(f, cct, img)
 	f.Close()
 
+}
+
+func PackTextures(in_directory string, out_directory string) {
+	entries, _ := os.ReadDir(in_directory)
+	files := []string{}
+
+	fmt.Println(filepath.Base(in_directory))
+	file_map := map[string]PackedTextureData{
+		"recipeImages":    {"recipeOffsets.bin.mid", .5},
+		"recipeImages2":   {"recipeOffsets2.bin.mid", .5},
+		"mapTiles":        {"mapTilesOffsets.bin.mid", 1},
+		"furniture":       {"furnitureOffsets.bin.mid", 1},
+		"furniture2":      {"furnitureOffsets2.bin.mid", 0.75},
+		"furniture3":      {"furnitureOffsets3.bin.mid", 1},
+		"ingameUiImages":  {"ingameUiOffsets.bin.mid", 1},
+		"menuImages":      {"menuOffsets.bin.mid", 1},
+		"menuTitleImages": {"menuTitleOffsets.bin.mid", 1},
+	}
+
+	folder_name := filepath.Base(in_directory)
+	out_data := file_map[folder_name]
+
+	for _, entry := range entries {
+		if entry.IsDir() {
+			continue
+		}
+
+		if !strings.HasSuffix(entry.Name(), ".png") {
+			continue
+		}
+
+		file_path := filepath.Join(in_directory, entry.Name())
+		files = append(files, file_path)
+	}
+
+	img, offsets := cct_file.WritePackedTexture(files, out_data.scale)
+	offsets.Type = 2
+	out_offsets_path := filepath.Join(out_directory, out_data.offsetsName)
+	f, err := os.Create(out_offsets_path)
+
+	if err != nil {
+		log.Fatal(err)
+	}
+
+	file_types.WriteImageOffsets(f, offsets)
+	f.Close()
+
+	cct := cct_file.CCTexture{}
+	cct.Magic = "CCTX"
+	cct.U1 = 2
+	cct.Width = int32(img.Bounds().Size().X)
+	cct.Height = int32(img.Bounds().Size().Y)
+
+	out_cct_path := filepath.Join(out_directory, folder_name+".cct.mid")
+	f, err = os.Create(out_cct_path)
+
+	imaging.Save(img, out_cct_path+".png")
+
+	if err != nil {
+		log.Fatal(err)
+	}
+
+	cct_file.WriteCCTexture(f, cct, img)
+	f.Close()
+}
+
+func tryWriteUnpackedData(result cct_file.TextureResult, index int, out_path string) {
+	if result.Offset.XOffset != 0 || result.Offset.YOffset != 0 || result.Offset.XOffsetFlipped != 0 || result.Offset.YOffsetFlipped != 0 {
+		b, _ := json.MarshalIndent(result.Metadata, "", "    ")
+		writeJson(b, out_path)
+	}
 }
 
 func UnpackCharacters(in_directory string, out_directory string, data_directory string) {
@@ -295,8 +365,7 @@ func UnpackCharacters(in_directory string, out_directory string, data_directory 
 				texture := textures[index]
 				file_path := filepath.Join(out_folder, texture.Name)
 				imaging.Save(texture.Image, file_path)
-				b, _ := json.MarshalIndent(texture.Offset, "", "    ")
-				writeJson(b, file_path)
+				tryWriteUnpackedData(texture, i, file_path)
 			}
 		}
 	}
@@ -343,6 +412,7 @@ func UnpackTextures(in_directory string, out_directory string) {
 			out_path := filepath.Join(out_folder, result.Name)
 			// /fmt.Println("Writing: " + out_path)
 			imaging.Save(result.Image, out_path)
+			tryWriteUnpackedData(result, i, out_path)
 		}
 	}
 }
@@ -424,9 +494,9 @@ func SerializeFiles(in_directory string, out_directory string) {
 		"mapTilesOffsets.bin.mid":        SerializeOffsets,
 		"menuOffsets.bin.mid":            SerializeOffsets,
 		"menuTitleOffsets.bin.mid":       SerializeOffsets,
-		"recipeOffsets.bin.mid":          SerializeOffsets,
-		"recipeOffsets2.bin.mid":         SerializeOffsets,
-		"zcOffsets.bin.mid":              SerializeOffsets,
+		// "recipeOffsets.bin.mid":          SerializeOffsets,
+		// "recipeOffsets2.bin.mid":         SerializeOffsets,
+		"zcOffsets.bin.mid": SerializeOffsets,
 	}
 
 	for key, value := range deserialize_map {

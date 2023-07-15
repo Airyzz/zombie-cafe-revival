@@ -34,6 +34,8 @@ func main() {
 		serialization.SerializeFiles(in_directory, out_directory)
 	} else if mode == "unpack_textures" {
 		serialization.UnpackTextures(in_directory, out_directory)
+	} else if mode == "pack_textures" {
+		serialization.PackTextures(in_directory, out_directory)
 	} else if mode == "unpack_characters" {
 		serialization.UnpackCharacters(in_directory, out_directory, data_directory)
 	} else if mode == "pack_characters" {

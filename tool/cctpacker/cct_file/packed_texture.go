@@ -7,7 +7,6 @@ import (
 	"image"
 	"image/color"
 	"io"
-	"log"
 	"math"
 	"os"
 	"path/filepath"
@@ -16,10 +15,19 @@ import (
 	"github.com/disintegration/imaging"
 )
 
+type TextureMetadata struct {
+	XOffset  int16
+	YOffset  int16
+	XOffset2 int16
+	YOffset2 int16
+	Index    int
+}
+
 type TextureResult struct {
-	Image  image.Image
-	Name   string
-	Offset file_types.Offset
+	Image    image.Image
+	Name     string
+	Offset   file_types.Offset
+	Metadata TextureMetadata
 }
 
 func ReadPackedTextures(cctFile io.Reader, offsetsFile io.Reader, scale float32) []TextureResult {
@@ -56,6 +64,13 @@ func ReadPackedTextures(cctFile io.Reader, offsetsFile io.Reader, scale float32)
 			image,
 			name,
 			image_entry,
+			TextureMetadata{
+				Index:    image_index,
+				XOffset:  image_entry.XOffset,
+				YOffset:  image_entry.YOffset,
+				XOffset2: image_entry.XOffsetFlipped,
+				YOffset2: image_entry.YOffsetFlipped,
+			},
 		})
 	}
 
@@ -70,13 +85,14 @@ func WritePackedTexture(images []string, scale float32) (*image.NRGBA, file_type
 
 	for i, file := range images {
 		var entryData file_types.Offset
+		var metaData TextureMetadata
 		b, err := os.ReadFile(file + ".json")
 
 		if err != nil {
-			log.Fatal("Could not find json file: " + file + ".json")
+			fmt.Println("Could not find json file: " + file + ".json, continuing with no offsets")
+		} else {
+			json.Unmarshal([]byte(b), &metaData)
 		}
-
-		json.Unmarshal([]byte(b), &entryData)
 
 		img, _ := imaging.Open(file)
 		bound := img.Bounds()
@@ -85,6 +101,11 @@ func WritePackedTexture(images []string, scale float32) (*image.NRGBA, file_type
 			H:             bound.Size().Y + 3,
 			OriginalIndex: i,
 		}
+
+		entryData.XOffset = metaData.XOffset
+		entryData.YOffset = metaData.YOffset
+		entryData.XOffsetFlipped = metaData.XOffset2
+		entryData.YOffsetFlipped = metaData.YOffset2
 
 		data.Offsets[i] = entryData
 

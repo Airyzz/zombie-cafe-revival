@@ -36,7 +36,8 @@ func main() {
 	serialization.SerializeFiles(filepath.Join(in_directory, "assets", "images"), filepath.Join(out_directory, "assets", "images"))
 	serialization.PackCharacters(filepath.Join(in_directory, "assets", "images", "characterParts"), filepath.Join(out_directory, "assets", "images"), filepath.Join(out_directory, "assets", "data"))
 	serialization.PackCharacters(filepath.Join(in_directory, "assets", "images", "characterParts2"), filepath.Join(out_directory, "assets", "images"), filepath.Join(out_directory, "assets", "data"))
-
+	serialization.PackTextures(filepath.Join(in_directory, "assets", "images", "recipeImages"), filepath.Join(out_directory, "assets", "images"))
+	serialization.PackTextures(filepath.Join(in_directory, "assets", "images", "recipeImages2"), filepath.Join(out_directory, "assets", "images"))
 }
 
 func copyFiles(in_directory, out_directory string) {
