@@ -1,11 +1,7 @@
 {
-    "Name": "1x1_front.png",
-    "X": 1087,
-    "Y": 1363,
-    "W": 41,
-    "H": 31,
     "XOffset": 4,
     "YOffset": 2,
-    "XOffsetFlipped": 4,
-    "YOffsetFlipped": 2
+    "XOffset2": 4,
+    "YOffset2": 2,
+    "Index": 1757
 }

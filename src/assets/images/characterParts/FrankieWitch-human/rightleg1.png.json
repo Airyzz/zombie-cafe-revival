@@ -1,11 +1,7 @@
 {
-    "Name": "rightleg1.png",
-    "X": 375,
-    "Y": 1722,
-    "W": 20,
-    "H": 32,
     "XOffset": 2,
     "YOffset": 3,
-    "XOffsetFlipped": 4,
-    "YOffsetFlipped": 3
+    "XOffset2": 4,
+    "YOffset2": 3,
+    "Index": 1752
 }

@@ -38,6 +38,12 @@ func main() {
 	serialization.PackCharacters(filepath.Join(in_directory, "assets", "images", "characterParts2"), filepath.Join(out_directory, "assets", "images"), filepath.Join(out_directory, "assets", "data"))
 	serialization.PackTextures(filepath.Join(in_directory, "assets", "images", "recipeImages"), filepath.Join(out_directory, "assets", "images"))
 	serialization.PackTextures(filepath.Join(in_directory, "assets", "images", "recipeImages2"), filepath.Join(out_directory, "assets", "images"))
+	serialization.PackTextures(filepath.Join(in_directory, "assets", "images", "furniture"), filepath.Join(out_directory, "assets", "images"))
+	serialization.PackTextures(filepath.Join(in_directory, "assets", "images", "furniture2"), filepath.Join(out_directory, "assets", "images"))
+	serialization.PackTextures(filepath.Join(in_directory, "assets", "images", "furniture3"), filepath.Join(out_directory, "assets", "images"))
+	//serialization.PackTextures(filepath.Join(in_directory, "assets", "images", "mapTiles"), filepath.Join(out_directory, "assets", "images"))
+	//serialization.PackTextures(filepath.Join(in_directory, "assets", "images", "menuImages"), filepath.Join(out_directory, "assets", "images"))
+	//serialization.PackTextures(filepath.Join(in_directory, "assets", "images", "menuTitleImages"), filepath.Join(out_directory, "assets", "images"))
 }
 
 func copyFiles(in_directory, out_directory string) {

@@ -1,11 +1,7 @@
 {
-    "Name": "rightarm2.png",
-    "X": 1819,
-    "Y": 1642,
-    "W": 17,
-    "H": 31,
     "XOffset": 3,
     "YOffset": 1,
-    "XOffsetFlipped": 3,
-    "YOffsetFlipped": 1
+    "XOffset2": 3,
+    "YOffset2": 1,
+    "Index": 779
 }

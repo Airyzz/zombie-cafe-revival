@@ -1,11 +1,7 @@
 {
-    "Name": "back_torso1.png",
-    "X": 1585,
-    "Y": 1231,
-    "W": 40,
-    "H": 55,
     "XOffset": 2,
     "YOffset": 4,
-    "XOffsetFlipped": 2,
-    "YOffsetFlipped": 4
+    "XOffset2": 2,
+    "YOffset2": 4,
+    "Index": 580
 }

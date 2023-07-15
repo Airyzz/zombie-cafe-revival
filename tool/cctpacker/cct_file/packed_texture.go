@@ -2,14 +2,18 @@ package cct_file
 
 import (
 	"encoding/json"
+	"errors"
 	"file_types"
 	"fmt"
 	"image"
 	"image/color"
 	"io"
+	"log"
 	"math"
 	"os"
 	"path/filepath"
+	"sort"
+	"strconv"
 	"tool/resource_manager/utils"
 
 	"github.com/disintegration/imaging"
@@ -28,6 +32,27 @@ type TextureResult struct {
 	Name     string
 	Offset   file_types.Offset
 	Metadata TextureMetadata
+}
+
+func isNumeric(s string) bool {
+	_, err := strconv.ParseFloat(s, 64)
+	return err == nil
+}
+
+func getLeadingNumber(s string) (int64, error) {
+	lastDigit := -1
+	for i := 0; i < len(s); i++ {
+		if !isNumeric(string(s[i])) {
+			lastDigit = i
+			break
+		}
+	}
+
+	if lastDigit == -1 {
+		return 0, errors.New("No leading digit")
+	}
+
+	return strconv.ParseInt(s[0:lastDigit], 10, 64)
 }
 
 func ReadPackedTextures(cctFile io.Reader, offsetsFile io.Reader, scale float32) []TextureResult {
@@ -77,16 +102,44 @@ func ReadPackedTextures(cctFile io.Reader, offsetsFile io.Reader, scale float32)
 	return result
 }
 
-func WritePackedTexture(images []string, scale float32) (*image.NRGBA, file_types.ImageOffsets) {
+func WritePackedTexture(images []string, scale float32, sortByName bool, xOffset int16) (*image.NRGBA, file_types.ImageOffsets) {
 	rects := []utils.Rect{}
 
 	data := file_types.ImageOffsets{}
 	data.Offsets = make([]file_types.Offset, len(images))
+	if sortByName {
+
+		sort.Slice(images, func(i, j int) bool {
+			str1 := images[i]
+			str2 := images[j]
+
+			str1 = filepath.Base(str1)
+			str2 = filepath.Base(str2)
+
+			num1, err := getLeadingNumber(str1)
+			if err != nil {
+				return str1 < str2
+			}
+
+			num2, err := getLeadingNumber(str2)
+			if err != nil {
+				return str1 < str2
+			}
+
+			return num1 < num2
+		})
+	}
+
+	fmt.Print(images)
+
+	padding := 4
 
 	for i, file := range images {
 		var entryData file_types.Offset
 		var metaData TextureMetadata
 		b, err := os.ReadFile(file + ".json")
+
+		fmt.Println(file)
 
 		if err != nil {
 			fmt.Println("Could not find json file: " + file + ".json, continuing with no offsets")
@@ -94,19 +147,26 @@ func WritePackedTexture(images []string, scale float32) (*image.NRGBA, file_type
 			json.Unmarshal([]byte(b), &metaData)
 		}
 
-		img, _ := imaging.Open(file)
-		bound := img.Bounds()
-		rect := utils.Rect{
-			W:             bound.Size().X + 3,
-			H:             bound.Size().Y + 3,
-			OriginalIndex: i,
+		img, err := imaging.Open(file)
+		var rect utils.Rect
+
+		if err != nil {
+			rect = utils.Rect{W: 1, H: 1, OriginalIndex: i}
+		} else {
+			bound := img.Bounds()
+			rect = utils.Rect{
+				W:             bound.Size().X + padding,
+				H:             bound.Size().Y + padding,
+				OriginalIndex: i,
+			}
 		}
 
 		entryData.XOffset = metaData.XOffset
 		entryData.YOffset = metaData.YOffset
 		entryData.XOffsetFlipped = metaData.XOffset2
 		entryData.YOffsetFlipped = metaData.YOffset2
-
+		fmt.Println("Initial rect:")
+		fmt.Print(entryData)
 		data.Offsets[i] = entryData
 
 		rects = append(rects, rect)
@@ -117,28 +177,46 @@ func WritePackedTexture(images []string, scale float32) (*image.NRGBA, file_type
 	num_not_packed := 0
 	for _, rect := range rects {
 		if !rect.WasPacked {
+			fmt.Printf("Could not pack: %d\n", rect.OriginalIndex)
 			num_not_packed += 1
 		}
 	}
 
 	fmt.Printf("Num rects not packed: %d\n", num_not_packed)
 
+	if num_not_packed > 0 {
+		log.Fatal("Could not pack all images :(")
+	}
+
 	img := imaging.New(2048, 2048, color.Transparent)
 
 	for _, rect := range rects {
 		img_path := images[rect.OriginalIndex]
-		src_img, _ := imaging.Open(img_path)
-
-		src, _ := src_img.(*image.NRGBA)
-
-		data.Offsets[rect.OriginalIndex].X = int16(math.Round(float64(rect.X) * (1 / float64(scale))))
+		data.Offsets[rect.OriginalIndex].X = int16(math.Round(float64(rect.X)*(1/float64(scale)))) + xOffset
 		data.Offsets[rect.OriginalIndex].Y = int16(math.Round(float64(rect.Y) * (1 / float64(scale))))
-		data.Offsets[rect.OriginalIndex].W = int16(math.Round(float64(rect.W) * (1 / float64(scale))))
-		data.Offsets[rect.OriginalIndex].H = int16(math.Round(float64(rect.H) * (1 / float64(scale))))
+		data.Offsets[rect.OriginalIndex].W = int16(math.Round(float64(rect.W-padding) * (1 / float64(scale))))
+		data.Offsets[rect.OriginalIndex].H = int16(math.Round(float64(rect.H-padding) * (1 / float64(scale))))
 		data.Offsets[rect.OriginalIndex].Name = filepath.Base(img_path)
 
-		for x := 0; x < rect.W; x++ {
-			for y := 0; y < rect.H; y++ {
+		if rect.W-padding <= 1 && rect.H-padding <= 6 {
+			continue
+		}
+
+		src_img, err := imaging.Open(img_path)
+		if err != nil {
+			continue
+		}
+
+		bound := src_img.Bounds().Size()
+
+		src, ok := src_img.(*image.NRGBA)
+
+		if !ok {
+			log.Fatal("Could not cast image to NRGBA")
+		}
+
+		for x := 0; x < bound.X; x++ {
+			for y := 0; y < bound.Y; y++ {
 				col := src.NRGBAAt(x, y)
 
 				img.SetNRGBA(rect.X+x, rect.Y+y, color.NRGBA{

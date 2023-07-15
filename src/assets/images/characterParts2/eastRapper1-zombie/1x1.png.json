@@ -1,11 +1,7 @@
 {
-    "Name": "1x1.png",
-    "X": 997,
-    "Y": 1489,
-    "W": 37,
-    "H": 29,
     "XOffset": 2,
     "YOffset": 1,
-    "XOffsetFlipped": 0,
-    "YOffsetFlipped": 1
+    "XOffset2": 0,
+    "YOffset2": 1,
+    "Index": 28
 }

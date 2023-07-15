@@ -1,11 +1,7 @@
 {
-    "Name": "back_leftarm2.png",
-    "X": 896,
-    "Y": 1319,
-    "W": 22,
-    "H": 42,
     "XOffset": 2,
     "YOffset": 0,
-    "XOffsetFlipped": 0,
-    "YOffsetFlipped": 0
+    "XOffset2": 0,
+    "YOffset2": 0,
+    "Index": 86
 }

@@ -1,11 +1,7 @@
 {
-    "Name": "head1.png",
-    "X": 1706,
-    "Y": 128,
-    "W": 94,
-    "H": 110,
     "XOffset": 23,
     "YOffset": 9,
-    "XOffsetFlipped": 13,
-    "YOffsetFlipped": 11
+    "XOffset2": 13,
+    "YOffset2": 11,
+    "Index": 1717
 }

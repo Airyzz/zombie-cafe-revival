@@ -1,11 +1,7 @@
 {
-    "Name": "pelvis1.png",
-    "X": 21,
-    "Y": 1819,
-    "W": 45,
-    "H": 31,
     "XOffset": 1,
     "YOffset": 2,
-    "XOffsetFlipped": 3,
-    "YOffsetFlipped": 2
+    "XOffset2": 3,
+    "YOffset2": 2,
+    "Index": 1938
 }

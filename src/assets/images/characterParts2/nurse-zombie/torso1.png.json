@@ -1,11 +1,7 @@
 {
-    "Name": "torso1.png",
-    "X": 431,
-    "Y": 1085,
-    "W": 42,
-    "H": 57,
     "XOffset": 0,
     "YOffset": 0,
-    "XOffsetFlipped": 0,
-    "YOffsetFlipped": 2
+    "XOffset2": 0,
+    "YOffset2": 2,
+    "Index": 3158
 }

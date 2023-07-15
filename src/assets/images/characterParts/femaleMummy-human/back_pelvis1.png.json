@@ -1,11 +1,7 @@
 {
-    "Name": "back_pelvis1.png",
-    "X": 1401,
-    "Y": 1655,
-    "W": 38,
-    "H": 32,
     "XOffset": 4,
     "YOffset": 3,
-    "XOffsetFlipped": 4,
-    "YOffsetFlipped": 3
+    "XOffset2": 4,
+    "YOffset2": 3,
+    "Index": 1709
 }

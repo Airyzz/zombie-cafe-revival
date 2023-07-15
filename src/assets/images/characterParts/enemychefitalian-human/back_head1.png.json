@@ -1,11 +1,7 @@
 {
-    "Name": "back_head1.png",
-    "X": 569,
-    "Y": 123,
-    "W": 108,
-    "H": 111,
     "XOffset": 6,
     "YOffset": 0,
-    "XOffsetFlipped": 0,
-    "YOffsetFlipped": 2
+    "XOffset2": 0,
+    "YOffset2": 2,
+    "Index": 1137
 }

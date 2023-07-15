@@ -1,11 +1,7 @@
 {
-    "Name": "leftarm1.png",
-    "X": 216,
-    "Y": 1133,
-    "W": 34,
-    "H": 47,
     "XOffset": 0,
     "YOffset": 1,
-    "XOffsetFlipped": 8,
-    "YOffsetFlipped": 1
+    "XOffset2": 8,
+    "YOffset2": 1,
+    "Index": 71
 }

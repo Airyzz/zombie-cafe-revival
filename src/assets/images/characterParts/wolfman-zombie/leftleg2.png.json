@@ -1,11 +1,7 @@
 {
-    "Name": "leftleg2.png",
-    "X": 636,
-    "Y": 1911,
-    "W": 22,
-    "H": 25,
     "XOffset": 0,
     "YOffset": 4,
-    "XOffsetFlipped": 2,
-    "YOffsetFlipped": 2
+    "XOffset2": 2,
+    "YOffset2": 2,
+    "Index": 1505
 }

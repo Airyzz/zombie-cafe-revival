@@ -188,6 +188,7 @@ func PackCharacters(in_directory string, out_directory string, out_data_director
 					numImages += 1
 					file_path := filepath.Join(folder_path, file.Name())
 					files = append(files, file_path)
+					fmt.Println(file_path)
 				}
 			}
 
@@ -201,7 +202,7 @@ func PackCharacters(in_directory string, out_directory string, out_data_director
 
 	fmt.Printf("Num pieces per pack: %d\n", piecesPerPack)
 
-	img, offsets := cct_file.WritePackedTexture(files, out_data.textureData.scale)
+	img, offsets := cct_file.WritePackedTexture(files, out_data.textureData.scale, false, 0)
 	offsets.Type = 2
 	out_offsets_path := filepath.Join(out_directory, out_data.textureData.offsetsName)
 	f, err := os.Create(out_offsets_path)
@@ -278,7 +279,7 @@ func PackTextures(in_directory string, out_directory string) {
 		files = append(files, file_path)
 	}
 
-	img, offsets := cct_file.WritePackedTexture(files, out_data.scale)
+	img, offsets := cct_file.WritePackedTexture(files, out_data.scale, true, -1)
 	offsets.Type = 2
 	out_offsets_path := filepath.Join(out_directory, out_data.offsetsName)
 	f, err := os.Create(out_offsets_path)
@@ -494,9 +495,9 @@ func SerializeFiles(in_directory string, out_directory string) {
 		"mapTilesOffsets.bin.mid":        SerializeOffsets,
 		"menuOffsets.bin.mid":            SerializeOffsets,
 		"menuTitleOffsets.bin.mid":       SerializeOffsets,
-		// "recipeOffsets.bin.mid":          SerializeOffsets,
-		// "recipeOffsets2.bin.mid":         SerializeOffsets,
-		"zcOffsets.bin.mid": SerializeOffsets,
+		"recipeOffsets.bin.mid":          SerializeOffsets,
+		"recipeOffsets2.bin.mid":         SerializeOffsets,
+		"zcOffsets.bin.mid":              SerializeOffsets,
 	}
 
 	for key, value := range deserialize_map {
