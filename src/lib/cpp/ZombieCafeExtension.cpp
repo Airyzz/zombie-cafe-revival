@@ -42,5 +42,14 @@ JNIEXPORT jint JNICALL JNI_OnLoad(JavaVM* vm, void* reserved) {
   Memory::setNop((void*)(base + 0x13d9e8), 4);
   Memory::setNop((void*)(base + 0x13d9ee), 4);
 
+  //Memory::setNop((void*)(base + 0x000ab020), 2);
+
+  /* Patch to change Money Buy to Toxin Buy
+    000ab018  d623       movs    r3, #0xd6    <-- change this offset to 0xb8
+    000ab01a  5b00       lsls    r3, r3, #1   <-- prevent this leftshift
+  */
+  Memory::setProtection((void*)(base + 0xab018), 50, PROT_READ | PROT_WRITE | PROT_EXEC);
+  *(char*)(base + 0x000ab018) = 0xb8;
+  Memory::setNop((char*)(base + 0x000ab01a), 2);
   return JNI_VERSION_1_4;
 }
