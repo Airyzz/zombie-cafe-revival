@@ -6426,7 +6426,7 @@
         "StoveSpeedMult": 1,
         "Description": "This expands the size of your cafe to 9x8.",
         "ExperiencePoints": 0,
-        "IsAvailableInStore": true,
+        "IsAvailableInStore": false,
         "U21": 0,
         "U22": false,
         "U23": 0
@@ -6490,7 +6490,7 @@
         "StoveSpeedMult": 1,
         "Description": "This expands the size of your cafe to 10x9.",
         "ExperiencePoints": 0,
-        "IsAvailableInStore": true,
+        "IsAvailableInStore": false,
         "U21": 0,
         "U22": false,
         "U23": 0
@@ -6554,7 +6554,7 @@
         "StoveSpeedMult": 1,
         "Description": "This expands the size of your cafe to 11x10.",
         "ExperiencePoints": 0,
-        "IsAvailableInStore": true,
+        "IsAvailableInStore": false,
         "U21": 0,
         "U22": false,
         "U23": 0
@@ -7610,7 +7610,7 @@
         "StoveSpeedMult": 1,
         "Description": "This expands the size of your cafe to 12x11.",
         "ExperiencePoints": 0,
-        "IsAvailableInStore": true,
+        "IsAvailableInStore": false,
         "U21": 0,
         "U22": false,
         "U23": 0
@@ -9018,7 +9018,7 @@
         "StoveSpeedMult": 1,
         "Description": "This expands the size of your cafe to 13x12.",
         "ExperiencePoints": 0,
-        "IsAvailableInStore": true,
+        "IsAvailableInStore": false,
         "U21": 0,
         "U22": false,
         "U23": 0
@@ -9082,7 +9082,7 @@
         "StoveSpeedMult": 1,
         "Description": "This expands the size of your cafe to 14x13.",
         "ExperiencePoints": 0,
-        "IsAvailableInStore": true,
+        "IsAvailableInStore": false,
         "U21": 0,
         "U22": false,
         "U23": 0
@@ -14298,7 +14298,7 @@
         "StoveSpeedMult": 1,
         "Description": "This expands the size of your cafe to 15x14.",
         "ExperiencePoints": 0,
-        "IsAvailableInStore": true,
+        "IsAvailableInStore": false,
         "U21": 0,
         "U22": false,
         "U23": 0
