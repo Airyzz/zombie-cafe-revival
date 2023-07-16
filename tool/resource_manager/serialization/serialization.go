@@ -55,6 +55,16 @@ func DeserializeCharacters(file *os.File, out_path string) {
 	writeJson(b, out_path)
 }
 
+func DeserializeCharactersJP(file *os.File, out_path string) {
+	data := file_types.ReadCharactersJP(file)
+	b, err := json.MarshalIndent(data, "", "    ")
+	if err != nil {
+		fmt.Println(err)
+	}
+
+	writeJson(b, out_path)
+}
+
 func DeserializeCharacterArt(file *os.File, out_path string) {
 	data := file_types.ReadCharacterArt(file)
 	b, err := json.MarshalIndent(data, "", "    ")
@@ -418,7 +428,7 @@ func UnpackTextures(in_directory string, out_directory string) {
 	}
 }
 
-func DeserializeFiles(in_directory string, out_directory string) {
+func DeserializeFiles(in_directory string, out_directory string, is_jp bool) {
 
 	deserialize_map := map[string]func(*os.File, string){
 		"furnitureData.bin.mid":          DeserializeFurniture,
@@ -458,6 +468,12 @@ func DeserializeFiles(in_directory string, out_directory string) {
 		"recipeImages.cct.mid":           DeserializeCCTexture,
 		"recipeImages2.cct.mid":          DeserializeCCTexture,
 		"animationData.bin.mid":          DeserializeAnimationData,
+	}
+
+	if is_jp {
+		deserialize_map = map[string]func(*os.File, string){
+			"characterData.bin.mid": DeserializeCharactersJP,
+		}
 	}
 
 	for key, deserializer := range deserialize_map {
