@@ -55,6 +55,16 @@ func DeserializeCharacters(file *os.File, out_path string) {
 	writeJson(b, out_path)
 }
 
+func DeserializeCharactersJP(file *os.File, out_path string) {
+	data := file_types.ReadCharactersJP(file)
+	b, err := json.MarshalIndent(data, "", "    ")
+	if err != nil {
+		fmt.Println(err)
+	}
+
+	writeJson(b, out_path)
+}
+
 func DeserializeCharacterArt(file *os.File, out_path string) {
 	data := file_types.ReadCharacterArt(file)
 	b, err := json.MarshalIndent(data, "", "    ")
@@ -202,7 +212,7 @@ func PackCharacters(in_directory string, out_directory string, out_data_director
 
 	fmt.Printf("Num pieces per pack: %d\n", piecesPerPack)
 
-	img, offsets := cct_file.WritePackedTexture(files, out_data.textureData.scale, false, 0)
+	img, offsets := cct_file.WritePackedTexture(files, out_data.textureData.scale, false, 0, 4, 2)
 	offsets.Type = 2
 	out_offsets_path := filepath.Join(out_directory, out_data.textureData.offsetsName)
 	f, err := os.Create(out_offsets_path)
@@ -242,6 +252,7 @@ func PackCharacters(in_directory string, out_directory string, out_data_director
 	}
 
 	cct_file.WriteCCTexture(f, cct, img)
+	imaging.Save(img, out_cct_path+".png")
 	f.Close()
 
 }
@@ -279,7 +290,7 @@ func PackTextures(in_directory string, out_directory string) {
 		files = append(files, file_path)
 	}
 
-	img, offsets := cct_file.WritePackedTexture(files, out_data.scale, true, -1)
+	img, offsets := cct_file.WritePackedTexture(files, out_data.scale, true, -1, 2, 0)
 	offsets.Type = 2
 	out_offsets_path := filepath.Join(out_directory, out_data.offsetsName)
 	f, err := os.Create(out_offsets_path)
@@ -312,21 +323,31 @@ func PackTextures(in_directory string, out_directory string) {
 
 func tryWriteUnpackedData(result cct_file.TextureResult, index int, out_path string) {
 	if result.Offset.XOffset != 0 || result.Offset.YOffset != 0 || result.Offset.XOffsetFlipped != 0 || result.Offset.YOffsetFlipped != 0 {
+
+		// result.Metadata.XOffset = int16(float32(result.Metadata.XOffset) * 0.75)
+		// result.Metadata.XOffset2 = int16(float32(result.Metadata.XOffset) * 0.75)
+		// result.Metadata.YOffset = int16(float32(result.Metadata.YOffset) * 0.75)
+		// result.Metadata.YOffset2 = int16(float32(result.Metadata.YOffset2) * 0.75)
+
 		b, _ := json.MarshalIndent(result.Metadata, "", "    ")
 		writeJson(b, out_path)
 	}
 }
 
-func UnpackCharacters(in_directory string, out_directory string, data_directory string) {
+func UnpackCharacters(in_directory string, out_directory string, data_directory string, is_jp bool) {
 	file_map := map[string]PackedCharacterData{
-		// JP Version uses 1x scale, English uses 0.75
 		"characterParts.cct.mid":  {PackedTextureData{"characterOffsets.bin.mid", 0.75}, "characterArt.bin.mid"},
 		"characterParts2.cct.mid": {PackedTextureData{"characterOffsets2.bin.mid", 0.75}, "characterArt2.bin.mid"},
+	}
 
-		//JP Version:
-		"characterParts3.cct.mid": {PackedTextureData{"characterOffsets3.bin.mid", 1}, "characterArt3.bin.mid"},
-		"characterParts4.cct.mid": {PackedTextureData{"characterOffsets4.bin.mid", 1}, "characterArt4.bin.mid"},
-		"characterParts5.cct.mid": {PackedTextureData{"characterOffsets5.bin.mid", 1}, "characterArt5.bin.mid"},
+	if is_jp {
+		file_map = map[string]PackedCharacterData{
+			"characterParts.cct.mid":  {PackedTextureData{"characterOffsets.bin.mid", 1}, "characterArt.bin.mid"},
+			"characterParts2.cct.mid": {PackedTextureData{"characterOffsets2.bin.mid", 1}, "characterArt2.bin.mid"},
+			"characterParts3.cct.mid": {PackedTextureData{"characterOffsets3.bin.mid", 1}, "characterArt3.bin.mid"},
+			"characterParts4.cct.mid": {PackedTextureData{"characterOffsets4.bin.mid", 1}, "characterArt4.bin.mid"},
+			"characterParts5.cct.mid": {PackedTextureData{"characterOffsets5.bin.mid", 1}, "characterArt5.bin.mid"},
+		}
 	}
 
 	for cct, data := range file_map {
@@ -418,7 +439,7 @@ func UnpackTextures(in_directory string, out_directory string) {
 	}
 }
 
-func DeserializeFiles(in_directory string, out_directory string) {
+func DeserializeFiles(in_directory string, out_directory string, is_jp bool) {
 
 	deserialize_map := map[string]func(*os.File, string){
 		"furnitureData.bin.mid":          DeserializeFurniture,
@@ -458,6 +479,17 @@ func DeserializeFiles(in_directory string, out_directory string) {
 		"recipeImages.cct.mid":           DeserializeCCTexture,
 		"recipeImages2.cct.mid":          DeserializeCCTexture,
 		"animationData.bin.mid":          DeserializeAnimationData,
+	}
+
+	if is_jp {
+		deserialize_map = map[string]func(*os.File, string){
+			"characterData.bin.mid":   DeserializeCharactersJP,
+			"characterParts.cct.mid":  DeserializeCCTexture,
+			"characterParts2.cct.mid": DeserializeCCTexture,
+			"characterParts3.cct.mid": DeserializeCCTexture,
+			"characterParts4.cct.mid": DeserializeCCTexture,
+			"characterParts5.cct.mid": DeserializeCCTexture,
+		}
 	}
 
 	for key, deserializer := range deserialize_map {

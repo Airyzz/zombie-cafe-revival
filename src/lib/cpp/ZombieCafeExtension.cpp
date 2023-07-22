@@ -42,7 +42,16 @@ JNIEXPORT jint JNICALL JNI_OnLoad(JavaVM* vm, void* reserved) {
   Memory::setNop((void*)(base + 0x13d9e8), 4);
   Memory::setNop((void*)(base + 0x13d9ee), 4);
 
-  //Memory::setNop((void*)(base + 0x000ab020), 2);
+
+  /*  Fix crash when releasing texture reference also causes memory leak :( 
+    #05 pc 0002eca7  /apex/com.android.runtime/lib/bionic/libc.so (scudo_free+18) (BuildId: 9e5101d790f828ae8b754029c778f7e2)
+    #06 lib/arm/libZombieCafeAndroid.so (CFTextureRef::~CFTextureRef()+12)
+    #07 lib/arm/libZombieCafeAndroid.so (CFTexture::releaseRef()+34)
+    #08 lib/arm/libZombieCafeAndroid.so (CFTexture::~CFTexture()+4)
+  */
+  Memory::setNop((void*)(base + 0x0013d3ae), 4);
+  Memory::setNop((void*)(base + 0x0013d3b4), 4);
+
 
   /* Patch to change Money Buy to Toxin Buy
     000ab018  d623       movs    r3, #0xd6    <-- change this offset to 0xb8

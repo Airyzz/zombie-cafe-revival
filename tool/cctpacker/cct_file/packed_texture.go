@@ -102,7 +102,7 @@ func ReadPackedTextures(cctFile io.Reader, offsetsFile io.Reader, scale float32)
 	return result
 }
 
-func WritePackedTexture(images []string, scale float32, sortByName bool, xOffset int16) (*image.NRGBA, file_types.ImageOffsets) {
+func WritePackedTexture(images []string, scale float32, sortByName bool, xOffset int16, padding int, offset int) (*image.NRGBA, file_types.ImageOffsets) {
 	rects := []utils.Rect{}
 
 	data := file_types.ImageOffsets{}
@@ -131,8 +131,6 @@ func WritePackedTexture(images []string, scale float32, sortByName bool, xOffset
 	}
 
 	fmt.Print(images)
-
-	padding := 4
 
 	for i, file := range images {
 		var entryData file_types.Offset
@@ -194,8 +192,8 @@ func WritePackedTexture(images []string, scale float32, sortByName bool, xOffset
 		img_path := images[rect.OriginalIndex]
 		data.Offsets[rect.OriginalIndex].X = int16(math.Round(float64(rect.X)*(1/float64(scale)))) + xOffset
 		data.Offsets[rect.OriginalIndex].Y = int16(math.Round(float64(rect.Y) * (1 / float64(scale))))
-		data.Offsets[rect.OriginalIndex].W = int16(math.Round(float64(rect.W-padding) * (1 / float64(scale))))
-		data.Offsets[rect.OriginalIndex].H = int16(math.Round(float64(rect.H-padding) * (1 / float64(scale))))
+		data.Offsets[rect.OriginalIndex].W = int16(math.Round(float64(rect.W-padding)*(1/float64(scale)))) + int16(offset)
+		data.Offsets[rect.OriginalIndex].H = int16(math.Round(float64(rect.H-padding)*(1/float64(scale)))) + int16(offset)
 		data.Offsets[rect.OriginalIndex].Name = filepath.Base(img_path)
 
 		if rect.W-padding <= 1 && rect.H-padding <= 6 {

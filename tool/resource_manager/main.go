@@ -22,6 +22,8 @@ func main() {
 	var data_directory string
 	flag.StringVar(&data_directory, "d", "", "Path of data directory")
 
+	is_jp := flag.Bool("jp", false, "Is parsing japanese version of game (1.7)")
+
 	flag.Parse()
 
 	if mode == "" {
@@ -29,7 +31,7 @@ func main() {
 	}
 
 	if mode == "unpack" {
-		serialization.DeserializeFiles(in_directory, out_directory)
+		serialization.DeserializeFiles(in_directory, out_directory, *is_jp)
 	} else if mode == "pack" {
 		serialization.SerializeFiles(in_directory, out_directory)
 	} else if mode == "unpack_textures" {
@@ -37,7 +39,7 @@ func main() {
 	} else if mode == "pack_textures" {
 		serialization.PackTextures(in_directory, out_directory)
 	} else if mode == "unpack_characters" {
-		serialization.UnpackCharacters(in_directory, out_directory, data_directory)
+		serialization.UnpackCharacters(in_directory, out_directory, data_directory, *is_jp)
 	} else if mode == "pack_characters" {
 		serialization.PackCharacters(in_directory, out_directory, out_directory)
 	} else if mode == "validate_save" {
