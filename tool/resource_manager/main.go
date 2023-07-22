@@ -39,7 +39,7 @@ func main() {
 	} else if mode == "pack_textures" {
 		serialization.PackTextures(in_directory, out_directory)
 	} else if mode == "unpack_characters" {
-		serialization.UnpackCharacters(in_directory, out_directory, data_directory)
+		serialization.UnpackCharacters(in_directory, out_directory, data_directory, *is_jp)
 	} else if mode == "pack_characters" {
 		serialization.PackCharacters(in_directory, out_directory, out_directory)
 	} else if mode == "validate_save" {

@@ -22,7 +22,7 @@ type CharacterJP struct {
 	U10                int16
 	U11                int16
 	U12                int16
-	U13                bool
+	IsFemale           bool
 	Cost               int32
 	U15                byte
 	U16                byte
@@ -33,8 +33,8 @@ type CharacterJP struct {
 	U21                byte
 	U22                int16
 	U23                float32
-	U24                string
-	U25                string
+	HumanDescription   string
+	ZombieDescription  string
 }
 
 func readSingleCharacterJP(file io.Reader) CharacterJP {
@@ -63,7 +63,7 @@ func readSingleCharacterJP(file io.Reader) CharacterJP {
 
 	c.U12 = ReadInt16(file)
 
-	c.U13 = ReadBool(file)
+	c.IsFemale = ReadBool(file)
 
 	c.Cost = ReadInt32(file)
 
@@ -80,8 +80,8 @@ func readSingleCharacterJP(file io.Reader) CharacterJP {
 	c.U22 = ReadInt16(file)
 	c.U23 = ReadFloat(file)
 
-	c.U24 = ReadString(file)
-	c.U25 = ReadString(file)
+	c.HumanDescription = ReadString(file)
+	c.ZombieDescription = ReadString(file)
 
 	return c
 }

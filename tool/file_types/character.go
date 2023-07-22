@@ -20,7 +20,7 @@ type Character struct {
 	U8                 byte
 	U9                 byte
 	U10                byte
-	U11                bool
+	IsFemale           bool
 	Cost               int32
 	PurchaseWithToxin  bool
 	U14                byte
@@ -54,7 +54,7 @@ func readSingleCharacter(file io.Reader) Character {
 	c.U8 = ReadByte(file)
 	c.U9 = ReadByte(file)
 	c.U10 = ReadByte(file)
-	c.U11 = ReadBool(file)
+	c.IsFemale = ReadBool(file)
 
 	c.Cost = ReadInt32(file)
 	c.PurchaseWithToxin = ReadBool(file)
@@ -89,7 +89,7 @@ func writeSingleCharacterData(file io.Writer, data Character) {
 	WriteByte(file, data.U8)
 	WriteByte(file, data.U9)
 	WriteByte(file, data.U10)
-	WriteBool(file, data.U11)
+	WriteBool(file, data.IsFemale)
 	WriteInt32(file, data.Cost)
 	WriteBool(file, data.PurchaseWithToxin)
 	WriteByte(file, data.U14)
