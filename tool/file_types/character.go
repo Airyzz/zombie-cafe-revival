@@ -6,31 +6,31 @@ import (
 )
 
 type Character struct {
-	CafeLevelRequired  byte
-	U2                 byte
-	U3                 byte
-	Name               string
-	Category           string
-	CharacterArtString string
-	U4                 byte
-	Energy             uint16
-	Speed              byte
-	AttackStrength     byte
-	TipRating          byte
-	U8                 byte
-	U9                 byte
-	U10                byte
-	IsFemale           bool
-	Cost               int32
-	PurchaseWithToxin  bool
-	U14                byte
-	CookSpeedBonus     float32
-	TipMultiplier      int32
-	RegenBoost         float32
-	CookXPBonus        float32
-	U19                bool
-	U20                int16
-	U21                byte
+	CafeLevelRequired      byte
+	U2                     byte
+	U3                     byte
+	Name                   string
+	CharacterArtStringHead string
+	CharacterArtString     string
+	U4                     byte
+	Energy                 uint16
+	Speed                  byte
+	AttackStrength         byte
+	TipRating              byte
+	U8                     byte
+	U9                     byte
+	U10                    byte
+	IsFemale               bool
+	Cost                   int32
+	PurchaseWithToxin      bool
+	U14                    byte
+	CookSpeedBonus         float32
+	TipMultiplier          int32
+	RegenBoost             float32
+	CookXPBonus            float32
+	U19                    bool
+	U20                    int16
+	U21                    byte
 
 	HumanDescription  string
 	ZombieDescription string
@@ -42,7 +42,7 @@ func readSingleCharacter(file io.Reader) Character {
 	c.U2 = ReadByte(file)
 	c.U3 = ReadByte(file)
 	c.Name = ReadString(file)
-	c.Category = ReadString(file)
+	c.CharacterArtStringHead = ReadString(file)
 	c.CharacterArtString = ReadString(file)
 	c.U4 = ReadByte(file)
 
@@ -79,7 +79,7 @@ func writeSingleCharacterData(file io.Writer, data Character) {
 	WriteByte(file, data.U2)
 	WriteByte(file, data.U3)
 	WriteString(file, data.Name)
-	WriteString(file, data.Category)
+	WriteString(file, data.CharacterArtStringHead)
 	WriteString(file, data.CharacterArtString)
 	WriteByte(file, data.U4)
 	WriteUint16(file, data.Energy)
