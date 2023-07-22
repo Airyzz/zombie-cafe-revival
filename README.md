@@ -2,6 +2,8 @@
 # Zombie Cafe Revival
 An effort to reverse engineer and revive the game, reimplementing online services, fixing crashes and adding new content.
 
+Check out [my article](https://airyz.xyz/p/zombie-cafe-revival/) for some more detail in to the technical side of things!
+
 ## Building
 
 ### Requirements
@@ -18,7 +20,8 @@ LibZombieCafeExtension is an extra library that applies runtime patches to the g
 cd src/lib/cpp
 mkdir build
 cd build
-cmake ../
+cmake ../ -DCMAKE_TOOLCHAIN_FILE=$NDK_HOME/build/cmake/android.toolchain.cmake  -DANDROID_ABI=armeabi-v7a -DANDROID_PLATFORM=android-8
+
 make
 ```
 
