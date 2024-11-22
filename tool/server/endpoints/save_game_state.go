@@ -5,12 +5,22 @@ import (
 	"file_types"
 	"fmt"
 	"io"
+	"math/rand"
 	"net/http"
 	"server/storage"
+	"time"
 )
 
 func saveGameState(w http.ResponseWriter, r *http.Request, storage storage.Storage) {
 	fmt.Printf("got request to save game: %s\n", r.URL.String())
+
+	rnd := rand.New(rand.NewSource(time.Now().UnixNano()))
+	save_chance := rnd.Float32()
+	fmt.Printf("Generated random number in save game state: %f\n", save_chance)
+	if save_chance < 0.9 {
+		fmt.Printf("returning early to save bandwidth")
+		return
+	}
 
 	err := r.ParseMultipartForm(5 * 1024 * 1024)
 

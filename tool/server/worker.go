@@ -27,11 +27,6 @@ func (kv CloudflareKVStorage) GetFile(id string) ([]byte, error) {
 	return io.ReadAll(reader)
 }
 
-func (kv CloudflareKVStorage) StoreFile(id string, data []byte) error {
-	err := kv.namespace.PutReader(id, bytes.NewReader(data), nil)
-	return err
-}
-
 func (kv CloudflareKVStorage) StoreSaveGameState(id string, data []byte) error {
 	err := kv.namespace.PutReader(id, bytes.NewReader(data), nil)
 	return err
@@ -57,7 +52,7 @@ func (kv CloudflareKVStorage) ListFiles() ([]string, error) {
 func main() {
 	workers.Serve(http.HandlerFunc(func(w http.ResponseWriter, req *http.Request) {
 
-		kv, err := cloudflare.NewKVNamespace(req.Context(), kvNamespace)
+		kv, err := cloudflare.NewKVNamespace(kvNamespace)
 
 		if err != nil {
 			fmt.Println("Could not init cloudflare KV Storage")

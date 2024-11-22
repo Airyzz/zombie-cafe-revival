@@ -1,5 +1,5 @@
 module server
 
-go 1.20
+go 1.23
 
-require github.com/syumai/workers v0.17.0
+require github.com/syumai/workers v0.27.0
